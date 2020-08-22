@@ -6,14 +6,24 @@
 <!-- namespace属性值通常设置为：包名 + SQL映射文件名来指定唯一的命名空间 -->
 <mapper namespace="com.story.dao.UserDao">
 
-    <select id="listIdeas" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits from idea i inner join user u on i.userId = u.userId;
+    <select id="listUsers" resultType="com.alibaba.fastjson.JSONObject">
+        select u.userAccount, u.userName, u.salt, u.email, r.roleName from user u inner join role r on u.roleId = r.roleId;
     </select>
 
+    <select id="getUserByUserAccount" resultType="com.story.domain.User" parameterType="String">
+        select userId, userAccount, userName, password, salt, email from user u where u.userAccount = #{ userAccount };
+    </select>
 
-    <insert id="saveIdea">
-        insert into idea (title, content, likes, visits, typeId)
-        values (#{title}, #{content}, #{likes}, #{visits}, #{typeId});
+    <select id="getRoleByUserAccount" resultType="com.alibaba.fastjson.JSONObject" parameterType="String">
+
+      select u.roleId, r.roleName from user u inner join role r on u.roleId = r.roleId
+      where u.userAccount = #{userAccount};
+
+    </select>
+
+    <insert id="saveUser">
+        insert into user (userName, userAccount, password, roleId, salt, gender, sign)
+        values (#{userName}, #{userAccount}, #{password}, #{roleId}, #{salt}, #{gender}, #{sign});
     </insert>
 
     <update id="updateUser">

@@ -191,9 +191,9 @@ public class UserServiceImpl implements UserService {
         User user = userDao.getUserByUserAccount(object.getString("userAccount"));
 
         // 获取前端界面输入的密码作为原始密码
-        String srcPassword = object.getString("password");
-
         String userAccount = object.getString("userAccount");
+
+        String srcPassword = object.getString("password");
 
         if (user == null) {
 
@@ -216,7 +216,7 @@ public class UserServiceImpl implements UserService {
                 // 5. 将盐值存放到数据库中
                 object.put("salt", salt);
 
-                object.put("roleId", "3");
+                object.put("roleId", 1);
 
                 userDao.saveUser(object);
 

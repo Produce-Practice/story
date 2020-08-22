@@ -16,7 +16,7 @@ public interface UserDao {
 
     List<JSONObject> listUsers();
 
-    Integer saveUser(JSONObject user);
+    void saveUser(JSONObject user);
 
     Integer updateUser(JSONObject jsonObject);
 

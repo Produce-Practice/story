@@ -18,4 +18,6 @@ public interface IdeaDao {
 
     Integer listIdeas(JSONObject jsonObject);
 
+    Integer listOneIdea(JSONObject jsonObject);
+
 }
