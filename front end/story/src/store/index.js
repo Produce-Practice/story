@@ -1,11 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-
-    state: { // 数据保存在state内，在任何组件内通过this.$store.state.XX来读取
+  state: {
+    // 数据保存在state内，在任何组件内通过this.$store.state.XX来读取
+    data: {},
 
         token: null,
 
@@ -16,7 +17,6 @@ export default new Vuex.Store({
             userAccount: null,
             password: null,
         }
-
     },
 
     // 用来直接修改state内的数据；在组件内，通过this.$store.commit(方法名)来执行mutations
@@ -25,23 +25,30 @@ export default new Vuex.Store({
     // 利用vue的双向驱动进行state中值的修改;
     mutations: {
 
-        setToken(state, value) {
-            state.token = value
+        // setToken(state, value) {
+        //     state.token = value
+        // },
+
+        setUser(state, user){
+            state.user = user;
         },
+    
 
+        // setUserAccount(state, value) {
 
-        setUserAccount(state, value) {
+        //     state.userAccount = value;
 
-            state.userAccount = value;
+        // },
 
-        },
+        // setPassword(state, value) {
 
-        setPassword(state, value) {
+        //     state.password = value;
 
-            state.password = value;
+        // },
+    // token: null,
 
-        },
-
+    // userAccount: null,
+    // password: null,
 
         createUser(state, user) {
 
@@ -86,11 +93,6 @@ export default new Vuex.Store({
         getPassword(state) {
             return state.password
         }
-
-    },
-
-    modules: { // 用来将store分割到不同模块
-
     }
 
-})
+});
