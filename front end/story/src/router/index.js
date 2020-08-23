@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
+import Home from '../views/user/Home.vue'
+import Login from '../views/user/Login.vue'
 import NotFound from '../views/NotFound.vue'
 import Navigation from '../components/Navigation.vue'
 import Footer from '../components/Footer.vue'
 
-import Register from '../views/Register.vue'
-import Book from '../views/Book.vue'
-import Music from '../views/Music.vue'
-import Note from '../views/Note.vue'
-import Video from '../views/Video.vue'
-import UpdatePassword from '../views/UpdatePassword.vue'
-import CreateCenter from '../views/CreateCenter.vue'
-import MessageCenter from '../views/MessageCenter.vue'
+import Register from '../views/user/Register.vue'
+import Book from '../views/user/Book.vue'
+import Music from '../views/user/Music.vue'
+import Note from '../views/user/Note.vue'
+import Video from '../views/user/Video.vue'
+import UpdatePassword from '../views/user/UpdatePassword.vue'
+import CreateCenter from '../views/user/CreateCenter.vue'
+import MessageCenter from '../views/user/MessageCenter.vue'
 
 
 Vue.use(VueRouter)
@@ -56,7 +56,14 @@ const routes = [
         components: {
             default: MessageCenter,
             nav: Navigation
-        }
+        },
+        children:[
+            {
+            path:'info',
+            name:'messageInfo',
+            component:() => import('@/views/user/MessageInfo'),
+      
+          }]
     },
 
     {

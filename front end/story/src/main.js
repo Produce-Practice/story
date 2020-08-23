@@ -17,6 +17,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import '@/assets/css/reset.css'
 
 Vue.config.productionTip = false;
 

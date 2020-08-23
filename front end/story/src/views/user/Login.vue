@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
-import storage from '../utils/storage';
+import Footer from '@/components/Footer.vue';
+import storage from '@/utils/storage';
 // 列表的样式
-import "../assets/css/common.css";
+import "@/assets/css/common.css";
 
 export default {
 

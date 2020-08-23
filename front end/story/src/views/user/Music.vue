@@ -42,9 +42,9 @@
 </template>
 <script>
 // 列表的样式
-import "../assets/css/common.css";
+import "@/assets/css/common.css";
 import axios from "axios";
-import Footer from "../components/Footer.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
