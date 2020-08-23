@@ -18,13 +18,13 @@
                     用户名:
                 </div>
 
-            <el-input type="text" prefix="ios-contact" v-model="userAccount" class="input_style"></el-input><br>
+            <el-input type="text" v-model="userAccount" class="input_style"></el-input><br>
 
             <div class="user_pass">
                 密码:
             </div>
 
-            <el-input type="password" prefix="ios-star" v-model="password" class="input_style"></el-input><br>
+            <el-input type="password" v-model="password" class="input_style" ></el-input><br>
 
             </div>
 
@@ -54,6 +54,7 @@ export default {
   name: 'login',
 
   data () {
+
     return {
 
       show: null,
@@ -152,7 +153,6 @@ export default {
           _this.$store.commit('setPassword', _this.password);
 
           _this.$router.replace('/home');
-          
           _this.$message.success('登录成功');
 
         } else if (code == 400 && info == 'incorrect') {
@@ -164,6 +164,12 @@ export default {
           // console.table(response.data);
 
           _this.$message.error('账号不存在！');
+
+          console.log("Hello")
+
+          console.log("getters: " + this.$store.getters.getUserAccount());
+
+          console.log("getters  22: " + this.$store.getters.getPassword());
 
         }
 
@@ -190,29 +196,11 @@ export default {
 .all {
 
     position: relative;
-    // top: 0;
-    // left: 0;
-    // width: 100%;
-    // height: 100%;
-    // // background-image: url('../assets/loginbg.jpg');
-    // background-color: #2d3a4b;
-    // background-repeat: no-repeat;
-    // background-size: cover;
     height: 100vh;
     background-color: #2d3a4b;
 
 }
 
-.picture {
-
-    position: absolute;
-    left: 590px;
-    top: 90px;
-    // background-image: url('../assets/whut.png');
-    width: 300px;
-    height: 66px;
-
-}
 
 .mydiv {
 
@@ -225,6 +213,7 @@ export default {
 
 }
 
+
 .headline {
 
     position: relative;
@@ -235,12 +224,6 @@ export default {
 
 }
 
-*{
-
-    padding: 0;
-    margin: 0;
-
-}
 
 .forget {
 
@@ -261,27 +244,30 @@ export default {
 
 }
 
+
 .user_id {
 
     position: relative;
-    left: -125px;
+    left: 10px;
     top: 0px;
 
 }
 
+
 .user_pass {
 
     position: relative;
-    left: -132px;
+    left: 10px;
     top: 0px;
     margin-top: 15px;
 
 }
 
+
 .button button {
 
     position: relative;
-    left: 0px;
+    left: 120px;
     top: 25px;
     width: 160px;
     height: 36px;
@@ -294,11 +280,13 @@ export default {
 
 }
 
+
 .button button:hover {
 
     color: aliceblue;
 
 }
+
 
 .input {
 
@@ -311,12 +299,14 @@ export default {
 
 }
 
+
 .input_style {
 
     width: 300px;
     height: 40px;
 
 }
+
 
 .errorTip {
     position: absolute;
