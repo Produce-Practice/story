@@ -61,41 +61,71 @@ export default {
   },
 
   created () {
+    
+    // // 存在token
+    // if (JSON.parse(storage.get("user")).token != null) {
 
-    if (storage.get('token') != null) {
+    //   console.log('-----------------create----------------------')
 
-      console.log('-----------------create----------------------')
+    //   var user = storage.get('user');
+    //   this.$store.commit('createUser', user);
 
-      var token = storage.get('token')
-      this.$store.commit('setToken', token)
+    //   // JSON.parse(this.$store.getters.getUser);
 
-      // var user = storage.get('user')
-      // this.$store.commit('createUser', user)
-
-      var userAccount = storage.get('userAccount')
-
-      this.$store.commit('setUserAccount', userAccount)
-
-      var password = storage.get('password')
-      
-      this.$store.commit('setPassword', password)
-
-    }
+    // }
     
   }
 
 }
 </script>
 
-<style lang="less">
-#app {
+<style lang="less" scoped>
 
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin: 0px 0px;
-  padding: 0px 0px;
 
-}
+// body {
+//   background-color: #1e1f23;
+//   padding-top: 8rem;
+// }
+
+// body.is-loading:after {
+//   visibility: hidden;
+//   opacity: 0;
+// }
+
+// body:after {
+//   -moz-pointer-events: none;
+//   -webkit-pointer-events: none;
+//   -ms-pointer-events: none;
+//   pointer-events: none;
+//   -moz-transition: opacity 1.5s ease-in-out, visibility 1.5s;
+//   -webkit-transition: opacity 1.5s ease-in-out, visibility 1.5s;
+//   -ms-transition: opacity 1.5s ease-in-out, visibility 1.5s;
+//   transition: opacity 1.5s ease-in-out, visibility 1.5s;
+//   content: '';
+//   background-image: url(./assets/bg.jpg);
+//   background-attachment: fixed;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   position: fixed;
+//   display: block;
+//   top: 0;
+//   left: 0;
+//   height: 100%;
+//   width: 100%;
+//   z-index: -1;
+//   visibility: visible;
+//   opacity: 1;
+// }
+
+// @media screen and (max-width: 980px) {
+
+//   body:after {
+//     background-attachment: scroll;
+//     background-position: top;
+//     background-size: 100%;
+//   }
+
+// }
+
 </style>

@@ -10,6 +10,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { Button, Message, Input, Loading } from 'element-ui'
 
+import './assets/css/bootstrap.min.css'
+//通过vue ui下载的jquery和bootstrap中的min.js
+import 'jquery/dist/jquery.min.js'
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);

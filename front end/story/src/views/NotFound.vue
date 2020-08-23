@@ -28,7 +28,7 @@ export default {
 .theme p {
     font-size: 40px;
     font-weight: bold;
-    top: 320px;
+    top: 365px;
     left: 610px;
     position: absolute;
 }

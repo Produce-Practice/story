@@ -1,22 +1,21 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import storage from '../utils/storage'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    // 数据保存在state内，在任何组件内通过this.$store.state.XX来读取
-    data: {},
 
-        token: null,
-
-        userAccount: "77",
-        password: "00",
+    state: { // 数据保存在state内，在任何组件内通过this.$store.state.XX来读取
 
         user: {
+
+            token: null,
             userAccount: null,
             password: null,
+
         }
+
     },
 
     // 用来直接修改state内的数据；在组件内，通过this.$store.commit(方法名)来执行mutations
@@ -24,31 +23,6 @@ export default new Vuex.Store({
     // mutations中主要是改变state初始值的方法, 用法: 通过传入state或额外参数
     // 利用vue的双向驱动进行state中值的修改;
     mutations: {
-
-        // setToken(state, value) {
-        //     state.token = value
-        // },
-
-        setUser(state, user){
-            state.user = user;
-        },
-    
-
-        // setUserAccount(state, value) {
-
-        //     state.userAccount = value;
-
-        // },
-
-        // setPassword(state, value) {
-
-        //     state.password = value;
-
-        // },
-    // token: null,
-
-    // userAccount: null,
-    // password: null,
 
         createUser(state, user) {
 
@@ -66,18 +40,17 @@ export default new Vuex.Store({
     // action在组件内通过this.$store.dipatch(方法名)来触发
     actions: {
 
-        // this.$store.dispatch('getToken');
-        getToken(context) {
-            context.commit('setToken');
-        },
+        // this.$store.dispatch('commitToken');
+        // commitToken(context) {
+        //     context.commit('setToken');
+        // },
 
         // value为要变化的形参
         // this.$store.dispatch('setPassword', value);
-        setPassword(context, value) {
+        // setPassword(context, value) {
+        //     context.password = value;
+        // },
 
-            context.password = value;
-
-        },
     },
 
     // 将各个组件中的computed中的方法提取出来
@@ -86,13 +59,18 @@ export default new Vuex.Store({
     getters: {
 
         // 方法名随意
-        getUserAccount() {
-            return state.userAccount
+        // _this.$store.getters.getUser
+        getUser(state) {
+
+            state.user = storage.get('user');
+            return state.user;
+
         },
 
-        getPassword(state) {
-            return state.password
-        }
+    },
+
+    modules: { // 用来将store分割到不同模块
+
     }
 
-});
+})

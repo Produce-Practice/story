@@ -2,19 +2,19 @@ const storage = {
 
     set(key, value) {
 
-        window.localStorage.setItem(key, value)
+        window.sessionStorage.setItem(key, value)
 
     },
 
     get(key) {
 
-        return window.localStorage.getItem(key)
+        return window.sessionStorage.getItem(key)
 
     },
 
     remove(key) {
 
-        window.localStorage.removeItem(key)
+        window.sessionStorage.removeItem(key)
 
     }
 

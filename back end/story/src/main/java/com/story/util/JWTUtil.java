@@ -8,8 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.util.Date;
 
-public class
-JWTUtil {
+public class JWTUtil {
 
     // Token到期时间: 24小时
     private static final long EXPIRE_TIME = 60 * 60 * 24 * 1000;
