@@ -1,5 +1,5 @@
 <template>
-  <!-- 随笔全列表，为实现分页 -->
+  <!-- 随笔全列表，未实现分页 -->
   <div>
     <section class="blog">
       <div class="container">
@@ -51,12 +51,14 @@ export default {
       instance: null
     };
   },
+
   components: {
     Footer
   },
+  
   created() {
     this.instance = axios.create({
-      baseURL: "http://localhost:8081",
+      baseURL: "http://localhost:8080",
       timeout: 1000
     });
     this.getnote();

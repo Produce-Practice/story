@@ -42,7 +42,7 @@
 </template>
 
 <script>
-// 列表的样式
+// 导入Footer，需在下方components注明
 import Footer from '../components/Footer.vue';
 import storage from '../utils/storage';
 import http from '../utils/http';
@@ -62,6 +62,11 @@ export default {
     }
   },
 
+  //注明Footer
+  components: {
+    Footer
+  },
+  
   created: function () {
   
   },

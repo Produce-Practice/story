@@ -1,26 +1,26 @@
 <template>
-    <div>
-        <Footer></Footer>
-    </div>    
+  <div>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
+//导入Footer
+import Footer from "../components/Footer.vue";
 export default {
-    name: 'messageCenter',
-    data() {
-        return {
-            
-        }
+  name: "messageCenter",
+  data() {
+    return {};
+  },
 
-    },
+  //注明Footer
+  components: {
+    Footer
+  },
 
-    methods: {
-
-    }
-}
+  methods: {}
+};
 </script>
 
 <style scoped>
-
 </style>

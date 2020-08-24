@@ -11,10 +11,9 @@
             <p class="blog-heading"></p>
           </div>
           <div class="exchange-btn">
-            <!-- 更新推荐列表 -->
+             <!-- 更新推荐列表 -->
             <button class="change">
               <i class="glyphicon glyphicon-refresh"></i>
-              换一换
             </button>
             <!-- 跳转到Book.vue 获取全部书籍分享列表 -->
             <button class="more">
@@ -66,7 +65,6 @@
              <!-- 更新推荐列表 -->
             <button class="change">
               <i class="glyphicon glyphicon-refresh"></i>
-              换一换
             </button>
             <!-- 跳转到Music.vue 获取全部音乐列表 -->
             <button class="more">
@@ -117,7 +115,6 @@
              <!-- 更新推荐列表 -->
             <button class="change">
               <i class="glyphicon glyphicon-refresh"></i>
-              换一换
             </button>
             <!-- 跳转到Video.vue 获取全部的电影列表 -->
             <button class="more">
@@ -168,7 +165,6 @@
              <!-- 更新推荐列表 -->
             <button class="change">
               <i class="glyphicon glyphicon-refresh"></i>
-              换一换
             </button>
             <button class="more">
               <!-- 跳转到Note.vue获取全部随笔列表 -->
@@ -229,7 +225,7 @@ export default {
   },
   created() {
     this.instance = axios.create({
-      baseURL: "http://localhost:8081",
+      baseURL: "http://localhost:8080",
       timeout: 1000
     });
     this.getbook();
@@ -299,16 +295,16 @@ export default {
   background: #cfcfcf;
   color: rgb(255, 255, 255);
   font-size: 15px;
+  width: 50px;
   border-radius: 25px;
 }
-.change:hover ,.more:hover {
-  background: #8b857e;
-}
+
 .more {
   outline: none;
   border: none;
   background: #cfcfcf; 
   font-size: 15px;
+  width: 75px;
   border-radius: 25px;
   margin-left:10px ;
 }
@@ -316,5 +312,10 @@ export default {
    color: #fff;
    text-decoration: none;
 }
-
+.change,.more i{
+  padding-top:5px;
+}
+.change:hover, .more:hover {
+  background: #8b857e;
+}
 </style>
