@@ -1,9 +1,10 @@
 package com.story.dao;
 
 import com.alibaba.fastjson.JSONObject;
-import com.story.domain.User;
-import org.springframework.stereotype.Repository;
+import com.story.domain.Idea;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository("storyDao")
@@ -16,8 +17,14 @@ public interface IdeaDao {
 
     Integer deleteIdea(JSONObject jsonObject);
 
-    Integer listIdeas(JSONObject jsonObject);
+    List<Idea> listIdeasByUserId(Integer userId, Integer currentBegin, Integer pageSize);
 
-    Integer listOneIdea(JSONObject jsonObject);
+    List<Idea> listIdeasByTypeId(Integer typeId, Integer currentBegin, Integer pageSize);
+
+    List<Idea> listIdeasByTitle(String title, Integer currentBegin, Integer pageSize);
+
+    List<Idea> listAllIdeas();
+
+    Idea listOneIdea(JSONObject jsonObject);
 
 }

@@ -1,9 +1,16 @@
 package com.story.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.story.domain.Idea;
+
+import java.util.List;
 
 public interface IdeaService {
-
-    JSONObject listCommentsByIdeaId(Integer ideaId);
-
+    JSONObject saveIdea(JSONObject message);
+    JSONObject updateIdea(JSONObject message);
+    JSONObject deleteIdea(JSONObject message);
+    JSONObject listIdeasByUserId(JSONObject message);  // 根据用户查找
+    JSONObject listIdeasByTypeId(JSONObject message);  // 根据类型查找
+    JSONObject listIdeasByTitle(JSONObject message);      // 根据标题查找
+    JSONObject listIdeasByHeat(JSONObject message);
 }
