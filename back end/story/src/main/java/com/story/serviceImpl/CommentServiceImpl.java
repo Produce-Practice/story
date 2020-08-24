@@ -60,24 +60,26 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
-
-
     // idea详情页显示所有评论
     @Override
     public JSONObject listCommentsByIdeaId(JSONObject message) {
         String ideaId = message.getString("ideaId");
         List<Comment> comments = commentDao.findByIdeaIdAndParentCommentNull(ideaId);
-        JSONObject parentComments = new JSONObject();
-        for (int i = 0; i < comments.size(); i++) {
-            Comment comment = comments.get(i);
-            JSONObject nowComment = new JSONObject();
-            nowComment.put("comment",comment);
+        List<JSONObject> parentComments = new ArrayList<>();
+        for (Comment comment : comments) {
+            //System.out.println(comment);
+            JSONObject nowComment = JSONObject.parseObject(JSONObject.toJSONString(comment));
             List<Comment> allReplys = new ArrayList<>();
             combineChildren(comment, allReplys);
-            nowComment.put("childrenComments",allReplys);
-            parentComments.put(Integer.toString(i),nowComment);
+            //System.out.println(allReplys);
+            nowComment.put("childrenComments", allReplys);
+            parentComments.add(nowComment);
         }
-        return parentComments;
+        if (parentComments.size() > 0) {
+            return JSONUtil.successJSON(parentComments);
+        } else {
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+        }
     }
 
     // 搜寻子评论

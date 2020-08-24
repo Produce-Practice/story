@@ -61,8 +61,8 @@ public class IdeaServiceImpl implements IdeaService {
         Integer currentPage = message.getInteger("currentPage");
         Integer pageSize = message.getInteger("pageSize");
         Integer currentBegin = (currentPage - 1) * pageSize;
-        Integer userId = message.getInteger("userId");
-        List<Idea> ideas = ideaDao.listIdeasByUserId(userId, currentBegin, pageSize);
+        message.put("currentBegin", currentBegin);
+        List<JSONObject> ideas = ideaDao.listIdeasByUserId(message);
         if (ideas != null) {
 
             return JSONUtil.successJSON(ideas);
@@ -80,12 +80,11 @@ public class IdeaServiceImpl implements IdeaService {
      */
     @Override
     public JSONObject listIdeasByTypeId(JSONObject message) {
-        String msg = message.getString("idea");
         Integer currentPage = message.getInteger("currentPage");
         Integer pageSize = message.getInteger("pageSize");
         Integer currentBegin = (currentPage - 1) * pageSize;
-        Integer typeId = message.getInteger("typeId");
-        List<Idea> ideas = ideaDao.listIdeasByTypeId(typeId, currentBegin, pageSize);
+        message.put("currentBegin", currentBegin);
+        List<JSONObject> ideas = ideaDao.listIdeasByTypeId(message);
         if (ideas != null) {
 
             return JSONUtil.successJSON(ideas);
@@ -106,7 +105,9 @@ public class IdeaServiceImpl implements IdeaService {
         Integer pageSize = message.getInteger("pageSize");
         Integer currentBegin = (currentPage - 1) * pageSize;
         String title = "%" + message.getString("title") + "%";
-        List<Idea> ideas = ideaDao.listIdeasByTitle(title, currentBegin, pageSize);
+        message.put("currentBegin", currentBegin);
+        message.put("title", title);
+        List<JSONObject> ideas = ideaDao.listIdeasByTitle(message);
         if (ideas != null) {
 
             return JSONUtil.successJSON(ideas);
@@ -129,14 +130,11 @@ public class IdeaServiceImpl implements IdeaService {
             idea.setCommentCount(commentNum);
         }
         //然后通过比较器来实现排序
-        ideaList.sort(new Comparator<Idea>() {
-            //降序排序
-            @Override
-            public int compare(Idea idea1, Idea idea2) {
-                Integer idea1Heat = idea1.getCommentCount() + idea1.getLikes() + idea1.getVisits();
-                Integer idea2Heat = idea2.getCommentCount() + idea2.getLikes() + idea2.getVisits();
-                return idea2Heat.compareTo(idea1Heat);
-            }
+        //降序排序
+        ideaList.sort((idea1, idea2) -> {
+            Integer idea1Heat = idea1.getCommentCount() + idea1.getLikes() + idea1.getVisits();
+            Integer idea2Heat = idea2.getCommentCount() + idea2.getLikes() + idea2.getVisits();
+            return idea2Heat.compareTo(idea1Heat);
         });
         if (ideaList.size() > 0) {
             return JSONUtil.successJSON(ideaList);

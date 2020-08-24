@@ -11,11 +11,11 @@
     </insert>
 
     <select id="findByIdeaIdAndParentCommentNull" resultType="com.story.domain.Comment">
-        select c.*, u.userName, u.sign, u.avatar from comment c inner join user u on c.userId = u.userId where ideaId = #{ideaId} and parentId is null;
+        select c.*, u.userName, u.sign, u.avatar from comment c inner join user u on c.userId = u.userId where ideaId = #{ideaId} and parentId is null order by c.commentTime desc;
     </select>
 
     <select id="findByIdeaIdAndParentId" resultType="com.story.domain.Comment">
-        select c.*, u.userName, u.sign, u.avatar from comment c inner join user u on c.userId = u.userId where ideaId = #{ideaId} and parentId = #{parentId};
+        select c.*, u.userName, u.sign, u.avatar from comment c inner join user u on c.userId = u.userId where ideaId = #{ideaId} and parentId = #{parentId} order by c.commentTime desc;
     </select>
 
     <select id="countComments" resultType="java.lang.Integer">
