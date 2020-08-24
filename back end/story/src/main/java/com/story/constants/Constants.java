@@ -20,4 +20,12 @@ public class Constants {
 
     public static final String QUERY_FAILED = "query failed";
 
+    public static final String INSERT_FAILED = "insert failed";
+
+    public static final String DELETE_FAILED = "delete failed";
+
+    public static final String UPDATE_FAILED = "update failed";
+
+    public static final String DESTINATION = "D:\\avatars\\";
+
 }

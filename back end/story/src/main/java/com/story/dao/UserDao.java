@@ -2,8 +2,9 @@ package com.story.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import com.story.domain.User;
-import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository("userDao")
@@ -14,10 +15,11 @@ public interface UserDao {
 
     JSONObject getRoleByUserAccount(String userAccount);
 
-    List<JSONObject> listUsers();
+    List<JSONObject> listUsers(Integer currentBegin, Integer pageSize);
 
-    void saveUser(JSONObject user);
+    Integer saveUser(JSONObject jsonObject);
+
+    Integer updateUserPassword(JSONObject jsonObject);
 
     Integer updateUser(JSONObject jsonObject);
-
 }

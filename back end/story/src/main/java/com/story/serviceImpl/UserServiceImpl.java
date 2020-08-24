@@ -14,8 +14,12 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.imageio.stream.FileImageOutputStream;
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -135,7 +139,7 @@ public class UserServiceImpl implements UserService {
 
             ok.put("userAccount", userAccount);
 
-            Integer rows = userDao.updateUser(ok);
+            Integer rows = userDao.updateUserPassword(ok);
 
             // 修改失败
             if (rows != 1) {
@@ -169,10 +173,13 @@ public class UserServiceImpl implements UserService {
     public JSONObject listUsers(JSONObject message) {
 
         String msg = message.getString("message");
+        Integer currentPage = message.getInteger("currentPage");
+        Integer pageSize = message.getInteger("pageSize");
+        Integer currentBegin = (currentPage - 1) * pageSize;
 
         if (msg.equals("userList")) {
 
-            List<JSONObject> users = userDao.listUsers();
+            List<JSONObject> users = userDao.listUsers(currentBegin, pageSize);
 
             return JSONUtil.successJSON(users);
 
@@ -216,7 +223,7 @@ public class UserServiceImpl implements UserService {
                 // 5. 将盐值存放到数据库中
                 object.put("salt", salt);
 
-                object.put("roleId", 1);
+                object.put("roleId", "1");
 
                 userDao.saveUser(object);
 
@@ -261,7 +268,7 @@ public class UserServiceImpl implements UserService {
 
         if (result != 1) {
 
-            return JSONUtil.errorJSON("删除异常!");
+            return JSONUtil.errorJSON(Constants.DELETE_FAILED);
 
         } else {
 

@@ -10,6 +10,38 @@ public class Comment {
 
     private Timestamp commentTime;
 
+    //詹一帆改动：8.23===================
+    private String ideaId;
+
+    private Integer userId;
+
+    private Integer parentId;
+    ///==================================
+
+    public String getIdeaId() {
+        return ideaId;
+    }
+
+    public void setIdeaId(String ideaId) {
+        this.ideaId = ideaId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
     public Integer getCommentId() {
         return commentId;
     }
@@ -34,4 +66,15 @@ public class Comment {
         this.commentTime = commentTime;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", content='" + content + '\'' +
+                ", commentTime=" + commentTime +
+                ", ideaId='" + ideaId + '\'' +
+                ", userId=" + userId +
+                ", parentId=" + parentId +
+                '}';
+    }
 }

@@ -24,6 +24,9 @@ public class User implements Serializable {
     // 用户头像
     private String avatar;
 
+    // 角色Id
+    private Integer roleId;
+
     public String getSalt() {
         return salt;
     }
@@ -94,5 +97,29 @@ public class User implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userAccount='" + userAccount + '\'' +
+                ", sign='" + sign + '\'' +
+                ", email='" + email + '\'' +
+                ", salt='" + salt + '\'' +
+                ", gender='" + gender + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", roleId='" + roleId + '\'' +
+                '}';
     }
 }
