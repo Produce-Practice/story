@@ -6,7 +6,7 @@
         tag：改变渲染结果; replace: 不会留下Hsitory;
         active-class: 高亮显示当前页面对应的菜单      -->
 
-    <router-view name="nav" v-if="isRouterAlive"></router-view>   <!-- router.js对应的path项的components中若有name就渲染, 没有name则不渲染 -->
+    <router-view name="nav" v-if="isRouterAlive" class="header1"></router-view>   <!-- router.js对应的path项的components中若有name就渲染, 没有name则不渲染 -->
     <router-view v-if="isRouterAlive"/>     <!-- 默认挂载router.js中default对应的路径 -->
     <router-view name="footer"></router-view>
     
@@ -19,6 +19,7 @@
 <script>
 
 import storage from './utils/storage'
+import http from './utils/http'
 
 export default {
 
@@ -41,7 +42,10 @@ export default {
   data() {
 
     return {
-      isRouterAlive: true
+
+      isRouterAlive: true,
+      typeList: ''
+
     }
 
   },
@@ -63,17 +67,63 @@ export default {
 
   created () {
     
-    // // 存在token
-    // if (JSON.parse(storage.get("user")).token != null) {
+    var _this = this;
+    
+    if (storage.get("typeList") == null) {
 
-    //   console.log('-----------------create----------------------')
+      http({
 
-    //   var user = storage.get('user');
-    //   this.$store.commit('createUser', user);
+      // 假设后台需要的是表单数据这里你就可以更改
+      headers: {
 
-    //   // JSON.parse(this.$store.getters.getUser);
+      "Content-Type": "application/json;charset=UTF-8"
+      
+      },
 
-    // }
+      method: 'post',
+      url: 'http://localhost:8080/listTypes',
+
+      data: {
+
+        message: "typeList"
+
+      },
+
+      responseType: 'json'
+
+      }).then(function (res) {
+
+          console.log(res);
+
+          var code = res.code;
+          var info = res.info;
+
+          if (res.code == 200) {
+
+            for (var i = 0; i < info.length; i++) {
+
+              this.typeList.push(JSON.stringify(info[i]));
+            
+            }
+          
+            storage.set("typeList", typeList);
+            _this.$store.commit('setTypeList', storage.get('typeList'));
+
+            console.log(JSON.parse(storage.get("typeList")));
+          
+          } else {
+              
+              _this.$message.error(info);
+
+          }
+
+      }).catch(function (err) {
+
+          _this.$message.error("系统错误！");
+    
+    });
+    }
+
     
   }
 
@@ -82,7 +132,10 @@ export default {
 
 <style lang="less" scoped>
 
-
+.header1{
+  position: relative;
+  z-index: 1;
+}
 // body {
 //   background-color: #1e1f23;
 //   padding-top: 8rem;

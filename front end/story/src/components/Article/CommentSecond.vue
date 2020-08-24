@@ -3,11 +3,11 @@
     <!-- 二级评论组件    -->
     <div class="box_user">
       <div class="user_avatar">
-        <img :src="avatar">
+        <img :src="SecondComment.avatar">
       </div>
       <div class="box_user_right">
         <div class="user_name">
-          周云飞
+          {{SecondComment.author}}
           <span>说道 :</span>
         </div>
         <div class="comment_date">2020年8月22日</div>
@@ -15,26 +15,8 @@
       </div>
     </div>
     <div class="box_content">   
-        <span class="which_user">@谁谁:</span>
-        评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容 评论内容
-        评论内容
-        评论内容
+        <span class="which_user">@{{SecondComment.father}}:</span>
+        {{SecondComment.comment}}
     </div>
   </div>
 </template>
@@ -42,12 +24,12 @@
 <script>
 export default {
   name: "myComments",
+  props:['SecondComment'],
   data() {
     return {
       num: 12,
       avatar:"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
 
-      
     };
   }
 };
@@ -58,13 +40,12 @@ export default {
   margin-top: 30px;
   width: 710px;
   padding: 0px 30px;
-  padding-bottom: 30px;
   height: auto;
   color: #7d7d7d;
 }
 .main_box2 {
   span {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -72,6 +53,8 @@ export default {
   margin-left: 20px;
   position: absolute;
   border: 1px solid #7d7d7d;
+  top: 5px;
+  left: 20px;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -87,7 +70,8 @@ export default {
 .user_name {
   position: absolute;
   left: 110px;
-  font-size: 18px;
+  top: 10px;
+  font-size: 16px;
   span {
     margin-left: 10px;
   }
@@ -107,7 +91,7 @@ export default {
 .comment_date {
   position: absolute;
   left: 110px;
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 30px;
   letter-spacing: 2px;
 }
@@ -120,8 +104,7 @@ export default {
   height: 60px;
 }
 .box_content {
-
-  margin-top: 20px;
+  font-size: 16px;
   padding-left: 110px;
   letter-spacing: 1px;
 }

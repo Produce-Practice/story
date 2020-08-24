@@ -4,11 +4,11 @@
     <div class="box_header">
       <div class="box_user">
         <div class="user_avatar">
-          <img :src="avatar">
+          <img :src="FirstComment.avatar">
         </div>
         <div class="box_user_right">
           <div class="user_name">
-            {{Cinfo.author}}
+            {{FirstComment.author}}
             <span>说道 :</span>
           </div>
           <div class="comment_date">2020年8月22日</div>
@@ -40,38 +40,44 @@
           </div>
         </div>
       </div>
-      <div class="box_content">
-        {{Cinfo.article}}
-      </div>
-      <transition name="second_show">
-        <myCommentSecond v-show="this.secondFlag"></myCommentSecond>
-      </transition>
+      <div class="box_content">{{FirstComment.comment}}</div>
+
+      <transition-group name="second_show">
+        <myCommentSecond
+          v-show="secondFlag"
+          v-for="(item, index) in FirstComment.secondComment"
+          :key="index"
+          :SecondComment="item"
+        ></myCommentSecond>
+
+      </transition-group>
     </div>
   </div>
 </template>
 
 <script>
-import myCommentSecond from "@/components/Article/CommentSecond";
+import myCommentSecond from "@/components/article/CommentSecond";
 export default {
   name: "myCommentFirst",
-  props:['Cinfo'],
+  props: ["FirstComment"],
   data() {
     return {
       num: 12,
-      avatar:
-        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-      secondFlag: false,
+      secondFlag: false
     };
   },
   methods: {
     spreadMore() {
       this.secondFlag = !this.secondFlag;
     },
-    reply(){
-        this.$store.commit('setToWho','回复'+this.Cinfo.author);
-     
+
+    reply() {
+
+      this.$store.state.toWho = 123;
+
     }
   },
+
   components: { myCommentSecond }
 };
 </script>
@@ -147,7 +153,7 @@ export default {
   height: 60px;
 }
 .box_content {
-  margin-top: 20px;
+  margin-top: 10px;
   padding-left: 110px;
   letter-spacing: 1px;
 }
@@ -161,7 +167,7 @@ export default {
   opacity: 0;
 }
 
-.comment_reply:hover{
-    cursor: pointer;
+.comment_reply:hover {
+  cursor: pointer;
 }
 </style>

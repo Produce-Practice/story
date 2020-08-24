@@ -2,35 +2,45 @@
     {
         "id":1,
         "userImg":"demo.jpg",
+        "likes":200,
         "views":200,
+        "commentCount":233,
         "title":"《这个杀手不太冷》",
         "content":"你陪了我多少年花开花败，一路上起起落落"
     },
     {
         "id":2,
         "userImg":"logo.png",
-        "views":220,
+        "likes":200,
+        "views":200,
+        "commentCount":233,
         "title":"《V字仇杀队》",
         "content":"这种重逢，算是命运吗？"
     },
     {
         "id":3,
         "userImg":"demo.jpg",
-        "views":2233,
+        "likes":200,
+        "views":200,
+        "commentCount":233,
         "title":"《夏洛特烦恼》",
         "content":"人与人之间的关系往往不是因为某些具体的原因而断。"
     },
     {
         "id":4,
         "userImg":"logo.png",
-        "views":6666,
+        "likes":200,
+        "views":200,
+        "commentCount":233,
         "title":"《我爱你》",
         "content":"被真相伤害总比被谎言欺骗的好,得到了再失去，总是比从来就没有得到更伤人。"
     },
     {
         "id":5,
         "userImg":"demo.jpg",
-        "views":123456,
+        "likes":200,
+        "views":200,
+        "commentCount":233,
         "title":"《后天》",
         "content":"如果我存在也是因为你需要我"
     }
@@ -38,7 +48,9 @@
     {
         "id":6,
         "userImg":"demo.jpg",
-        "views":123456,
+        "likes":200,
+        "views":200,
+        "commentCount":233,
         "title":"《魁拔》",
         "content":"如果我存在也是因为你需要我"
     }

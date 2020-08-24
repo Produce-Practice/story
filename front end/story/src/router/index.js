@@ -1,110 +1,114 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/user/Home.vue'
-import Login from '../views/user/Login.vue'
-import NotFound from '../views/user/NotFound.vue'
-import Navigation from '../components/Navigation.vue'
-import Footer from '../components/Footer.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/user/Home.vue";
+import Login from "../views/user/Login.vue";
+import NotFound from "../views/user/NotFound.vue";
+import Navigation from "../components/Navigation.vue";
+import Footer from "../components/Footer.vue";
 
 // import Register from '../views/user/Register.vue'
-import Book from '../views/user/Book.vue'
-import Music from '../views/user/Music.vue'
-import Note from '../views/user/Note.vue'
-import Video from '../views/user/Video.vue'
-import UpdatePassword from '../views/user/UpdatePassword.vue'
-import CreateCenter from '../views/user/CreateCenter.vue'
-import PersonCenter from '../views/user/PersonCenter.vue'
-import CreateIdea from '../views/user/CreateIdea.vue'
+import Book from "../views/user/Book.vue";
+import Music from "../views/user/Music.vue";
+import Note from "../views/user/Note.vue";
+import Video from "../views/user/Video.vue";
+import UpdatePassword from "../views/user/UpdatePassword.vue";
+import CreateCenter from "../views/user/CreateCenter.vue";
+import CreateIdea from "../views/user/CreateIdea.vue";
+import IdeaInfo from '../views/user/IdeaInfo.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-const routes = [
-
-    {
-        path: '/user/createIdea',
-        name: 'createIdea',
+const routes = [{
+        path: "/user/createIdea",
+        name: "createIdea",
         components: {
             default: CreateIdea,
-            nav: Navigation,
+            nav: Navigation
         },
+        children: [{
+            path: "public",
+            name: "public",
+            component: () =>
+                import ("@/components/createCenter/Public")
+        }, ]
     },
 
     {
-        path: '/user/personCenter',
-        name: 'personCenter',
+        path: "/ideaInfo",
+        name: "ideaInfo",
         components: {
-            default: PersonCenter,
-            nav: Navigation,
-            // footer: Footer
+            default: IdeaInfo,
+            nav: Navigation
         }
     },
 
     {
-        path: '/login',
-        name: 'login',
+        path: "/login",
+        name: "login",
         components: {
             default: Login,
-            nav: Navigation,
-            // footer: Footer
+            nav: Navigation
+                // footer: Footer
         }
     },
 
     {
-        path: '/',
-        name: 'home',
+        path: "/",
+        name: "home",
         components: {
             default: Home,
-            nav: Navigation,
-            // footer: Footer
+            nav: Navigation
+                // footer: Footer
         }
     },
 
     {
-        path: '/user/createCenter',
-        name: 'createCenter',
+        path: "/user/createCenter",
+        name: "createCenter",
+
         components: {
             default: CreateCenter,
             nav: Navigation
         },
-
         children: [{
-                path: 'messageInfo',
-                name: 'messageInfo',
-                components: () =>
-                    import ('@/views/user/MessageInfo')
+                path: "personCenter",
+                name: "personCenter",
+                component: () =>
+                    import ("@/views/user/PersonCenter")
+            },
+            {
+                path: "favourInfo",
+                name: "favourInfo",
+                component: () =>
+                    import ("@/views/user/MyFavour")
             },
 
             {
-                path: 'favourInfo',
-                name: 'favourInfo',
+                path: "messageInfo",
+                name: "messageInfo",
                 component: () =>
-                    import ('@/views/user/MyFavour'),
+                    import ("@/views/user/MessageInfo")
             },
 
             {
-                path: 'draft',
-                name: 'draft',
+                path: "draft",
+                name: "draft",
                 component: () =>
-                    import ('@/views/user/Draft'),
+                    import ("@/views/user/Draft")
             },
 
             {
-                path: 'record',
-                name: 'record',
+                path: "record",
+                name: "record",
                 component: () =>
-                    import ('@/views/user/Record'),
-
-            },
-
+                    import ("@/views/user/Record")
+            }
         ]
-
-
-
     },
 
     {
-        path: '/user/updatePassword',
-        name: 'updatePassword',
+        path: "/user/updatePassword",
+        name: "updatePassword",
         components: {
             default: UpdatePassword,
             nav: Navigation
@@ -112,14 +116,14 @@ const routes = [
     },
 
     {
-        path: '/notFound',
-        name: 'notFound',
+        path: "/notFound",
+        name: "notFound",
         component: NotFound
     },
 
     {
-        path: '/book',
-        name: 'book',
+        path: "/book",
+        name: "book",
         components: {
             default: Book,
             nav: Navigation
@@ -127,18 +131,17 @@ const routes = [
     },
 
     {
-        path: '/music',
-        name: 'music',
+        path: "/music",
+        name: "music",
         components: {
             default: Music,
             nav: Navigation
         }
     },
 
-
     {
-        path: '/note',
-        name: 'note',
+        path: "/note",
+        name: "note",
         components: {
             default: Note,
             nav: Navigation
@@ -146,8 +149,8 @@ const routes = [
     },
 
     {
-        path: '/video',
-        name: 'video',
+        path: "/video",
+        name: "video",
         components: {
             default: Video,
             nav: Navigation
@@ -155,16 +158,20 @@ const routes = [
     },
 
     {
-        path: '*', // 访问路径不存在时, 重定向到登录界面
-        redirect: '/notFound'
+        path: "*", // 访问路径不存在时, 重定向到登录界面
+        redirect: "/notFound"
     }
-
-]
+];
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: "history",
     base: process.env.BASE_URL,
     routes
-})
+});
 
-export default router
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err);
+};
+
+export default router;

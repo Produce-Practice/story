@@ -16,6 +16,30 @@
         <p>———— {{PageInfo.author}}</p>
       </div>
       <div class="icon_content">
+        <i class="eye">
+          <svg
+            t="1598281181752"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4069"
+            width="20"
+            height="20"
+          >
+            <path
+              d="M511.3 288.8c46.6 0 94.6 9.5 142.6 28.3 42.4 16.6 83.8 39.8 123.1 69.1 42.2 31.4 70.5 61.4 86.8 80.9 17.2 20.6 26 35.6 29.8 43.6-3.9 8.1-12.9 23-30.2 43.8-16.5 19.8-44.9 49.9-86.9 81.5-39.2 29.6-80.6 53-122.8 69.7-48 19-95.9 28.6-142.5 28.6-46.4 0-94.3-9.6-142.2-28.4-42.3-16.6-83.6-39.9-122.9-69.3-42.1-31.5-70.5-61.5-87-81.1-17.3-20.7-26.2-35.6-30.1-43.6 3.8-8 12.6-23 29.8-43.7 29.6-35.7 63.5-63.9 86.7-81.3 39.2-29.4 80.6-52.8 122.9-69.5 48.1-19 96.2-28.6 142.9-28.6m0-64c-247.5 0-447.2 225-448.1 286.7-0.9 59.6 200.6 286.7 448.1 286.7s447-227.1 448.1-286.7c1.1-61.7-200.6-286.7-448.1-286.7z"
+              p-id="4070"
+              fill="#2c2c2c"
+            ></path>
+            <path
+              d="M512.2 512.2m-192.1 0a192.1 192.1 0 1 0 384.2 0 192.1 192.1 0 1 0-384.2 0Z"
+              p-id="4071"
+              fill="#2c2c2c"
+            ></path>
+          </svg>
+        </i>
+        <span>{{PageInfo.eye}}</span>
         <i class="icon">
           <svg
             t="1597996768855"
@@ -46,24 +70,21 @@ export default {
   name: "myArticle",
   data() {
     return {
-
       PageInfo: {
         article:
           "本人今年34么用处的一种人吧！种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父",
         author: "张三",
         title: "慢一步，差一步-网易云热评墙",
-        star: 123
+        star: 1234,
+        eye: 123,
       },
 
       flag: false
-
     };
-
   },
   methods: {
-    
     goBack() {
-      console.log("go back");
+      this.$router.go(-1);
     },
     clickStar(e) {
       if (this.flag == true) {
@@ -121,18 +142,34 @@ export default {
   }
 }
 .icon_content {
+  position: relative;
   width: 100%;
   padding: 20px 0px;
   .icon {
     position: absolute;
+
     right: 20px;
   }
 
-  span {
+  .eye {
+    position: absolute;
+    top: 18px;
+    right: 100px;
+  }
+
+  span:nth-child(4) {
     position: absolute;
     right: 15px;
     font-size: 10px;
-    line-height: 16px;
+    line-height: 18px;
+    font-weight: 100px;
+  }
+
+  span:nth-child(2) {
+    position: absolute;
+    right: 100px;
+    font-size: 10px;
+    line-height: 18px;
     font-weight: 100px;
   }
 }
@@ -140,13 +177,13 @@ export default {
   transition: all 0.5s;
 }
 .icon:hover {
-  path {
+  .icon path {
     fill: #d81e06;
     transition: all 0.5s;
   }
 }
 .icon:active {
-  path {
+  .icon path {
     fill: #d81e06;
     transition: all 0.5s;
   }

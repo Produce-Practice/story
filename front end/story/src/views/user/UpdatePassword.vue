@@ -21,6 +21,7 @@
                 <button type="button" class="submit" @click="update">修改</button>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -32,6 +33,10 @@ import http from '@/utils/http';
 export default {
 
   name: 'updatePasswrod',
+
+  components: {
+      Footer
+  },
 
   data () {
 
@@ -123,6 +128,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+footer{
+    position: absolute;
+    bottom: -650px;
+}
+
+
+
 *,
 *:before,
 *:after {

@@ -5,31 +5,76 @@
       <span>Comments |</span>
       {{num}} 条评论
     </div>
-    
-    <myCommentFirst v-for="(item, index) in commentInfo" :key="index" :Cinfo="item"></myCommentFirst>
-    
+
+    <myCommentFirst v-for="(item, index) in commentFirst" :key="index" :FirstComment="item"></myCommentFirst>
+
     <myCommentArea class="mycomment-area"></myCommentArea>
   </div>
 </template>
 
 <script>
-import myCommentArea from "@/components/Article/CommentArea";
- import myCommentFirst from "@/components/Article/CommentFirst";
+import myCommentArea from "@/components/article/CommentArea";
+import myCommentFirst from "@/components/article/CommentFirst";
 export default {
   name: "myUserComment",
-  props:['commentInfo'],
+  // props:['FirstComment'],
+
   data() {
     return {
       num: 12,
-      avatar:
-        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+      avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
       secondFlag: false,
       Page: {
         role: "飞飞"
-      }
+      },
+      commentFirst: [
+        
+        
+        {
+          author: "不知名男作者1",
+          comment:
+            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+          secondComment: [{
+            author: "不知名男作者1二级作者",
+            comment:
+              "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+            avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+            father: "不知名作者1"
+          },
+          {
+            author: "不知名男作者2二级作者",
+            comment:
+              "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+            avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+            father: "不知名作者1"
+          }]
+
+
+
+        },
+        {
+          author: "不知名男作者2",
+          comment:
+            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+          father:"不知名作者1"
+        },
+
+
+
+
+
+        {
+          author: "不知名男作者3",
+          comment:
+            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg"
+        }
+      ]
     };
   },
-  components: { myCommentArea , myCommentFirst}
+  components: { myCommentArea, myCommentFirst }
 };
 </script>
 
@@ -117,8 +162,7 @@ export default {
   opacity: 0;
 }
 
-
-.mycomment-area{
-    transform: translateX(-30px);
+.mycomment-area {
+  transform: translateX(-30px);
 }
 </style>

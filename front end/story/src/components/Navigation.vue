@@ -59,9 +59,9 @@
               </div>
 
               <div v-show="show1">
-                <router-link to="/user/personCenter"><el-dropdown-item>个人中心</el-dropdown-item></router-link>
-                <router-link to="/user/createCenter"><el-dropdown-item>创作中心</el-dropdown-item></router-link>
-                <router-link to="/user/messageCenter"><el-dropdown-item>消息中心</el-dropdown-item></router-link>
+                <router-link to="/user/createCenter/personCenter"><el-dropdown-item>个人中心</el-dropdown-item></router-link>
+                <router-link to="/user/createCenter/draft"><el-dropdown-item>创作中心</el-dropdown-item></router-link>
+                <router-link to="/user/createCenter/messageInfo"><el-dropdown-item>消息中心</el-dropdown-item></router-link>
                 <router-link to="/user/updatePassword"><el-dropdown-item>修改密码</el-dropdown-item></router-link>
                 <el-dropdown-item @click.native="exit()">退出</el-dropdown-item>
               </div>
@@ -109,7 +109,7 @@ export default {
     // 若用户已登录
     if (JSON.parse(storage.get("user")) != null) {
 
-      this.squareUrl = "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'";
+      this.squareUrl = "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100";
       this.show0 = false;
       this.show1 = true;
 

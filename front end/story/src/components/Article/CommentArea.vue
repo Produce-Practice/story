@@ -5,13 +5,15 @@
     </div>
     <div style="margin: 0px 0;font-size:18px;color:#656d78">发表评论</div>
     <div class="textarea">
+
       <el-input
         type="textarea"
         :placeholder="this.$store.state.toWho"
         v-model="textarea"
         maxlength="100"
         show-word-limit
-      >hello</el-input>
+      ></el-input>
+      
     </div>
     <div class="footer">
       <el-button>发表评论</el-button>

@@ -14,7 +14,12 @@ export default new Vuex.Store({
             userAccount: null,
             password: null,
 
-        }
+        },
+
+        typeList: [],
+
+        isShow: false,
+        toWho: "请输入内容"
 
     },
 
@@ -27,6 +32,32 @@ export default new Vuex.Store({
         createUser(state, user) {
 
             state.user = user;
+
+        },
+
+        setTypeList(state, typeList) {
+
+            // typeList.forEach(item => {
+            //     Vue.set(state.typeList, item.tpyeId, item);
+            // })
+
+            for (var i = 0; i < typeList.length; i++) {
+
+                state.typeList.push(typeList[i]);
+
+            }
+
+        },
+
+        changeShow(state) {
+
+            state.isShow = !state.isShow;
+
+        },
+
+        setToWho(state, data) {
+
+            state.toWho = data;
 
         }
 
@@ -66,6 +97,11 @@ export default new Vuex.Store({
             return state.user;
 
         },
+
+        getTypeList(state) {
+            state.typeList = storage.get("typeList");
+            return state.typeList;
+        }
 
     },
 

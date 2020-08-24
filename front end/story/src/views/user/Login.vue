@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <!-- <Footer></Footer> -->
+        <Footer></Footer>
     </div>
 </template>
 
@@ -230,6 +230,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+footer{
+    position: absolute;
+    bottom: -650px;
+}
+
 
 *,
 *:before,

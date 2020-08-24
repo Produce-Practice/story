@@ -38,14 +38,20 @@ export default {
     };
   },
   methods: {
+    
     toSend() {
+
       alert("去创造中心发送");
+    
     },
     currentchange: function(currentPage) {
+
       this.currentPage = currentPage;
       console.log(this.currentPage);
       console.log("发送http请求");
+    
     }
+  
   },
   beforeMount() {
       //

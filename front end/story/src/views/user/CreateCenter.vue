@@ -44,15 +44,24 @@
     <div class="router_class">
       <router-view></router-view>
     </div>
+    <Footer></Footer>
   </div>
   <!-- </el-aside>     -->
 </template>
 
-<script >
+<script>
+
+import Footer from '@/components/Footer.vue'
+
 export default {
+
   name: "createCenter",
 
   inject: ["reload"],
+
+  components: {
+    Footer
+  },
 
   data() {
     return {
@@ -95,8 +104,16 @@ export default {
 </script>
 
 <style scoped lang="less">
+
 // .createCenter {
 // }
+
+
+footer {
+  position: absolute;
+  bottom: -1250px;
+}
+
 
 .message-content {
   top: 54px;

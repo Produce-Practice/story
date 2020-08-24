@@ -1,215 +1,236 @@
 <template>
-    <div class="all">
-        <div class="center">
-            个人资料
-            <button @click="edit_state?edit():save()">{{message}}</button>
-            <br />——————————————————————————————————————————————
-            <div>
-                头
-                <span></span>像
-                <span></span>：
+  <div>
+      <div>
+        <div class="form-wrapper">
+          <div class="form-signin wow fadeInUp">
+            <div class="login-wrap">
+              <div class="userImage">
+                <span>头像：</span>
                 <el-upload
-                    class="avatar-uploader"
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    :show-file-list="false"
-                    :on-success="handleAvatarSuccess"
-                    :before-upload="beforeAvatarUpload"
+                  class="avatar-uploader"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                  :before-upload="beforeAvatarUpload"
                 >
-                    <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
-            </div>
-
-            <div>
-                昵
-                <span></span>称
-                <span></span>：
-                <input type="text" v-model="nickname" :readonly="edit_state" />
-            </div>
-
-            <div>
-                性
-                <span></span>别
-                <span></span>：
-                <input type="radio" name="radios" value="男" v-model="sex" :disabled="choseState" />男
-                <span></span>
-                <input type="radio" name="radios" value="女" v-model="sex" :disabled="choseState" />女
-            </div>
-
-            <div>
-                邮
-                <span></span>箱
-                <span></span>：
-                <input type="email" v-model="email" :readonly="edit_state" />
-            </div>
-
-            <div>
-                个性签名：
+              </div>
+              <span>昵称：</span>
+              <input
+                type="text"
+                v-model="nickname"
+                :readonly="edit_state"
+                :style="{border:borderState+'px solid'}"
+              />
+              <div class="checkbox">
+                <span>性别：</span>
+                男：
+                <input
+                  type="radio"
+                  name="radios"
+                  value="男"
+                  v-model="sex"
+                  :disabled="choseState"
+                />
+                女：
+                <input
+                  type="radio"
+                  name="radios"
+                  value="女"
+                  v-model="sex"
+                  :disabled="choseState"
+                />
+              </div>
+              <div class="mail">
+                <span>邮箱：</span>
+                <input
+                  type="email"
+                  v-model="email"
+                  :readonly="edit_state"
+                  :style="{border:borderState+'px solid'}"
+                />
+              </div>
+              <div class="personalSignature">
+                <span>个性签名：</span>
                 <textarea v-model="signature" cols="50" rows="8" :readonly="edit_state"></textarea>
+              </div>
+              <button class="btn btn-lg btn-login" @click="edit_state?edit():save()">{{message}}</button>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+    <!-- <Footer></Footer> -->
+  </div>
 </template>
 
 <script>
+import Footer from "@/components/Footer.vue";
 export default {
-    
-    name: "personCenter",
-    
-    data() {
-
-        return {
-
-            message: "修 改",
-            nickname: "Mystory",
-            sex: "男",
-            email: "1062653191@qq.com",
-            signature: "Welcome to mysory!",
-            edit_state: true,
-            choseState: true,
-            imageUrl: "",
-        
-        };
-    
+  name: "PersonalInfo",
+  components: {
+    Footer
+  },
+  data() {
+    return {
+      message: "修 改",
+      nickname: "Mystory",
+      sex: "男",
+      email: "1062653191@qq.com",
+      signature: "Welcome to mystory!",
+      edit_state: true,
+      choseState: true,
+      borderState: "0",
+      imageUrl: ""
+    };
+  },
+  methods: {
+    edit: function() {
+      this.choseState = this.edit_state = false;
+      this.borderState = "1";
+      this.message = "保 存";
     },
-    methods: {
-    
-        edit: function () {
-    
-            this.choseState = this.edit_state = false;
-            this.message = "保 存";
-    
-        },
-    
-        save: function () {
-    
-            //保存信息到数据库
-            this.choseState = this.edit_state = true;
-            this.message = "修 改";
-    
-        },
-
-        handleAvatarSuccess(res, file) {
-    
-            this.imageUrl = URL.createObjectURL(file.raw);
-    
-        },
-        beforeAvatarUpload(file) {
-    
-            const isJPG = file.type === "image/jpeg";
-            const isLt2M = file.size / 1024 / 1024 < 2;
-
-            if (!isJPG) {
-
-                this.$message.error("上传头像图片只能是 JPG 格式!");
-            
-            }
-            
-            if (!isLt2M) {
-            
-                this.$message.error("上传头像图片大小不能超过 2MB!");
-            
-            }
-            
-            return isJPG && isLt2M;
-        
-        },
-    
+    save: function() {
+      //保存信息到数据库
+      this.choseState = this.edit_state = true;
+      this.borderState = "0";
+      this.message = "修 改";
     },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
 
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    }
+  }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.all {
-    background-color: whitesmoke;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.form-wrapper {
+  padding-bottom: 70px;
 }
-
-.center {
-    width: 1000px;
-    margin-left: 10px;
-    padding: 30px 0 20px 30px;
-    font-size: 20px;
-    background-color: white;
+.form-signin {
+  width: 600px;
+  margin-left: 55px;
+  margin-top: 10px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
-
-.center div {
-    margin-top: 20px;
-    margin-left: 50px;
-    font-size: 18px;
+.userImage {
+  height: 78px;
+  overflow: hidden;
+  z-index: -2;
+  margin-bottom: 40px;
 }
-
-img {
-    height: 50px;
-    vertical-align: middle;
+.login-wrap {
+  padding: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
-
-input {
-    font-size: 18px;
-    height: 22px;
-    border-style: solid;
-    border-width: 0px;
-    outline: none;
+.form-signin span {
+  font-size: 20px;
+  margin-left: 160px;
 }
-
-textarea {
-    vertical-align: top;
-    font-size: 18px;
-    outline: none;
+.form-signin input[type="text"] {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border: 2px solid #eaeaea;
+  box-shadow: none;
+  font-size: 20px;
 }
-
-span {
-    padding: 0.5em;
+.form-signin .checkbox {
+  text-align: left;
+  font-weight: normal;
+  color: #b6b6b6;
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 14px;
 }
-
-button {
-    position: absolute;
-    margin-left: 750px;
-    width: 80px;
-    height: 30px;
-    font-size: 15px;
-    background: rgb(51, 152, 235);
-    color: white;
-    border: 0px;
-    border-radius: 5px;
-    outline: none;
+.form-signin .checkbox > input {
+  margin-right: 90px;
 }
-
-.avatar-uploader{
-    display: inline;
-    vertical-align: middle;
+.mail {
+  text-align: left;
+  font-weight: normal;
+  color: #b6b6b6;
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 14px;
 }
-
-/* .el-upload__input{
-    display: none;
-} */
+.personalSignature textarea {
+  margin-left: 160px;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.form-signin .btn-login {
+  margin-left: 260px;
+  margin-top: 50px;
+  width: 25%;
+  background: #48cfad;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+.avatar-uploader {
+  display: inline;
+  vertical-align: middle;
+}
 
 .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 .avatar-uploader .el-upload:hover {
-    border-color: #409eff;
+  border-color: #409eff;
 }
 
 .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 78px;
-    height: 78px;
-    line-height: 78px;
-    text-align: center;
+  font-size: 28px;
+  color: #8c939d;
+  border: 2px dashed #b3b3b3;
+  border-radius: 6px;
+  width: 78px;
+  height: 78px;
+  line-height: 78px;
+  text-align: center;
+  margin-right: 150px;
 }
 .avatar {
-    width: 78px;
-    height: 78px;
-    display: block;
+  width: 78px;
+  height: 78px;
+  display: block;
 }
 </style>
