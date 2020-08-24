@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/user/Home.vue'
 import Login from '../views/user/Login.vue'
-import NotFound from '../views/NotFound.vue'
+import NotFound from '../views/user/NotFound.vue'
 import Navigation from '../components/Navigation.vue'
 import Footer from '../components/Footer.vue'
 
-import Register from '../views/user/Register.vue'
+// import Register from '../views/user/Register.vue'
 import Book from '../views/user/Book.vue'
 import Music from '../views/user/Music.vue'
 import Note from '../views/user/Note.vue'
@@ -14,16 +14,42 @@ import Video from '../views/user/Video.vue'
 import UpdatePassword from '../views/user/UpdatePassword.vue'
 import CreateCenter from '../views/user/CreateCenter.vue'
 import MessageCenter from '../views/user/MessageCenter.vue'
-import About from '../views/user/About.vue'
-
+import PersonCenter from '../views/user/PersonCenter.vue'
+import CreateIdea from '../views/user/CreateIdea.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
 
     {
+        path: '/user/createIdea',
+        name: 'createIdea',
+        components: {
+            default: CreateIdea,
+            nav: Navigation,
+        },
+        // children: [{
+        //     path: 'info',
+        //     name: 'messageInfo',
+        //     component: () =>
+        //         import ('@/views/user/CreateIdea'),
+
+        // }]
+    },
+
+    {
+        path: '/user/personCenter',
+        name: 'personCenter',
+        components: {
+            default: PersonCenter,
+            nav: Navigation,
+            // footer: Footer
+        }
+    },
+
+    {
         path: '/login',
-        name: 'Login',
+        name: 'login',
         components: {
             default: Login,
             nav: Navigation,
@@ -33,7 +59,7 @@ const routes = [
 
     {
         path: '/',
-        name: 'Home',
+        name: 'home',
         components: {
             default: Home,
             nav: Navigation,
@@ -42,8 +68,8 @@ const routes = [
     },
 
     {
-        path: '/createCenter',
-        name: 'CreateCenter',
+        path: '/user/createCenter',
+        name: 'createCenter',
         components: {
             default: CreateCenter,
             nav: Navigation
@@ -52,48 +78,48 @@ const routes = [
 
 
     {
-        path: '/messageCenter',
-        name: 'MessageCenter',
+        path: '/user/messageCenter',
+        name: 'messageCenter',
         components: {
             default: MessageCenter,
             nav: Navigation
         },
-        children:[
-            {
-            path:'info',
-            name:'messageInfo',
-            component:() => import('@/views/user/MessageInfo'),
-      
-          }]
+        children: [{
+            path: 'info',
+            name: 'messageInfo',
+            component: () =>
+                import ('@/views/user/MessageInfo'),
+
+        }]
     },
 
     {
-        path: '/updatePassword',
-        name: 'UpdatePassword',
+        path: '/user/updatePassword',
+        name: 'updatePassword',
         components: {
             default: UpdatePassword,
             nav: Navigation
         }
     },
 
-    {
-        path: '/register',
-        name: 'register',
-        components: {
-            default: Register,
-            nav: Navigation
-        }
-    },
+    // {
+    //     path: '/register',
+    //     name: 'register',
+    //     components: {
+    //         default: Register,
+    //         nav: Navigation
+    //     }
+    // },
 
     {
         path: '/notFound',
-        name: 'NotFound',
+        name: 'notFound',
         component: NotFound
     },
 
     {
         path: '/book',
-        name: 'Book',
+        name: 'book',
         components: {
             default: Book,
             nav: Navigation
@@ -102,7 +128,7 @@ const routes = [
 
     {
         path: '/music',
-        name: 'Music',
+        name: 'music',
         components: {
             default: Music,
             nav: Navigation
@@ -112,7 +138,7 @@ const routes = [
 
     {
         path: '/note',
-        name: 'Note',
+        name: 'note',
         components: {
             default: Note,
             nav: Navigation
@@ -121,18 +147,9 @@ const routes = [
 
     {
         path: '/video',
-        name: 'Video',
+        name: 'video',
         components: {
             default: Video,
-            nav: Navigation
-        }
-    },
-
-    {
-        path: '/about',
-        name: 'About',
-        components: {
-            default: About,
             nav: Navigation
         }
     },

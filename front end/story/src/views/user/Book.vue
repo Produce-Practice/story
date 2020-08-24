@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4" v-for="(book,index) in books" :key="index">
+          <div class="col-sm-4" v-for="(book, index) in books" :key="index">
             <div class="single-blog">
               <!-- 用户头像 -->
               <img v-bind:src="book.userImg" alt />
@@ -43,7 +43,7 @@
 
 <script>
 // 列表的样式
-import "@/assets/css/common.css";
+import "../../assets/css/common.css";
 import axios from "axios";
 import Footer from "@/components/Footer.vue";
 export default {

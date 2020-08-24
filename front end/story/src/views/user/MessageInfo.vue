@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import myMessage from "@/components/MessageCenter/Message";
-import myCommentArea from "@/components/Article/CommentArea";
+import myMessage from "@/components/messageCenter/Message";
+import myCommentArea from "@/components/article/CommentArea";
 export default {
   name: "message",
   components: { myMessage, myCommentArea },

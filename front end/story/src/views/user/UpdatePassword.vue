@@ -1,49 +1,27 @@
-<!-- 登陆界面 -->
 <template>
     <div class="all">
-
-        <!-- logo -->
-        <!-- <div class="picture"></div> -->
-
-        <div class="mydiv">
-
-            <div class="headline">
-              拾一片光阴, <span>与你诉说</span>
+        <div class="content">
+            <div class="form sign-in">
+                <h2>修改密码</h2>
+                <label>
+                    <span>原密码</span>
+                    <input type="password" v-model="oldPassword" />
+                </label>
+                <label>
+                    <span>新密码</span>
+                    <input type="password" v-model="newPassword" />
+                </label>
+                <label>
+                    <span>确认新密码</span>
+                    <input type="password" v-model="confirmNewPassword" />
+                </label>
+                <p class="forgot-pass">
+                    <a href="javascript:">忘记密码?</a>
+                </p>
+                <button type="button" class="submit" @click="update">修改</button>
             </div>
-
-            <!-- 用户名、密码输入 -->
-            <div class="input">
-
-            <div class="user_pass">
-                原密码:
-            </div>
-
-            <el-input type="password" v-model="oldPassword" class="input_style"></el-input><br>
-
-            <div class="user_pass">
-                新密码:
-            </div>
-
-            <el-input type="password" v-model="newPassword" class="input_style"></el-input><br>
-
-
-            <div class="user_pass">
-                重复新密码:
-            </div>
-
-            <el-input type="password" v-model="repeatNewPassword" class="input_style"></el-input><br>
-
-            </div>
-
-        <div>
-          <el-row class="but">
-            <el-button @click="update()" type="danger">修&nbsp;&nbsp;&nbsp;改</el-button>
-          </el-row>
         </div>
-
     </div>
-    <Footer></Footer>
-</div>
 </template>
 
 <script>
@@ -61,7 +39,7 @@ export default {
 
       oldPassword: '',
       newPassword: '',
-      repeatNewPassword: ''
+      confirmNewPassword: ''
 
     }
   },
@@ -76,11 +54,11 @@ export default {
 
       var _this = this;
 
-      if (this.oldPassword == null || this.newPassword == null || this.repeatNewPassword == null || this.newPassword == '') {
+      if (this.oldPassword == null || this.newPassword == null || this.confirmNewPassword == null || this.newPassword == '') {
 
         this.$message.warning("密码不能为空!");
 
-      } else if (this.newPassword != this.repeatNewPassword) {
+      } else if (this.newPassword != this.confirmNewPassword) {
 
         this.$message.warning("两次密码输入不一致!");
 
@@ -117,8 +95,10 @@ export default {
 
                 if (res.code == 200) {
                 
-                    _this.$message.success("注册成功!");
-                    _this.$router.push("/");
+                    _this.$message.success("修改成功!");
+
+                    storage.remove("user");
+                    _this.$router.replace("/login");
                 
                 } else {
                     
@@ -128,7 +108,7 @@ export default {
 
             }).catch(function (err) {
 
-                console.log(err);
+                _this.$message.error(err);
             
         });
 
@@ -141,112 +121,112 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 .all {
-
-    // position: relative;
-    // height: 100vh;
-    // background-color: #2d3a4b;
-
-}
-
-.but {
-  margin: 60px 132px;
-  
-}
-
-
-.but button {
-  font-size: 20px;
-  padding: 12px 16px;
-  margin: 10px 25px;
-}
-
-
-.mydiv {
-
     position: absolute;
-    top: 175px;
-    left: 550px;
-    background: rgb(255, 255, 255);
-    width: 400px;
-    height: 380px;
-    border: 4px solid rgb(248, 248, 248);
-
+    width: 100%;
+    height: 85%;
+    background-color: whitesmoke;
+    background-size: cover;
 }
 
+input,
+button {
+    border: none;
+    outline: none;
+    background: none;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
 
-.headline {
+.content {
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 640px;
+    height: 550px;
+    margin: -270px 0 0 -300px;
+    background: #fff;
+}
 
+.form {
     position: relative;
-    top: 20px;
-    text-align: center;
-    font-size: 22px;
-    letter-spacing: 2px;
-
-    color: #5675db;
-    font-weight: 100;
-    // line-height: 30px;
-    // margin-top: 30px;
-    // padding: 0;
-
+    width: 640px;
+    height: 100%;
+    transition: -webkit-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+    padding: 50px 0px 0;
 }
 
-.headline span {
-    color: #48cfad;
-    font-size: 20px;
-}
-
-
-.user_id {
-
-    position: relative;
-    left: 10px;
-    top: 0px;
-
-}
-
-
-.user_pass {
-
-    position: relative;
-    left: 10px;
-    top: 0px;
-    margin-top: 15px;
-
-}
-
-
-.input {
-
-    position: relative;
-    left: 50px;
-    top: 35px;
-    width: 300px;
-    height: 200px;
+button {
+    display: block;
+    margin: 0 auto;
+    width: 260px;
+    height: 36px;
+    border-radius: 30px;
+    color: #fff;
     font-size: 15px;
-
+    cursor: pointer;
 }
 
-
-.input_style {
-
-    width: 300px;
-    height: 40px;
-
+h2 {
+    width: 100%;
+    font-size: 26px;
+    text-align: center;
 }
 
-
-.errorTip {
-    position: absolute;
-    top: 200px;
-    left: 50px;
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: red;
+label {
+    display: block;
+    width: 260px;
+    margin: 25px auto 0;
+    text-align: center;
 }
 
+label span {
+    font-size: 12px;
+    color: #909399;
+    text-transform: uppercase;
+}
 
+input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.forgot-pass {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #cfcfcf;
+}
+
+.forgot-pass a {
+    color: #cfcfcf;
+}
+
+.submit {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    background: #d4af7a;
+    text-transform: uppercase;
+}
+
+.sign-in {
+    transition-timing-function: ease-out;
+}
 </style>

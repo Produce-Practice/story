@@ -32,4 +32,12 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = {"/logout"}, method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject logout(@RequestBody JSONObject message) {     // 退出
+
+        return userService.logout(message);
+
+    }
+
 }

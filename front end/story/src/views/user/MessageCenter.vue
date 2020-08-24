@@ -16,19 +16,19 @@
               <router-link to="/">首页</router-link>
             </li>
             <li>
-              <router-link to="/messageCenter/info" @click.native="replyme">回复我的</router-link>
+              <router-link to="/user/messageCenter/info" @click.native="replyme">回复我的</router-link>
             </li>
             <li>
-              <router-link to="/messageCenter/info" @click.native="atme">@我的</router-link>
+              <router-link to="/user/messageCenter/info" @click.native="atme">@我的</router-link>
             </li>
             <li>
-              <router-link to="/messageCenter/info" @click.native="praiseme">收到的赞</router-link>
+              <router-link to="/user/messageCenter/info" @click.native="praiseme">收到的赞</router-link>
             </li>
           </ul>
         </div>
       </div>
       <div class="message-content-head">
-        <span>{{this.message}}</span>
+        <span>{{ this.message }}</span>
       </div>
       <!-- 左边导航结束 -->
 
@@ -43,12 +43,18 @@
     </div>
     <Footer></Footer>
   </div>
+
 </template>
 
 <script>
 import Footer from "@/components/Footer.vue";
 export default {
   name: "messageCenter",
+
+  components: {
+    Footer
+  },
+
   data() {
     return {
       message: "回复我的",
@@ -77,7 +83,8 @@ export default {
   width: 800px;
   padding-bottom: 30px;
   height: 500px;
-  position: absolute;
+  // position: absolute;
+  position: relative;
   left: 45%;
   transform: translateX(-50%);
 }

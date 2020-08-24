@@ -1,5 +1,6 @@
 <template>
-  <header class="head-section">
+  <!-- <el-header style="height: auto; width: 100%; border: 10px solid red"> -->
+    <header class="head-section">
     <div class="navbar navbar-default navbar-static-top container">
       <div class="navbar-header">
         <button
@@ -21,9 +22,13 @@
 
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <!-- <li>
-            <router-link to="/">首页</router-link>
-          </li> -->
+            <li>
+              <input class="el-input__inner" placeholder="search something..." autofocus="true" v-model="title">
+            </li>
+            <li>
+              <img src="@/assets/search.png" width="20px" height="20px" style="margin-top: 10px;" @click="search()">
+            </li>
+
           <li>
             <!-- 跳转到书籍全列表 -->
             <router-link to="/book">书评</router-link>
@@ -48,11 +53,21 @@
               <el-avatar shape="circle" :src="squareUrl"></el-avatar>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item><router-link to="/login">登录</router-link></el-dropdown-item>
-              <el-dropdown-item><router-link to="/createCenter">创作中心</router-link></el-dropdown-item>
-              <el-dropdown-item><router-link to="/messageCenter">消息中心</router-link></el-dropdown-item>
-              <el-dropdown-item><router-link to="/updatePassword">修改密码</router-link></el-dropdown-item>
-              <el-dropdown-item><span @click="exit()">退出</span></el-dropdown-item>
+
+              <div v-show="show0">
+                <router-link to="/login"><el-dropdown-item>登录</el-dropdown-item></router-link>
+              </div>
+
+              <div v-show="show1">
+                <router-link to="/user/personCenter"><el-dropdown-item>个人中心</el-dropdown-item></router-link>
+                <router-link to="/user/createCenter"><el-dropdown-item>创作中心</el-dropdown-item></router-link>
+                <router-link to="/user/messageCenter"><el-dropdown-item>消息中心</el-dropdown-item></router-link>
+                <router-link to="/user/updatePassword"><el-dropdown-item>修改密码</el-dropdown-item></router-link>
+                <el-dropdown-item @click.native="exit()">退出</el-dropdown-item>
+              </div>
+              
+
+
             </el-dropdown-menu>
           </el-dropdown>
           </li>
@@ -60,27 +75,126 @@
       </div>
     </div>
   </header>
+  <!-- </el-header> -->
 </template>
 
 <script>
 
 import storage from "../utils/storage.js"
+import http from "../utils/http.js"
 
 export default {
+  
+  inject:['reload'],
+
+  name: 'navigation',
+
   data() {
 
     return {
-      squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+
+      title: null, 
+
+      show0: null,
+      show1: null,
+      // squareUrl: "G:\Visual StudioCode\VScodeSource\story\src\assets\demo.jpg",
+      squareUrl:"https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
+      
+    }
+
+  },
+
+  created() {
+
+    // 若用户已登录
+    if (JSON.parse(storage.get("user")) != null) {
+
+      this.show0 = false;
+      this.show1 = true;
+
+    } else {  // 用户未登录
+
+      this.show0 = true;
+      this.show1 = false;
+
+    }
+
+    var _this = this;
+    document.onkeydown = function (e) {
+      
+      if (window.event.keyCode == 13 && _this.title != null && _this.title != "") {
+        _this.search();
+      }
+
     }
 
   },
 
   methods: {
+
+    search() {
+
+      var _this = this;
+
+      if (_this.title != null && _this.title != "") {
+
+        http({
+
+            // 假设后台需要的是表单数据这里你就可以更改
+            headers: {
+
+            "Content-Type": "application/json;charset=UTF-8"
+            
+            },
+
+            method: 'post',
+            url: 'http://localhost:8080/idea/search',
+
+            data: {
+
+              title: _this.title
+
+            },
+
+            responseType: 'json'
+
+            }).then(function (res) {
+
+                console.log(res);
+
+                var code = res.code;
+                var info = res.info;
+
+                if (res.code == 200) {
+                
+                    console.log(info);
+                
+                } else {
+
+                    console.log(info);
+                    
+                    _this.$message.error(info);
+
+                }
+
+            }).catch(function (err) {
+
+                _this.$message.error("系统错误！");
+            
+        });
+      
+      } else {
+
+        _this.$message.warning("请输入搜索信息！");
+
+      }
+
+    },
     exit() {
 
       console.log("exit")
 
-      var _this = this
+      var _this = this;
 
       _this.message = 'logout'
 
@@ -88,7 +202,7 @@ export default {
 
         method: 'post',
 
-        url: 'http://localhost:8080/logout',
+        url: 'http://localhost:8080/user/logout',
 
         headers: {
 
@@ -114,10 +228,11 @@ export default {
         if (code == 200) {
 
           storage.remove('user');
-
+          
           _this.$router.replace('/');
+          _this.reload();  // 刷新界面
           _this.$message.success('退出成功');
-
+          
         } else if (code == 400) {
           
           _this.$message.error('遭遇异常！')
@@ -130,7 +245,6 @@ export default {
       
       }).catch(function (error) {
 
-        
           console.log(error);
       
           _this.$message.error('系统错误！')
@@ -144,6 +258,49 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+.navbar-brand {
+  position: relative;
+}
+
+// 过渡的方向与所处的相对位置有关
+.el-input__inner {
+
+  -webkit-appearance: none;
+  background-color: #FFF;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #DCDFE6;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  font-size: inherit;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 15px;
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  width: 180px;  
+  transition: width 2s;
+  -moz-transition: width 2s; /* Firefox 4 */
+  -webkit-transition: width 2s; /* Safari and Chrome */
+  -o-transition: width 2s; /* Opera */
+  position: absolute;
+  top: 30px;
+  right: 0px;
+
+}
+
+
+.navbar-nav:hover .el-input__inner{
+    width: 300px;
+
+}
+
+
+.navbar-nav img:hover {
+  cursor: pointer;
+}
 
 .el-dropdown-link {
     cursor: pointer;

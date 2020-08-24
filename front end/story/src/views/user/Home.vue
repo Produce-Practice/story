@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <!-- <el-main> -->
+    <div>
     <!-- 四个session内容大致一样，就是获取对象不同，第一个是书籍，
     第二个是音乐，第三个是电影，第四个是随笔-->
+    <img class="banner" src="@/assets/banner.jpg" alt="banner" />
     <section class="blog">
       <div class="container">
         <div class="row text-center clearfix">
@@ -18,7 +20,7 @@
             </button>
             <!-- 跳转到Book.vue 获取全部书籍分享列表 -->
             <button class="more">
-              <router-link to="/book">
+              <router-link to="/user/book">
                 更多
                 <i class="glyphicon glyphicon-menu-right"></i>
               </router-link>
@@ -27,8 +29,8 @@
         </div>
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
-          <div class="col-sm-4" v-for="(book,index) in books" :key="index">
-            <div class="single-blog" v-if="index<6">
+          <div class="col-sm-4" v-for="(book, index) in books" :key="index">
+            <div class="single-blog" v-if="index < 6">
               <!-- 用户头像 -->
               <img v-bind:src="book.userImg" alt />
               <!-- idea标题 -->
@@ -70,7 +72,7 @@
             </button>
             <!-- 跳转到Music.vue 获取全部音乐列表 -->
             <button class="more">
-              <router-link to="/music">
+              <router-link to="/user/music">
                 更多
                 <i class="glyphicon glyphicon-menu-right"></i>
               </router-link>
@@ -121,7 +123,7 @@
             </button>
             <!-- 跳转到Video.vue 获取全部的电影列表 -->
             <button class="more">
-              <router-link to="/video">
+              <router-link to="/user/video">
                 更多
                 <i class="glyphicon glyphicon-menu-right"></i>
               </router-link>
@@ -172,7 +174,7 @@
             </button>
             <button class="more">
               <!-- 跳转到Note.vue获取全部随笔列表 -->
-              <router-link to="/note">
+              <router-link to="/user/note">
                 更多
                 <i class="glyphicon glyphicon-menu-right"></i>
               </router-link>
@@ -208,10 +210,11 @@
     </section>
     <Footer></Footer>
   </div>
+  <!-- </el-main> -->
 </template>
 <script>
 // 列表的样式
-import "@/assets/css/common.css";
+import "../../assets/css/common.css";
 import axios from "axios";
 import Footer from '@/components/Footer.vue'
 export default {
@@ -229,7 +232,7 @@ export default {
   },
   created() {
     this.instance = axios.create({
-      baseURL: "http://localhost:8080",
+      baseURL: "http://localhost:8081",
       timeout: 1000
     });
     this.getbook();
@@ -286,6 +289,12 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+
+.banner {
+    width: 100%;
+}
+
+
 .exchange-btn {
   position: relative;
   float: right;

@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-
+    <!-- <el-container style="height: auto; width: 100%; border: 10px solid black"> -->
       <!-- <router-link to="/address"></router-link>          -->
         <!-- <router-link>会被渲染为一个<a>标签, to是一个prop, 指定需要跳转的路径
         tag：改变渲染结果; replace: 不会留下Hsitory;
         active-class: 高亮显示当前页面对应的菜单      -->
 
-    <router-view name="nav"></router-view>   <!-- router.js对应的path项的components中若有name就渲染, 没有name则不渲染 -->
-    <router-view name="footer"></router-view>
+    <router-view name="nav" v-if="isRouterAlive"></router-view>   <!-- router.js对应的path项的components中若有name就渲染, 没有name则不渲染 -->
     <router-view v-if="isRouterAlive"/>     <!-- 默认挂载router.js中default对应的路径 -->
+    <router-view name="footer"></router-view>
+    
 
     <!-- 路由视图, 挂载所有路由组件; 根据当前路由动态渲染不同的页面组件; 路由切换时, 切换的是<router-view>挂载的组件 -->
-
+    <!-- </el-container> -->
   </div>
 </template>
 

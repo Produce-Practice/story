@@ -29,15 +29,6 @@ public class CommonController {
     }
 
 
-    @RequestMapping(value = {"/logout"}, method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject logout(@RequestBody JSONObject message) {     // 退出
-
-        return userService.logout(message);
-
-    }
-
-
     /**
      * 必须为GET方法
      *
