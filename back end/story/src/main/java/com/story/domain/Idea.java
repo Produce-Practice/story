@@ -21,7 +21,7 @@ public class Idea {
     private Integer userId;
 
     // 可见性
-    private Boolean visibility;
+    private Integer visibility;
 
     // 评论数
     private Integer commentCount;
@@ -82,11 +82,11 @@ public class Idea {
         this.userId = userId;
     }
 
-    public Boolean getVisibility() {
+    public Integer getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(Boolean visibility) {
+    public void setVisibility(Integer visibility) {
         this.visibility = visibility;
     }
 

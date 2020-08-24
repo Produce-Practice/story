@@ -17,14 +17,14 @@ public interface IdeaDao {
 
     Integer deleteIdea(JSONObject jsonObject);
 
-    List<Idea> listIdeasByUserId(Integer userId, Integer currentBegin, Integer pageSize);
+    List<JSONObject> listIdeasByUserId(JSONObject jsonObject);
 
-    List<Idea> listIdeasByTypeId(Integer typeId, Integer currentBegin, Integer pageSize);
+    List<JSONObject> listIdeasByTypeId(JSONObject jsonObject);
 
-    List<Idea> listIdeasByTitle(String title, Integer currentBegin, Integer pageSize);
+    List<JSONObject> listIdeasByTitle(JSONObject jsonObject);
 
     List<Idea> listAllIdeas();
 
-    Idea listOneIdea(JSONObject jsonObject);
+    JSONObject listOneIdea(JSONObject jsonObject);
 
 }

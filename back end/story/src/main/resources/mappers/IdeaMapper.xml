@@ -6,33 +6,33 @@
 <!-- namespace属性值通常设置为：包名 + SQL映射文件名来指定唯一的命名空间 -->
 <mapper namespace="com.story.dao.IdeaDao">
 
-    <select id="listIdeasByUserId" resultType="com.story.domain.Idea">
-        select ideaId, title, content, likes, visits, typeId，visibility from idea where userId = #{userId} limit #{currentBegin}, #{pageSize};
+    <select id="listIdeasByUserId" resultType="com.alibaba.fastjson.JSONObject">
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where userId = #{userId} limit #{currentBegin}, #{pageSize};
     </select>
 
     <select id="listAllIdeas" resultType="com.story.domain.Idea">
-        select ideaId, title, content, likes, visits, typeId，visibility from idea;
+        select ideaId, title, content, likes, visits, typeId, visibility from idea;
     </select>
 
-    <select id="listIdeasByTypeId" resultType="com.story.domain.Idea">
-        select ideaId, title, content, likes, visits, typeId，visibility from idea where typeId = #{typeId} limit #{currentBegin}, #{pageSize};
+    <select id="listIdeasByTypeId" resultType="com.alibaba.fastjson.JSONObject">
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where typeId = #{typeId} limit #{currentBegin}, #{pageSize};
     </select>
 
-    <select id="listIdeasByTitle" resultType="com.story.domain.Idea">
-        select ideaId, title, content, likes, visits, typeId，visibility from idea where title like #{title} limit #{currentBegin}, #{pageSize};
+    <select id="listIdeasByTitle" resultType="com.alibaba.fastjson.JSONObject">
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where title like #{title} limit #{currentBegin}, #{pageSize};
     </select>
 
-    <select id="listOneIdea" resultType="com.story.domain.Idea">
-        select ideaId, title, content, likes, visits, typeId，visibility from idea where ideaId = #{ideaId};
+    <select id="listOneIdea" resultType="com.alibaba.fastjson.JSONObject">
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where ideaId = #{ideaId};
     </select>
 
     <insert id="saveIdea">
-        insert into idea (title, content, likes, visits, typeId, userId，visibility)
+        insert into idea (title, content, likes, visits, typeId, userId, visibility)
         values (#{title}, #{content}, #{likes}, #{visits}, #{typeId}, #{userId}, #{visibility});
     </insert>
 
     <update id="updateIdea">
-        update idea set title = #{title}, content = #{content}, likes = #{likes}, visits = #{visits}, typeId = #{typeId}，visibility = #{visibility}
+        update idea set title = #{title}, content = #{content}, likes = #{likes}, visits = #{visits}, typeId = #{typeId}, visibility = #{visibility}
         where ideaId = #{ideaId};
     </update>
 

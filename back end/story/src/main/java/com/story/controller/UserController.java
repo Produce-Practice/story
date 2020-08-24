@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/updateUser"}, method = RequestMethod.POST)
-    public JSONObject updateUser(@RequestBody JSONObject message,@RequestParam("img") MultipartFile uploadImag) {
+    public JSONObject updateUser(@RequestBody JSONObject message) {
 
         return userService.updateUser(message);
 

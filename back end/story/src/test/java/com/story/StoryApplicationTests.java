@@ -55,16 +55,6 @@ class StoryApplicationTests {
     }
 
     @Test
-    void testListIdeaByUserId() {
-        System.out.println(ideaDao.listIdeasByUserId(4,0,5));
-    }
-
-    @Test
-    void testListIdeaByTitle() {
-        System.out.println(ideaDao.listIdeasByTitle("a",0,5));
-    }
-
-    @Test
     void testSaveUser() {
         User user = new User();
         user.setUserAccount("271880");
