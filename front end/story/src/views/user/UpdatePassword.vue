@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="all">
         <div class="content">
             <div class="form sign-in">
@@ -22,6 +23,8 @@
             </div>
         </div>
     </div>
+     <Footer></Footer>   
+</div>
 </template>
 
 <script>
@@ -43,11 +46,11 @@ export default {
 
     }
   },
-
   created: function () {
-  
   },
-
+  components:{
+      Footer
+  },
   methods: {
 
     update: function () {
@@ -130,7 +133,9 @@ export default {
     margin: 0;
     padding: 0;
 }
-
+footer{
+    bottom: -500px;
+}
 .all {
     position: absolute;
     width: 100%;
@@ -138,7 +143,6 @@ export default {
     background-color: whitesmoke;
     background-size: cover;
 }
-
 input,
 button {
     border: none;

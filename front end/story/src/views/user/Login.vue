@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <!-- <Footer></Footer> -->
+        <Footer></Footer>
     </div>
 </template>
 
@@ -247,7 +247,10 @@ export default {
     background-color: whitesmoke;
     background-size: cover;
 }
-
+footer{
+    position: absolute;
+    bottom: -650px;
+}
 input,
 button {
     border: none;
@@ -259,7 +262,6 @@ button {
 .content {
     overflow: hidden;
     position: absolute;
-    /* position: relative; */
     left: 50%;
     top: 50%;
     width: 900px;

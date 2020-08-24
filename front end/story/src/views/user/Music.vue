@@ -5,32 +5,50 @@
       <div class="container">
         <div class="row text-center clearfix">
           <div class="col-sm-8 col-sm-offset-2">
-            <h2 class="title-one">音乐分享</h2>
+            <!-- idea的type -->
+            <h2 class="title-one">音乐分享推荐</h2>
             <p class="blog-heading"></p>
           </div>
         </div>
         <div class="row">
+          <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
           <div class="col-sm-4" v-for="(music,index) in musics" :key="index">
             <div class="single-blog">
               <!-- 用户头像 -->
+              <router-link :to="{path: '/about', query: {item: music}}">
               <img v-bind:src="music.userImg" alt />
-              <!-- 标题 -->
+              </router-link>
+              <!-- idea标题 -->
+              <router-link :to="{path: '/about', query: {item: music}}">
               <h2>{{music.title}}</h2>
+              </router-link>
+              
               <div class="blog-content">
-                <!-- 内容 -->
+                <!-- idea内容 -->
+                <router-link :to="{path: '/about', query: {item: music}}">
                 <p>{{music.content}}</p>
+                </router-link>
               </div>
+              
               <ul class="post-meta">
                 <li>
-                  <!-- 该idea的详情页 传送这个music 到About.vue-->
+                  <!-- 点击评论跳转到idea详情页 将整个music对象传到about-->
                   <router-link :to="{path: '/about', query: {item: music}}">
                     <i class="glyphicon glyphicon-comment"></i>
+                    {{music.commentCount}}
                   </router-link>
+                  
                 </li>
-                <li>
-                  <!-- 点赞 -->
+                <!-- 点赞 +1-->
+                <li @click="music.likes++">
                   <i class="glyphicon glyphicon-heart"></i>
+                  {{music.likes}}
                 </li>
+                <!-- 热度 -->
+                 <div class="view">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                  {{music.views}}
+                </div>
               </ul>
             </div>
           </div>

@@ -5,32 +5,50 @@
       <div class="container">
         <div class="row text-center clearfix">
           <div class="col-sm-8 col-sm-offset-2">
-            <h2 class="title-one">书籍分享</h2>
+            <!-- idea的type -->
+            <h2 class="title-one">书籍分享推荐</h2>
             <p class="blog-heading"></p>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4" v-for="(book, index) in books" :key="index">
+          <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
+          <div class="col-sm-4" v-for="(book,index) in books" :key="index">
             <div class="single-blog">
               <!-- 用户头像 -->
-              <img v-bind:src="book.userImg" alt />
-              <!-- 标题名 -->
-              <h2>{{book.title}}</h2>
+              <router-link :to="{path: '/about', query: {item: book}}">
+                <img v-bind:src="book.userImg" alt />
+              </router-link>
+              <!-- idea标题 -->
+              <router-link :to="{path: '/about', query: {item: book}}">
+                <h2>{{book.title}}</h2>
+              </router-link>
+
               <div class="blog-content">
-                <!-- 内容 -->
-                <p>{{book.content}}</p>
+                <!-- idea内容 -->
+                <router-link :to="{path: '/about', query: {item: book}}">
+                  <p>{{book.content}}</p>
+                </router-link>
               </div>
+
               <ul class="post-meta">
                 <li>
-                   <!-- 该idea的详情页 传送这个book 到About.vue-->
+                  <!-- 点击评论跳转到idea详情页 将整个book对象传到about-->
                   <router-link :to="{path: '/about', query: {item: book}}">
                     <i class="glyphicon glyphicon-comment"></i>
+                     {{book.commentCount}}
                   </router-link>
+                 
                 </li>
-                <li>
-                  <!-- 点赞 -->
+                <!-- 点赞 +1-->
+                <li @click="book.likes++">
                   <i class="glyphicon glyphicon-heart"></i>
+                  {{book.likes}}
                 </li>
+                <!-- 热度 -->
+                <div class="view">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                  {{book.views}}
+                </div>
               </ul>
             </div>
           </div>

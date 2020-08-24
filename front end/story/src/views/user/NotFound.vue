@@ -6,24 +6,27 @@
       </div>
       <p>Page not Found</p>
      </div>
+     <Footer></Footer>
  </div>
 </template>
  
 <script>
+import Footer from '@/components/Footer.vue';
 export default {
 
     name: 'NotFound',
 
     components: {
-
-
-    },
-
+        Footer
+    }
 };
 
 </script>
  
 <style lang="less" scoped>
+footer{
+    bottom: -550px;
+}
 
 .theme p {
     font-size: 40px;

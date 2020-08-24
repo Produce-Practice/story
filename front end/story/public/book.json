@@ -1,53 +1,66 @@
-[{
-        "id": 1,
-        "userImg": "demo.jpg",
-        "views": 200,
-        "title": "《龙族》",
-        "content": "你陪了我多少年花开花败，一路上起起落落"
+[
+    {
+        "id":1,
+        "userImg":"demo.jpg",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《龙族》",
+        "content":"你陪了我多少年花开花败，一路上起起落落"
     },
     {
-        "id": 2,
-        "userImg": "logo.png",
-        "views": 220,
-        "title": "《天之炽》",
-        "content": "这种重逢，算是命运吗？"
+        "id":2,
+        "userImg":"logo.png",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《天之炽》",
+        "content":"这种重逢，算是命运吗？"
     },
     {
-        "id": 3,
-        "userImg": "demo.jpg",
-        "views": 2233,
-        "title": "《解忧杂货店》",
-        "content": "人与人之间的关系往往不是因为某些具体的原因而断。"
+        "id":3,
+        "userImg":"demo.jpg",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《解忧杂货店》",
+        "content":"人与人之间的关系往往不是因为某些具体的原因而断。"
     },
     {
-        "id": 4,
-        "userImg": "logo.png",
-        "visits": 6666,
-        "likes": 12,
-        "comments": 21,
-        "title": "《追风筝的人》",
-        "content": "被真相伤害总比被谎言欺骗的好,得到了再失去，总是比从来就没有得到更伤人。"
+        "id":4,
+        "userImg":"logo.png",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《追风筝的人》",
+        "content":"被真相伤害总比被谎言欺骗的好,得到了再失去，总是比从来就没有得到更伤人。"
     },
     {
-        "id": 5,
-        "userImg": "demo.jpg",
-        "views": 123456,
-        "title": "《摆渡人》",
-        "content": "如果我存在也是因为你需要我"
+        "id":5,
+        "userImg":"demo.jpg",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《摆渡人》",
+        "content":"如果我存在也是因为你需要我"
     },
     {
-        "id": 6,
-        "userImg": "logo.png",
-        "views": 13456,
-        "title": "《隐世十族》",
-        "content": "如果我存在也是因为你需要我"
+        "id":6,
+        "userImg":"logo.png",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《隐世十族》",
+        "content":"如果我存在也是因为你需要我"
     },
     {
-        "id": 7,
-        "userImg": "logo.png",
-        "views": 13456,
-        "title": "《隐世》",
-        "content": "如果我存在也是因为你需要我"
+        "id":7,
+        "userImg":"logo.png",
+        "likes":200,
+        "views":200,
+        "commentCount":233,
+        "title":"《隐世》",
+        "content":"如果我存在也是因为你需要我"
     }
 
 ]
