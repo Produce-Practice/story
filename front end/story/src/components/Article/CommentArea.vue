@@ -1,5 +1,6 @@
 <template>
   <div class="main_box3">
+    <!-- 发送评论对话框组件   -->
     <div class="userComment">
     </div>
     <div style="margin: 0px 0;font-size:18px;color:#656d78">发表评论</div>

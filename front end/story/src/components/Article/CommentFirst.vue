@@ -1,5 +1,6 @@
 <template>
   <div class="main_box1">
+    <!-- 一级评论 组件 -->
     <div class="box_header">
       <div class="box_user">
         <div class="user_avatar">

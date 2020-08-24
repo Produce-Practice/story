@@ -1,5 +1,6 @@
 <template>
   <div class="main_box2">
+    <!-- 二级评论组件    -->
     <div class="box_user">
       <div class="user_avatar">
         <img :src="avatar">

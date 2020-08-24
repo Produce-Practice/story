@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 消息 子路由部分 -->
     <p>{{this.messagedata.title}}</p>
     
     <!--消息内容 -->

@@ -1,5 +1,6 @@
 <template>
   <div class="main_box">
+    <!-- 整合 一级评论  二级评论  发送对话框  -->
     <div class="box_header">
       <span>Comments |</span>
       {{num}} 条评论

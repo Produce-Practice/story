@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 文章内容组件 -->
     <article class="main_box">
       <header>
         <h1>{{PageInfo.title}}</h1>
