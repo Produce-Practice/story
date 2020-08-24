@@ -41,31 +41,31 @@ Vue.prototype.$message = Message;
 
 
 
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
 
-    if (to.path.startsWith('/user')) {
+//     if (to.path.startsWith('/user')) {
 
-        var user = storage.get('user')
+//         var user = storage.get('user')
 
-        if (user != null) {
+//         if (user != null) {
 
-            // 放行
-            next();
+//             // 放行
+//             next();
 
-        } else {
+//         } else {
 
-            alert("请先登录！");
-            next('/login');
+//             alert("请先登录！");
+//             next('/login');
 
-        }
+//         }
 
-    } else {
+//     } else {
 
-        next();
+//         next();
 
-    }
+//     }
 
-})
+// })
 
 
 

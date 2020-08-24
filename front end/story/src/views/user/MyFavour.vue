@@ -1,11 +1,10 @@
 <template>
   <div>
-     <div class="message-content-head">
-        <span>@我</span>
-      </div>
-    <myMessageinfo :Cinfo="messagedata" @child-event="toShow"></myMessageinfo>
-    <myMessageinfo :Cinfo="messagedata" @child-event="toShow"></myMessageinfo>
-    <myMessageinfo :Cinfo="messagedata" @child-event="toShow"></myMessageinfo>
+    <div class="message-content-head">
+      <span>赞我的</span>
+    </div>
+    <myFvourinfo :Cinfo="messagedata" @child-event="toShow"></myFvourinfo>
+    <myFvourinfo :Cinfo="messagedata" @child-event="toShow"></myFvourinfo>
 
     <div class="pagination">
       <el-pagination
@@ -26,20 +25,18 @@
 </template>
 
 <script>
-import myMessageinfo from "@/components/MessageCenter/MessageInfo";
+import myFvourinfo from "@/components/MessageCenter/MyFavourInfo";
 import myComment from "@/components/Article/CommentArea";
 export default {
   name: "message",
-  components: { myMessageinfo, myComment },
+  components: { myFvourinfo, myComment },
   data() {
     return {
-      message:'hello',
       show3: false,
       pageCount: 7,
       currentPage: 1,
-      messagedata:{
-        title:123,
-        author:"周云飞"
+      messagedata: {
+        title: "好标题"
       }
     };
   },
@@ -57,9 +54,9 @@ export default {
 </script>
 
 <style lang="less">
- .el-pagination{
-    width: 500px;
-  }
+.el-pagination {
+  width: 500px;
+}
 </style>
 
 
@@ -89,7 +86,7 @@ export default {
   margin-right: 20px;
 }
 
-.pagination{
+.pagination {
   width: 400px;
   padding-left: 100px;
   padding-top: 30px;

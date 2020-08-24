@@ -13,7 +13,6 @@ import Note from '../views/user/Note.vue'
 import Video from '../views/user/Video.vue'
 import UpdatePassword from '../views/user/UpdatePassword.vue'
 import CreateCenter from '../views/user/CreateCenter.vue'
-import MessageCenter from '../views/user/MessageCenter.vue'
 import PersonCenter from '../views/user/PersonCenter.vue'
 import CreateIdea from '../views/user/CreateIdea.vue'
 
@@ -73,24 +72,22 @@ const routes = [
         components: {
             default: CreateCenter,
             nav: Navigation
-        }
-    },
-
-
-    {
-        path: '/user/messageCenter',
-        name: 'messageCenter',
-        components: {
-            default: MessageCenter,
-            nav: Navigation
         },
         children: [{
-            path: 'info',
+            path: 'messageinfo',
             name: 'messageInfo',
             component: () =>
                 import ('@/views/user/MessageInfo'),
 
-        }]
+        },
+        {
+            path: 'favourinfo',
+            name: 'favourInfo',
+            component: () =>
+                import ('@/views/user/MyFavour'),
+
+        },
+    ]
     },
 
     {

@@ -1,38 +1,49 @@
 <template>
   <div class="main_box">
-    <div class="box_header">
-      <div class="box_user">
-        <div class="user_avatar">
-          <img :src="avatar">
-        </div>
-        <div class="box_user_right">
-          <div class="user_name">
-            {{Cinfo.author}}
-            <span>回复了你 :</span>
+      <div class="box_header">
+        <div class="box_user">
+          <div class="user_avatar">
+            <img :src="avatar">
           </div>
-          <div class="comment_date">2020年8月22日</div>
+          <div class="box_user_right">
+            <div class="user_name">
+              {{Cinfo.author}}
+              <span>回复了你 :</span>
+            </div>
+            <div class="comment_date">2020年8月22日</div>
 
-          <div class="comment_delete" @click="reply">删除</div>
-          <div class="comment_reply" @click="reply">@回复</div>
+            <div class="comment_delete" @click="reply">删除</div>
+            <div class="comment_reply" @click="reply">回复</div>
+          </div>
         </div>
+        <div class="box_content">天天今天回家今天回天天今天回家今天回家回家天天今天回家今天回家回家天天今天回家今天回家回家家回家</div>
+        
+        <div class="pre_article" @click="toArticle">{{preArticle}}</div>
       </div>
-      <div class="box_content">今天今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家</div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "myMessage",
+  name: "myMessageinfo",
   data() {
     return {
       Cinfo: { author: 123 },
       num: 12,
       avatar:
         "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-      secondFlag: false
+      secondFlag: false,
+
+      preArticledata:
+        "原来的文章内容原来的文章内容原来的文章内容原原来的文章内容原容原来的文章内容原容原来的文章内容原来的文章内容原来的文章内容原来的文章内容原来的文章内容"
     };
   },
+  computed: {
+    preArticle: function() {
+      return this.preArticledata.substring(0.9) + "...";
+    }
+  },
+
   methods: {
     spreadMore() {
       this.secondFlag = !this.secondFlag;
@@ -40,6 +51,10 @@ export default {
     reply() {
       this.$store.commit("setToWho", "回复" + this.Cinfo.author);
       this.$emit("child-event");
+    },
+
+    toArticle(){
+      console.log("前往文章详情页")
     }
   }
 };
@@ -145,5 +160,22 @@ export default {
 .second_show-leave-to {
   opacity: 0;
 }
+.pre_article {
+  position: relative;
+  transform: translateX(-50%);
+  left: 50%;
+  width: 560px;
+  height: 40px;
+  padding-top: 10px;
+  background: #f0f0f0;
+  box-shadow: 0px 2px 4px 0px rgba(121, 146, 180, 0.54);
+  margin-top: 5px;
+  transition: all 0.3s ease;
 
+}
+.pre_article:hover{
+  box-shadow: 0px 2px 4px 0px rgba(121, 146, 180, 0.9);
+  cursor: pointer;
+  background: #f1ecec
+}
 </style>
