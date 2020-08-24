@@ -14,6 +14,7 @@ import Video from '../views/user/Video.vue'
 import UpdatePassword from '../views/user/UpdatePassword.vue'
 import CreateCenter from '../views/user/CreateCenter.vue'
 import MessageCenter from '../views/user/MessageCenter.vue'
+import About from '../views/user/About.vue'
 
 
 Vue.use(VueRouter)
@@ -123,6 +124,15 @@ const routes = [
         name: 'Video',
         components: {
             default: Video,
+            nav: Navigation
+        }
+    },
+
+    {
+        path: '/about',
+        name: 'About',
+        components: {
+            default: About,
             nav: Navigation
         }
     },

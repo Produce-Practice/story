@@ -20,7 +20,7 @@ import 'mavon-editor/dist/css/index.css'
 import '@/assets/css/reset.css'
 
 Vue.config.productionTip = false;
-
+Vue.prototype.$axios = axios;
 Vue.use(VueAxios, axios);
 
 Vue.use(ElementUI);

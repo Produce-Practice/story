@@ -1,16 +1,21 @@
 <template>
   <div>
     <p>{{this.messagedata.title}}</p>
+    
+    <!--消息内容 -->
     <myMessage :Cinfo="messagedata" @child-event="toShow"></myMessage>
     <myMessage :Cinfo="messagedata" @child-event="toShow"></myMessage>
     <myMessage :Cinfo="messagedata" @child-event="toShow"></myMessage>
+    <!-- 消息内容结束 -->
 
 
+    <!-- 输入框 -->
     <el-collapse-transition>
       <div v-show="show3" class="comment_box">
         <myCommentArea class="mycomment"></myCommentArea>
       </div>
     </el-collapse-transition>
+    <!-- 输入框结束 -->
   </div>
 </template>
 

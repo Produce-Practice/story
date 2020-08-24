@@ -1,13 +1,19 @@
-import Mock from "mockjs";
+const Mock = require('mockjs')
 
-Mock.mock("/parameter/demoList", {
-  'comments|3-5':[{
-    title: "@title(3)",
-    author: "@name(3)",
-    article: "@cparagraph)",
-    star: 11
+let dataList = Mock.mock({
+  "comments|3-5": [{
+      title: "@title(3)",
+      author: "@name(3)",
+      article: "@cparagraph)",
+      star: 11
   }]
 });
-// 'PageInfo':[{
-//
-// }]
+
+Mock.mock('/parameter/demoList', 'get', (res, req) => {
+  return {
+    status: 200,
+    data: dataList,
+    message: "成功"
+  }
+});
+

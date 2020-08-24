@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="message_box">
+
+      <!-- 左边侧边导航 -->
       <div class="left-sidebar">
         <div class="logo">
           <a href="index.html">
@@ -28,11 +30,16 @@
       <div class="message-content-head">
         <span>{{this.message}}</span>
       </div>
+      <!-- 左边导航结束 -->
+
+      <!-- 右边内容区域  子路由 -->
       <transition name="mess-content">
         <div class="message-content">
           <router-view :messagedata="datadetails"></router-view>
         </div>
       </transition>
+      <!-- 内容区域结束 -->
+      
     </div>
     <Footer></Footer>
   </div>
@@ -54,7 +61,7 @@ export default {
       this.message = "回复我的";
       this.$axios({
         methods: "get",
-        url: "http://localhost:8080/login/parameter/demoList"
+        url: "/parameter/demoList"
       }).then(res => {
         this.datadetails = res.data.comments;
         console.log(this.datadetails);

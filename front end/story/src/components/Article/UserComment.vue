@@ -1,0 +1,123 @@
+<template>
+  <div class="main_box">
+    <div class="box_header">
+      <span>Comments |</span>
+      {{num}} 条评论
+    </div>
+    
+    <myCommentFirst v-for="(item, index) in commentInfo" :key="index" :Cinfo="item"></myCommentFirst>
+    
+    <myCommentArea class="mycomment-area"></myCommentArea>
+  </div>
+</template>
+
+<script>
+import myCommentArea from "@/components/Article/CommentArea";
+ import myCommentFirst from "@/components/Article/CommentFirst";
+export default {
+  name: "myUserComment",
+  props:['commentInfo'],
+  data() {
+    return {
+      num: 12,
+      avatar:
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+      secondFlag: false,
+      Page: {
+        role: "飞飞"
+      }
+    };
+  },
+  components: { myCommentArea , myCommentFirst}
+};
+</script>
+
+<style lang="less" scoped>
+.main_box {
+  width: 740px;
+  padding: 0px 30px;
+  padding-bottom: 30px;
+  height: auto;
+  color: #7d7d7d;
+}
+.box_header {
+  span {
+    font-size: 26px;
+  }
+}
+
+.user_avatar {
+  margin-left: 20px;
+  position: absolute;
+  border: 1px solid #7d7d7d;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  img {
+    position: absolute;
+    left: 2.5px;
+    top: 2px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+}
+
+.user_name {
+  position: absolute;
+  left: 110px;
+  font-size: 18px;
+  span {
+    margin-left: 10px;
+  }
+}
+
+.comment_info {
+  position: absolute;
+  right: 90px;
+  margin-top: 20px;
+}
+
+.comment_reply {
+  position: absolute;
+  right: 10px;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+.comment_reply:hover {
+  color: #686ec7;
+}
+
+.comment_date {
+  position: absolute;
+  left: 110px;
+  font-size: 18px;
+  margin-top: 30px;
+  letter-spacing: 2px;
+}
+
+.box_user {
+  position: relative;
+  margin-top: 20px;
+  height: 60px;
+}
+.box_content {
+  margin-top: 20px;
+  padding-left: 110px;
+}
+
+.second_show-enter-active,
+.second_show-leave-active {
+  transition: all 1s ease;
+}
+.second_show-enter,
+.second_show-leave-to {
+  opacity: 0;
+}
+
+
+.mycomment-area{
+    transform: translateX(-30px);
+}
+</style>

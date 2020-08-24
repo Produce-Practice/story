@@ -1,5 +1,5 @@
 <template>
-  <div class="main_box2">
+  <div class="main_box3">
     <div class="userComment">
     </div>
     <div style="margin: 0px 0;font-size:18px;color:#656d78">发表评论</div>
@@ -39,7 +39,7 @@ export default {
 
 
 <style lang="less" scoped>
-.main_box2 {
+.main_box3 {
   margin-top: 100px;
   width: 800px;
   padding-bottom: 30px;

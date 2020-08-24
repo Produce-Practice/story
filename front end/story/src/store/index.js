@@ -13,9 +13,7 @@ export default new Vuex.Store({
             token: null,
             userAccount: null,
             password: null,
-
         }
-
     },
 
     // 用来直接修改state内的数据；在组件内，通过this.$store.commit(方法名)来执行mutations
