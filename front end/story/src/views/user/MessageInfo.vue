@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import myMessageinfo from "@/components/MessageCenter/MessageInfo";
-import myComment from "@/components/Article/CommentArea";
+import myMessageinfo from "@/components/messageCenter/MessageInfo";
+import myComment from "@/components/article/CommentArea";
 export default {
   name: "message",
   components: { myMessageinfo, myComment },
@@ -37,27 +37,36 @@ export default {
       show3: false,
       pageCount: 7,
       currentPage: 1,
-      messagedata:{
-        title:123,
-        author:"周云飞"
+      messagedata: {
+
+        title: 123,
+        author: "周云飞"
+
       }
     };
   },
   methods: {
+
     toShow() {
+
       this.show3 = true;
+
     },
+
     currentchange: function(currentPage) {
+
       this.currentPage = currentPage;
+
       console.log(this.currentPage);
       console.log("发送http请求");
+
     }
   }
 };
 </script>
 
 <style lang="less">
- .el-pagination{
+ .el-pagination {
     width: 500px;
   }
 </style>

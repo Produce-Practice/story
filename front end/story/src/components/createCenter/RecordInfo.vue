@@ -8,12 +8,12 @@
         <div class="box_user_right">
           <div class="user_name">
             {{Cinfo.author}}
-            <span>赞了你 :</span>
+            <span>历史发送 :</span>
           </div>
-          <div class="comment_date">2020年8月22日</div>
+          <div class="comment_date">2020年8月23日</div>
 
           <div class="comment_delete" @click="reply">删除</div>
-          <div class="comment_reply" @click="reply">回复</div>
+          <!-- <div class="comment_reply" @click="reply">去发送</div> -->
         </div>
       </div>
       <div class="box_content">{{this.article}}</div>
@@ -23,52 +23,34 @@
 
 <script>
 export default {
-
-  name: "myFvourinfo",
-  
+  name: "myRecordinfo",
   data() {
-  
     return {
-      
       Cinfo: { author: 123 },
-      
-      data: "今天回回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家",
-      
+      data:"今天回回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家",
       num: 12,
-      
-      avatar: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-      
+      avatar:
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
       secondFlag: false
-    
     };
-  
   },
-
   methods: {
-
     spreadMore() {
-
       this.secondFlag = !this.secondFlag;
-    
     },
-
-    reply() {
-      
-      this.$store.commit("setToWho", "回复" + this.Cinfo.author);
-      this.$emit("child-event");
-    
-    }
-  
+    // reply() {
+    //   this.$store.commit("setToWho", "回复" + this.Cinfo.author);
+    //   this.$emit("child-event");
+    // }
   },
 
   computed: {
-
-    article: function() {
     
-      return this.data.substring(0, 80)+'...';
+    article:function() {
+
+      return this.data.substring(0, 80) + '...';
     
     }
-
   },
 };
 </script>
@@ -96,7 +78,6 @@ export default {
   height: 45px;
   box-shadow: 0px 2px 4px 0px rgba(121, 146, 180, 0.54);
   border-radius: 50%;
-  
   img {
     position: absolute;
     left: 2px;

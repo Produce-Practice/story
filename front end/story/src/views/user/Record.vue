@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="message-content-head">
-      <span>赞我的</span>
+      <span>已发送</span>
     </div>
-    <myFvourinfo :Cinfo="messagedata" @child-event="toShow"></myFvourinfo>
-    <myFvourinfo :Cinfo="messagedata" @child-event="toShow"></myFvourinfo>
+    <myRecordinfo :Cinfo="messagedata" @child-event="toSend"></myRecordinfo>
+    <myRecordinfo :Cinfo="messagedata" @child-event="toSend"></myRecordinfo>
+    <myRecordinfo :Cinfo="messagedata" @child-event="toSend"></myRecordinfo>
 
     <div class="pagination">
       <el-pagination
@@ -16,22 +17,18 @@
         @current-change="currentchange"
       ></el-pagination>
     </div>
-    <el-collapse-transition>
-      <div v-show="show3" class="comment_box">
-        <myComment class="mycomment"></myComment>
-      </div>
-    </el-collapse-transition>
   </div>
 </template>
 
 <script>
-import myFvourinfo from "@/components/messageCenter/MyFavourInfo";
+import myRecordinfo from "@/components/createCenter/RecordInfo";
 import myComment from "@/components/article/CommentArea";
 export default {
   name: "message",
-  components: { myFvourinfo, myComment },
+  components: { myRecordinfo, myComment },
   data() {
     return {
+
       show3: false,
       pageCount: 7,
       currentPage: 1,
@@ -41,14 +38,17 @@ export default {
     };
   },
   methods: {
-    toShow() {
-      this.show3 = true;
+    toSend() {
+      alert("去创造中心发送");
     },
     currentchange: function(currentPage) {
       this.currentPage = currentPage;
       console.log(this.currentPage);
       console.log("发送http请求");
     }
+  },
+  beforeMount() {
+      //
   }
 };
 </script>

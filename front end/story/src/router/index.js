@@ -27,13 +27,6 @@ const routes = [
             default: CreateIdea,
             nav: Navigation,
         },
-        // children: [{
-        //     path: 'info',
-        //     name: 'messageInfo',
-        //     component: () =>
-        //         import ('@/views/user/CreateIdea'),
-
-        // }]
     },
 
     {
@@ -73,21 +66,40 @@ const routes = [
             default: CreateCenter,
             nav: Navigation
         },
+
         children: [{
-            path: 'messageinfo',
-            name: 'messageInfo',
-            component: () =>
-                import ('@/views/user/MessageInfo'),
+                path: 'messageInfo',
+                name: 'messageInfo',
+                components: () =>
+                    import ('@/views/user/MessageInfo')
+            },
 
-        },
-        {
-            path: 'favourinfo',
-            name: 'favourInfo',
-            component: () =>
-                import ('@/views/user/MyFavour'),
+            {
+                path: 'favourInfo',
+                name: 'favourInfo',
+                component: () =>
+                    import ('@/views/user/MyFavour'),
+            },
 
-        },
-    ]
+            {
+                path: 'draft',
+                name: 'draft',
+                component: () =>
+                    import ('@/views/user/Draft'),
+            },
+
+            {
+                path: 'record',
+                name: 'record',
+                component: () =>
+                    import ('@/views/user/Record'),
+
+            },
+
+        ]
+
+
+
     },
 
     {
@@ -98,15 +110,6 @@ const routes = [
             nav: Navigation
         }
     },
-
-    // {
-    //     path: '/register',
-    //     name: 'register',
-    //     components: {
-    //         default: Register,
-    //         nav: Navigation
-    //     }
-    // },
 
     {
         path: '/notFound',

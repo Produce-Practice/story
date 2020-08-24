@@ -109,6 +109,7 @@ export default {
     // 若用户已登录
     if (JSON.parse(storage.get("user")) != null) {
 
+      this.squareUrl = "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'";
       this.show0 = false;
       this.show1 = true;
 
@@ -179,13 +180,13 @@ export default {
 
             }).catch(function (err) {
 
-                _this.$message.error("系统错误！");
+                _this.$message.error("系统错误!");
             
         });
       
       } else {
 
-        _this.$message.warning("请输入搜索信息！");
+        _this.$message.warning("请输入搜索信息!");
 
       }
 

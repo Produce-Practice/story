@@ -23,8 +23,8 @@
               <span>创作中心</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="2-1">草稿箱</el-menu-item>
-              <el-menu-item index="2-2">已投递</el-menu-item>
+              <el-menu-item index="2-1" @click="toDraft">草稿箱</el-menu-item>
+              <el-menu-item index="2-2" @click="toRecord">已投递</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
@@ -55,7 +55,9 @@ export default {
   inject: ["reload"],
 
   data() {
-    return {};
+    return {
+      
+    }
   },
 
   methods: {
@@ -63,12 +65,28 @@ export default {
       this.$router.push("/user/createIdea");
     },
 
-    toReply(){
-      this.$router.push("/user/createCenter/messageinfo");
+    toReply() {
+      this.$router.push("/user/createCenter/messageInfo");
     },
     
-    toFavour(){
-      this.$router.push("/user/createCenter/favourinfo");
+    toFavour() {
+      this.$router.push("/user/createCenter/favourInfo");
+    },
+
+    toDraft() {
+      this.$router.push({
+        path:'/user/createCenter/draft',
+        query:{
+        }
+      });
+    },
+
+    toRecord() {
+       this.$router.push({
+        path:'/user/createCenter/record',
+        query:{
+        }
+      });
     }
 
 

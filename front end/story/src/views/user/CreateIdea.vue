@@ -8,8 +8,8 @@
         />
 
         <div class="btn">
-            <el-button type="primary" @click="submit">提交</el-button>
-            <el-button type="danger" @click="save">保存</el-button>
+            <el-button type="primary" @click="submit()">提交</el-button>
+            <el-button type="danger" @click="save()">保存</el-button>
         </div>
         <Footer></Footer>
     </div>
@@ -33,7 +33,6 @@ export default {
 
         mavonEditor,
         Footer
-
     
     },
 
@@ -59,7 +58,13 @@ export default {
         // 提交
         submit () { 
             
+            console.log("-------------- content --------------")
+            // 获取左侧
             console.log(this.content);
+
+
+            console.log("-------------- html --------------")
+            // 获取右侧
             console.log(this.html);
         
         },
