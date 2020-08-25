@@ -63,6 +63,14 @@ public class UserController {
         return commentService.notifyMessages(message);
 
     }
+
+    @RequestMapping(value = {"/listOneUser"}, method = RequestMethod.POST)
+    public JSONObject listOneUser(@RequestBody JSONObject message) {
+
+        return userService.listOneUser(message);
+
+    }
+
     @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
     public JSONObject uploadImageFile(@RequestParam("img") MultipartFile file) throws IOException {
         File fileDir = new File(Constants.DESTINATION);

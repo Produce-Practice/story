@@ -22,4 +22,6 @@ public interface UserDao {
     Integer updateUserPassword(JSONObject jsonObject);
 
     Integer updateUser(JSONObject jsonObject);
+
+    JSONObject listOneUser(JSONObject jsonObject);
 }

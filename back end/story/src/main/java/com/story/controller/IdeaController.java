@@ -43,7 +43,7 @@ public class IdeaController {
     @RequestMapping(value = {"/listIdeasByUserAccount"}, method = RequestMethod.POST)
     public JSONObject listIdeasByUserAccount(@RequestBody JSONObject message) {
 
-        return ideaService.listIdeasByUserId(message);
+        return ideaService.listIdeasByUserAccount(message);
 
     }
 
@@ -62,9 +62,23 @@ public class IdeaController {
     }
 
     @RequestMapping(value = {"/listIdeasByHeat"}, method = RequestMethod.POST)
-    public JSONObject listAllIdeas(@RequestBody JSONObject message) {
+    public JSONObject listIdeasByHeat(@RequestBody JSONObject message) {
 
         return ideaService.listIdeasByHeat(message);
+
+    }
+
+    @RequestMapping(value = {"/listAllIdeasVisible"}, method = RequestMethod.POST)
+    public JSONObject listAllIdeasVisible(@RequestBody JSONObject message) {
+
+        return ideaService.listAllIdeasVisible(message);
+
+    }
+
+    @RequestMapping(value = {"/listAllIdeasInvisible"}, method = RequestMethod.POST)
+    public JSONObject listAllIdeasInvisible(@RequestBody JSONObject message) {
+
+        return ideaService.listAllIdeasInvisible(message);
 
     }
 }

@@ -278,4 +278,14 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public JSONObject listOneUser(JSONObject jsonObject) {
+        JSONObject listOneUser = userDao.listOneUser(jsonObject);
+        if (listOneUser != null) {
+            return listOneUser;
+        } else {
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+        }
+    }
+
 }

@@ -77,7 +77,7 @@ public class IdeaServiceImpl implements IdeaService {
      * 根据userId查找idea
      */
     @Override
-    public JSONObject listIdeasByUserId(JSONObject message) {
+    public JSONObject listIdeasByUserAccount(JSONObject message) {
         //获取userId
         String userAccount = message.getString("userAccount");
         User user = userDao.getUserByUserAccount(userAccount);
@@ -88,7 +88,7 @@ public class IdeaServiceImpl implements IdeaService {
         for (JSONObject idea : ideas) {
             idea.put("markdownString",markdownStyle(idea));
         }
-        if (ideas != null) {
+        if (ideas.size() > 0) {
 
             return JSONUtil.successJSON(ideas);
 
@@ -116,7 +116,7 @@ public class IdeaServiceImpl implements IdeaService {
         for (JSONObject idea : ideas) {
             idea.put("markdownString",markdownStyle(idea));
         }
-        if (ideas != null) {
+        if (ideas.size() > 0) {
 
             return JSONUtil.successJSON(ideas);
 
@@ -140,7 +140,7 @@ public class IdeaServiceImpl implements IdeaService {
         for (JSONObject idea : ideas) {
             idea.put("markdownString",markdownStyle(idea));
         }
-        if (ideas != null) {
+        if (ideas.size() > 0) {
 
             return JSONUtil.successJSON(ideas);
 
@@ -173,6 +173,42 @@ public class IdeaServiceImpl implements IdeaService {
             return JSONUtil.successJSON(ideaList);
         } else {
             return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+        }
+    }
+
+    @Override
+    public JSONObject listAllIdeasVisible(JSONObject message) {
+        //获取userId
+        String userAccount = message.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        message.put("userId",user.getUserId());
+        List<JSONObject> ideas = ideaDao.listAllIdeasByVisible(message);
+        if (ideas.size() > 0) {
+
+            return JSONUtil.successJSON(ideas);
+
+        } else {
+
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+
+        }
+    }
+
+    @Override
+    public JSONObject listAllIdeasInvisible(JSONObject message) {
+        //获取userId
+        String userAccount = message.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        message.put("userId",user.getUserId());
+        List<JSONObject> ideas = ideaDao.listAllIdeasByInvisible(message);
+        if (ideas.size() > 0) {
+
+            return JSONUtil.successJSON(ideas);
+
+        } else {
+
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+
         }
     }
 

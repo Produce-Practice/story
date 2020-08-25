@@ -29,4 +29,8 @@ public interface IdeaDao {
     JSONObject listOneIdea(JSONObject jsonObject);
 
     Type getTypeByTypeName(JSONObject jsonObject);
+
+    List<JSONObject> listAllIdeasByVisible(JSONObject message);
+
+    List<JSONObject> listAllIdeasByInvisible(JSONObject message);
 }
