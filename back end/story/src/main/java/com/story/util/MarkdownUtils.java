@@ -74,11 +74,17 @@ public class MarkdownUtils {
 
 
     public static void main(String[] args) {
-
-        String table = "| hello | hi   | 哈哈哈   |\n" +
+        Map<String, String> message = new HashMap<>();
+        message.put("title","呵呵哒");
+        message.put("content","GG");
+        /*String table = "| hello | hi   | 哈哈哈   |\n" +
                 "| ----- | ---- | ----- |\n" +
                 "| 斯维尔多  | 士大夫  | f啊    |\n" +
                 "| 阿什顿发  | 非固定杆 | 撒阿什顿发 |\n" +
+                "\n";*/
+        String table = "| " + message.get("title") + "|\n" +
+                "| ----- | ---- | ----- |\n" +
+                "| " + message.get("content") + "|\n" +
                 "\n";
 
         System.out.println(markdownToHtmlExtensions(table));

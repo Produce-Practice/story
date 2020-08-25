@@ -40,15 +40,15 @@ public class IdeaController {
 
     }
 
-    @RequestMapping(value = {"/listIdeasByUserId"}, method = RequestMethod.POST)
-    public JSONObject listIdeasByUserId(@RequestBody JSONObject message) {
+    @RequestMapping(value = {"/listIdeasByUserAccount"}, method = RequestMethod.POST)
+    public JSONObject listIdeasByUserAccount(@RequestBody JSONObject message) {
 
         return ideaService.listIdeasByUserId(message);
 
     }
 
-    @RequestMapping(value = {"/listIdeasByTypeId"}, method = RequestMethod.POST)
-    public JSONObject listIdeasByTypeId(@RequestBody JSONObject message) {
+    @RequestMapping(value = {"/listIdeasByTypeName"}, method = RequestMethod.POST)
+    public JSONObject listIdeasByTypeName(@RequestBody JSONObject message) {
 
         return ideaService.listIdeasByTypeId(message);
 
