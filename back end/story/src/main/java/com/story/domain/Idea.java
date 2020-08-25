@@ -26,6 +26,9 @@ public class Idea {
     // 评论数
     private Integer commentCount;
 
+    // markdown格式字符串
+    private String markdownString;
+
     public Integer getLikes() {
         return likes;
     }
@@ -96,6 +99,14 @@ public class Idea {
 
     public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public String getMarkdownString() {
+        return markdownString;
+    }
+
+    public void setMarkdownString(String markdownString) {
+        this.markdownString = markdownString;
     }
 
     @Override

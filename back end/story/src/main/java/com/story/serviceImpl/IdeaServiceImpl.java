@@ -1,5 +1,6 @@
 package com.story.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.story.constants.Constants;
 import com.story.dao.CommentDao;
@@ -10,6 +11,7 @@ import com.story.domain.Type;
 import com.story.domain.User;
 import com.story.service.IdeaService;
 import com.story.util.JSONUtil;
+import com.story.util.MarkdownUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -85,6 +87,10 @@ public class IdeaServiceImpl implements IdeaService {
         Integer currentBegin = (currentPage - 1) * pageSize;
         message.put("currentBegin", currentBegin);
         List<JSONObject> ideas = ideaDao.listIdeasByUserId(message);
+        // 插入markdown格式字符
+        for (JSONObject idea : ideas) {
+            idea.put("markdownString",markdownStyle(idea));
+        }
         if (ideas != null) {
 
             return JSONUtil.successJSON(ideas);
@@ -112,6 +118,10 @@ public class IdeaServiceImpl implements IdeaService {
         Integer currentBegin = (currentPage - 1) * pageSize;
         message.put("currentBegin", currentBegin);
         List<JSONObject> ideas = ideaDao.listIdeasByTypeId(message);
+        // 插入markdown格式字符
+        for (JSONObject idea : ideas) {
+            idea.put("markdownString",markdownStyle(idea));
+        }
         if (ideas != null) {
 
             return JSONUtil.successJSON(ideas);
@@ -135,6 +145,10 @@ public class IdeaServiceImpl implements IdeaService {
         message.put("currentBegin", currentBegin);
         message.put("title", title);
         List<JSONObject> ideas = ideaDao.listIdeasByTitle(message);
+        // 插入markdown格式字符
+        for (JSONObject idea : ideas) {
+            idea.put("markdownString",markdownStyle(idea));
+        }
         if (ideas != null) {
 
             return JSONUtil.successJSON(ideas);
@@ -155,6 +169,7 @@ public class IdeaServiceImpl implements IdeaService {
         for (Idea idea : ideaList) {
             Integer commentNum = commentDao.countComments(idea.getIdeaId());
             idea.setCommentCount(commentNum);
+            idea.setMarkdownString(markdownStyle(idea));
         }
         //然后通过比较器来实现排序
         //降序排序
@@ -170,4 +185,19 @@ public class IdeaServiceImpl implements IdeaService {
         }
     }
 
+    private String markdownStyle(JSONObject message) {
+        String table = "| " + message.getString("title") + "|\n" +
+                "| ----- | ---- | ----- |\n" +
+                "| " + message.getString("content") + "|\n" +
+                "\n";
+        return MarkdownUtils.markdownToHtmlExtensions(table);
+    }
+
+    private String markdownStyle(Idea idea) {
+        String table = "| " + idea.getTitle() + "|\n" +
+                "| ----- | ---- | ----- |\n" +
+                "| " + idea.getContent() + "|\n" +
+                "\n";
+        return MarkdownUtils.markdownToHtmlExtensions(table);
+    }
 }
