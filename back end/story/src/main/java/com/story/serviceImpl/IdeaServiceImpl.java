@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.story.constants.Constants;
 import com.story.dao.CommentDao;
 import com.story.dao.IdeaDao;
+import com.story.dao.UserDao;
 import com.story.domain.Idea;
+import com.story.domain.Type;
+import com.story.domain.User;
 import com.story.service.IdeaService;
 import com.story.util.JSONUtil;
 import org.springframework.stereotype.Service;
@@ -21,9 +24,20 @@ public class IdeaServiceImpl implements IdeaService {
     private IdeaDao ideaDao;
     @Resource
     private CommentDao commentDao;
+    @Resource
+    private UserDao userDao;
 
     @Override
     public JSONObject saveIdea(JSONObject message) {
+        //获取userId
+        String userAccount = message.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        message.put("userId",user.getUserId());
+        if (!message.containsKey("typeId")) {
+            //获取typeId
+            Type type = ideaDao.getTypeByTypeName(message);
+            message.put("typeId",type.getTypeId());
+        }
         Integer result = ideaDao.saveIdea(message);
         if (result != 1) {
             return JSONUtil.errorJSON(Constants.INSERT_FAILED);
@@ -34,6 +48,11 @@ public class IdeaServiceImpl implements IdeaService {
 
     @Override
     public JSONObject updateIdea(JSONObject message) {
+        if (!message.containsKey("typeId")) {
+            //获取typeId
+            Type type = ideaDao.getTypeByTypeName(message);
+            message.put("typeId",type.getTypeId());
+        }
         Integer result = ideaDao.updateIdea(message);
         if (result != 1) {
             return JSONUtil.errorJSON(Constants.UPDATE_FAILED);
@@ -57,7 +76,10 @@ public class IdeaServiceImpl implements IdeaService {
      */
     @Override
     public JSONObject listIdeasByUserId(JSONObject message) {
-        String msg = message.getString("idea");
+        //获取userId
+        String userAccount = message.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        message.put("userId",user.getUserId());
         Integer currentPage = message.getInteger("currentPage");
         Integer pageSize = message.getInteger("pageSize");
         Integer currentBegin = (currentPage - 1) * pageSize;
@@ -80,6 +102,11 @@ public class IdeaServiceImpl implements IdeaService {
      */
     @Override
     public JSONObject listIdeasByTypeId(JSONObject message) {
+        if (!message.containsKey("typeId")) {
+            //获取typeId
+            Type type = ideaDao.getTypeByTypeName(message);
+            message.put("typeId",type.getTypeId());
+        }
         Integer currentPage = message.getInteger("currentPage");
         Integer pageSize = message.getInteger("pageSize");
         Integer currentBegin = (currentPage - 1) * pageSize;

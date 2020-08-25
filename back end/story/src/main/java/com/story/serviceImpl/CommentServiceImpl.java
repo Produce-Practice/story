@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.story.constants.Constants;
 import com.story.dao.CommentDao;
+import com.story.dao.UserDao;
 import com.story.domain.Comment;
+import com.story.domain.User;
 import com.story.service.CommentService;
 import com.story.util.JSONUtil;
 import org.springframework.stereotype.Service;
@@ -20,11 +22,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Resource
     private CommentDao commentDao;
+    @Resource
+    private UserDao userDao;
 
     // 保存评论
     @Override
     public JSONObject saveComment(JSONObject message) {
-
+        //获取userId
+        String userAccount = message.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        message.put("userId",user.getUserId());
         Integer result = commentDao.saveComment(message);
         if (result != 1) {
             return JSONUtil.errorJSON(Constants.INSERT_FAILED);
@@ -37,7 +44,10 @@ public class CommentServiceImpl implements CommentService {
     // 更新评论：评论内容和时间
     @Override
     public JSONObject updateComment(JSONObject jsonObject) {
-
+        //获取userId
+        String userAccount = jsonObject.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        jsonObject.put("userId",user.getUserId());
         Integer result = commentDao.updateComment(jsonObject);
         if (result != 1) {
             return JSONUtil.errorJSON(Constants.UPDATE_FAILED);
@@ -63,6 +73,7 @@ public class CommentServiceImpl implements CommentService {
     // idea详情页显示所有评论
     @Override
     public JSONObject listCommentsByIdeaId(JSONObject message) {
+
         String ideaId = message.getString("ideaId");
         List<Comment> comments = commentDao.findByIdeaIdAndParentCommentNull(ideaId);
         List<JSONObject> parentComments = new ArrayList<>();
@@ -96,6 +107,10 @@ public class CommentServiceImpl implements CommentService {
     // 消息中心的消息
     @Override
     public JSONObject notifyMessages(JSONObject jsonObject) {
+        //获取userId
+        String userAccount = jsonObject.getString("userAccount");
+        User user = userDao.getUserByUserAccount(userAccount);
+        jsonObject.put("userId",user.getUserId());
         List<JSONObject> notifyMessages = commentDao.notifyMessages(jsonObject);
         if (notifyMessages != null) {
             return JSONUtil.successJSON(notifyMessages);
