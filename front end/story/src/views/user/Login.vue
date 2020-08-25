@@ -54,9 +54,8 @@
 </template>
 
 <script>
-
-import Footer from '@/components/Footer.vue';
 import storage from '@/utils/storage';
+import Footer from '@/components/Footer.vue';
 import http from '@/utils/http';
 
 // 列表的样式

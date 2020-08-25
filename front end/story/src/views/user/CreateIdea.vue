@@ -26,7 +26,7 @@
 
 
 <script>
-
+import storage from '@/utils/storage';
 import Footer from '@/components/Footer.vue'
 
 import { mavonEditor } from 'mavon-editor'
@@ -53,6 +53,8 @@ export default {
             content: '', // 输入的markdown
             html: '',    // 及时转的html
             visibility: null,
+            likes: 0,
+            visits: 0,
 
         }
     },
@@ -68,6 +70,8 @@ export default {
 
         // 提交
         submit () { 
+
+            var _this = this;
             
             console.log("-------------- content --------------")
             // 获取左侧
@@ -77,6 +81,8 @@ export default {
             console.log("-------------- html --------------")
             // 获取右侧
             console.log(this.html);
+
+            this.visibility = 1;
 
             if (this.title == null || this.title == "") {
 
@@ -88,72 +94,34 @@ export default {
             
             } else {
 
-                this.$router.push({
-                    path:'/user/createIdea/public',
-                    query:{
-                    }
+                var obj = new Object();
+                obj.title = _this.title;
+                obj.content = _this.content;
+                obj.html = _this.html;
+                obj.likes = _this.likes;
+                obj.visits = _this.visits;
+                obj.visibility = _this.visibility;
+
+                storage.set("article", JSON.stringify(obj));
+                _this.$store.commit('saveArticle', storage.get('article'));
+
+                // _this.$router.push({
+                //     path: '/user/createIdea/public',
+                //     query: {
+
+                //     }
                 
-                })
+                // }),
 
-                var _this = this;
-
-                http({
-
-                // 假设后台需要的是表单数据这里你就可以更改
-                headers: {
-
-                "Content-Type": "application/json;charset=UTF-8"
-                
-                },
-
-                method: 'post',
-                url: 'http://localhost:8080/register',
-
-                data: {
-
-                    userAccount: _this.userAccount,
-                    title: _this.title,
-                    content: _this.content,
-                    typeId: 1,
-                    visibility: 0,
-                    likes: 0,
-                    visits: 0
-
-                },
-
-                responseType: 'json'
-
-                }).then(function (res) {
-
-                    console.log(res);
-
-                    var code = res.code;
-                    var info = res.info;
-
-                    if (res.code == 200) {
-                    
-                        _this.$message.success("注册成功！");
-                        _this.change();
-                    
-                    } else {
-                        
-                        _this.$message.error(info);
-
-                    }
-
-                }).catch(function (err) {
-
-                    _this.$message.error("系统错误！");
-            
-            });
-
+                _this.$router.push('/user/createIdea/public');
 
             }
+
         },
 
         save() {
-
-
+            
+            this.visibility = 0;
 
         }
 

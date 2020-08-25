@@ -59,6 +59,8 @@
   </div>
 </template>
 <script>
+import storage from '@/utils/storage';
+import http from '@/utils/http';
 // 列表的样式
 import "@/assets/css/common.css";
 import axios from "axios";

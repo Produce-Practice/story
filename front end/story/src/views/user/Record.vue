@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import storage from '@/utils/storage';
+import http from '@/utils/http';
 import myRecordinfo from "@/components/createCenter/RecordInfo";
 import myComment from "@/components/article/CommentArea";
 export default {

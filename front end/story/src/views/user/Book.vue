@@ -12,7 +12,7 @@
         </div>
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
-          <div class="col-sm-4" v-for="(book,index) in books" :key="index">
+          <div class="col-sm-4" v-for="(book, index) in books" :key="index">
             <div class="single-blog">
               <!-- 用户头像 -->
               <router-link :to="{path: '/ideaInfo', query: {item: book}}">
@@ -60,6 +60,9 @@
 </template>
 
 <script>
+
+import http from '@/utils/http';
+import storage from '@/utils/storage';
 // 列表的样式
 import "../../assets/css/common.css";
 import axios from "axios";

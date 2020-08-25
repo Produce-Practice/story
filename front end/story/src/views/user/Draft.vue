@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import storage from '@/utils/storage';
+import http from '@/utils/http';
 import myDraftinfo from "@/components/createCenter/DraftInfo";
 import myComment from "@/components/article/CommentArea";
 export default {

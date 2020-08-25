@@ -19,7 +19,18 @@ export default new Vuex.Store({
         typeList: [],
 
         isShow: false,
-        toWho: "请输入内容"
+        toWho: "请输入内容",
+
+        article: {
+
+            title: null,
+            content: null,
+            visibility: null,
+            likes: null,
+            visits: null,
+            typeId: null
+
+        },
 
     },
 
@@ -35,17 +46,29 @@ export default new Vuex.Store({
 
         },
 
+        saveArticle(state, article) {
+
+            state.article = article;
+
+        },
+
+        keepArticleType(state, type) {
+            state.article.typeId = type;
+        },
+
         setTypeList(state, typeList) {
 
             // typeList.forEach(item => {
             //     Vue.set(state.typeList, item.tpyeId, item);
             // })
 
-            for (var i = 0; i < typeList.length; i++) {
+            // for (var i = 0; i < typeList.length; i++) {
 
-                state.typeList.push(typeList[i]);
+            //     state.typeList.push(typeList[i]);
 
-            }
+            // }
+
+            state.typeList = typeList;
 
         },
 
@@ -101,7 +124,14 @@ export default new Vuex.Store({
         getTypeList(state) {
             state.typeList = storage.get("typeList");
             return state.typeList;
-        }
+        },
+
+        getArticle(state) {
+
+            state.article = storage.get('article');
+            return state.article;
+
+        },
 
     },
 

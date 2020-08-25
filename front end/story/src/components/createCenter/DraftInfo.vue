@@ -1,39 +1,62 @@
 <template>
-  <div class="main_box">
-    <div class="box_header">
-      <div class="box_user">
-        <div class="user_avatar">
-          <img :src="avatar">
-        </div>
-        <div class="box_user_right">
-          <div class="user_name">
-            {{Cinfo.author}}
-            <span>草稿 :</span>
+  <div>
+    <div class="main_box" v-for="(draft,index) in draftList" :key="index">
+      <div class="box_header">
+        <div class="box_user">
+          <div class="user_avatar">
+            <img :src="draft.avatar" />
           </div>
-          <div class="comment_date">2020年8月22日</div>
+          <div class="box_user_right">
+            <div class="user_name">
+              {{draft.author}}
+              <span>草稿 :</span>
+            </div>
+            <div class="comment_date">2020年8月22日</div>
 
-          <div class="comment_delete" @click="reply">删除</div>
-          <div class="comment_reply" @click="reply">去发送</div>
+            <div class="comment_delete" @click="reply">删除</div>
+            <div class="comment_reply" @click="reply">去发送</div>
+          </div>
         </div>
+        <div class="box_content">{{draft.data}}</div>
       </div>
-      <div class="box_content">{{this.article}}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
   name: "myDraftinfo",
   data() {
-    
     return {
-      
-      Cinfo: { author: 123 },
-      data: "今天回回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家",
-      num: 12,
-      avatar: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-      secondFlag: false
+      draftList: [
+        {
+          author: 123 ,
+          data:
+            "今天回回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家",
+          num: 12,
+          avatar:
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+          secondFlag: false
+        },
+        {
+          author: 32322 ,
+          data:
+            "今天回回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家",
+          num: 23,
+          avatar:
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+          secondFlag: false
+        },
+        {
+          author: 2233 ,
+          data:
+            "今天回回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家今天回家回家",
+          num: 567,
+          avatar:
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+          secondFlag: false
+        }
+      ]
     };
   },
   methods: {
@@ -47,14 +70,10 @@ export default {
   },
 
   computed: {
-    
-    article:function() {
-
-      return this.data.substring(0, 80) + '...';
-    
+    article: function() {
+      return this.data.substring(0, 80) + "...";
     }
-  
-  },
+  }
 };
 </script>
 
@@ -158,5 +177,4 @@ export default {
 .second_show-leave-to {
   opacity: 0;
 }
-
 </style>

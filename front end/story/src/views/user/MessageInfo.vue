@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import storage from '@/utils/storage';
+import http from '@/utils/http';
 import myMessageinfo from "@/components/messageCenter/MessageInfo";
 import myComment from "@/components/article/CommentArea";
 export default {

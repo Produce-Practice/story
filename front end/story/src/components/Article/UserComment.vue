@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import storage from '@/utils/storage';
 import myCommentArea from "@/components/article/CommentArea";
 import myCommentFirst from "@/components/article/CommentFirst";
 export default {

@@ -30,21 +30,21 @@
             </li>
 
           <li>
-            <!-- 跳转到书籍全列表 -->
             <router-link to="/book">书评</router-link>
           </li>
           <li>
-            <!-- 跳转到音乐全列表 -->
             <router-link to="/music">乐评</router-link>
           </li>
           <li>
-            <!-- 跳转到电影全列表 -->
             <router-link to="/video">影评</router-link>
           </li>
           <li>
-            <!-- 跳转随笔全列表 -->
             <router-link to="/note">随笔</router-link>
           </li>
+
+          <!-- <li v-for="(typeName, typeId) in typeList" :key="typeId">
+            <router-link :to="/{{typeName}}"></router-link>
+          </li> -->
 
           <li>
 
@@ -98,7 +98,12 @@ export default {
       show0: null,
       show1: null,
       // squareUrl: "G:\Visual StudioCode\VScodeSource\story\src\assets\demo.jpg",
-      squareUrl:"https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
+      squareUrl:"https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+
+      typeList: [{
+        typeId : 0,
+        typeName: "书评"
+      }],
       
     }
 

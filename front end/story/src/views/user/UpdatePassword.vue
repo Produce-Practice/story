@@ -26,6 +26,7 @@
 </template>
 
 <script>
+
 import Footer from '@/components/Footer.vue';
 import storage from '@/utils/storage';
 import http from '@/utils/http';

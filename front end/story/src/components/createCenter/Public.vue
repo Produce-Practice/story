@@ -6,11 +6,18 @@
           <span class="do">发布想法</span>
         </el-form-item>
         <el-form-item label="想法类型">
-          <el-select v-model="form.region" placeholder="请选择想法类型">
-            <el-option label="书评" value="book"></el-option>
+          <el-select v-model="form.region" placeholder="请选择想法类型" @change="select"> 
+            <!-- <el-option label="书评" value="book"></el-option>
             <el-option label="乐评" value="music"></el-option>
             <el-option label="影评" value="video"></el-option>
-            <el-option label="随笔" value="note"></el-option>
+            <el-option label="随笔" value="note"></el-option> -->
+            <el-option 
+              v-for="(item, index) in typeList" 
+              :key="index"
+              :label="item.typeName"
+              :value="item.typeId"
+            >
+            </el-option>
           </el-select>
         </el-form-item>
         <!-- <el-form-item label="活动性质">
@@ -37,8 +44,14 @@
 </template>
 
 <script>
+
+import http from '@/utils/http';
+import storage from '@/utils/storage';
+
 export default {
+
   data() {
+    
     return {
       form: {
         name: "",
@@ -49,17 +62,113 @@ export default {
         type: [],
         resource: "",
         desc: ""
-      }
+      },
+      typeList: [],
+      selectedType: [],
+
     };
   },
 
+  created() {
+
+    console.log(this.$store.getters.getTypeList)
+
+    this.typeList = JSON.parse(this.$store.getters.getTypeList);
+
+    // this.typeList.push({
+    //   typeId: 1,
+    //   typeName: '音乐'
+    // })
+
+  },
+
   methods: {
-    publish() {},
+
+    select(item) {
+
+      // console.log("000000000000000");
+      // console.table(item);
+      // console.log(item);
+
+      storage.set("typeId", item);
+      this.$store.commit('keepArticleType', storage.get('typeId'));
+
+    },
+
+    publish() {
+
+      var _this = this;
+
+      var user = JSON.parse(_this.$store.getters.getUser);
+      var article = JSON.parse(_this.$store.getters.getArticle);
+
+      console.log(article)
+
+      http({
+
+            // 假设后台需要的是表单数据这里你就可以更改
+            headers: {
+
+            "Content-Type": "application/json;charset=UTF-8"
+            
+            },
+
+            method: 'post',
+            url: 'http://localhost:8080/idea/saveIdea',
+
+            data: {
+              
+                userId: 3,
+                userAccount: user.userAccount,
+                title: article.title,
+                content: article.content,
+                typeId: storage.get("typeId"),
+                visibility: article.visibility,
+                likes: article.likes,
+                visits: article.visits
+
+            },
+
+            responseType: 'json'
+
+            }).then(function (res) {
+
+                console.log(res);
+
+                var code = res.code;
+                var info = res.info;
+
+                storage.remove("artile");
+
+                storage.remove("typeId");
+
+                if (res.code == 200) {
+                
+                    _this.$message.success("提交成功！");
+                    _this.$router.replace("/user/createCenter/draft");
+                
+                } else {
+                    
+                    _this.$message.error(info);
+
+                }
+
+            }).catch(function (err) {
+
+              _this.$message.error("系统错误！");
+        
+        });
+
+    },
 
     cancel() {
+
       this.$router.push("/user/createIdea");
+    
     }
+  
   }
+
 };
 </script>
 

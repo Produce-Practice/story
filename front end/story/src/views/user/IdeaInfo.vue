@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import storage from '@/utils/storage';
+import http from '@/utils/http';
 import myArticle from "@/components/article/Article";
 import myUserComment from "@/components/article/UserComment";
 

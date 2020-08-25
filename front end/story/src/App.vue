@@ -68,6 +68,8 @@ export default {
   created () {
     
     var _this = this;
+
+    console.log("halo---------------");
     
     if (storage.get("typeList") == null) {
 
@@ -95,34 +97,37 @@ export default {
 
           console.log(res);
 
+          console.log("halo---------------1");
+
           var code = res.code;
           var info = res.info;
 
           if (res.code == 200) {
 
-            for (var i = 0; i < info.length; i++) {
+            storage.set("typeList", JSON.stringify(info));
 
-              this.typeList.push(JSON.stringify(info[i]));
-            
-            }
-          
-            storage.set("typeList", typeList);
             _this.$store.commit('setTypeList', storage.get('typeList'));
 
             console.log(JSON.parse(storage.get("typeList")));
           
           } else {
               
+              console.log("halo---------------2");
               _this.$message.error(info);
 
           }
 
       }).catch(function (err) {
 
+          console.log("halo---------------3");
           _this.$message.error("系统错误！");
     
     });
+
     }
+
+    // console.log(JSON.parse(storage.get("typeList")));
+    // console.log(JSON.parse(this.$store.getters.getTypeList)[0].typeName);
 
     
   }

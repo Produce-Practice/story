@@ -50,9 +50,10 @@
 </template>
 
 <script>
-
+import storage from '@/utils/storage';
 import Footer from '@/components/Footer.vue'
 
+import http from '@/utils/http';
 export default {
 
   name: "createCenter",

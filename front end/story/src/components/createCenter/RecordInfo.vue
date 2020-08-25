@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import storage from '@/utils/storage';
+import http from '@/utils/http';
 export default {
   name: "myRecordinfo",
   data() {
