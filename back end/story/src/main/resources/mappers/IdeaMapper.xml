@@ -7,7 +7,7 @@
 <mapper namespace="com.story.dao.IdeaDao">
 
     <select id="listIdeasByUserId" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits, typeId, visibility from idea where userId = #{userId} limit #{currentBegin}, #{pageSize};
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where userId = #{userId};
     </select>
 
     <select id="listAllIdeas" resultType="com.story.domain.Idea">
@@ -15,11 +15,11 @@
     </select>
 
     <select id="listIdeasByTypeId" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits, typeId, visibility from idea where typeId = #{typeId} limit #{currentBegin}, #{pageSize};
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where typeId = #{typeId};
     </select>
 
     <select id="listIdeasByTitle" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits, typeId, visibility from idea where title like #{title} limit #{currentBegin}, #{pageSize};
+        select ideaId, title, content, likes, visits, typeId, visibility from idea where title like #{title};
     </select>
 
     <select id="listOneIdea" resultType="com.alibaba.fastjson.JSONObject">
