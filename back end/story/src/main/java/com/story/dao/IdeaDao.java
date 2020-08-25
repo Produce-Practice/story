@@ -2,6 +2,7 @@ package com.story.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import com.story.domain.Idea;
+import com.story.domain.Type;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,5 @@ public interface IdeaDao {
 
     JSONObject listOneIdea(JSONObject jsonObject);
 
+    Type getTypeByTypeName(JSONObject jsonObject);
 }

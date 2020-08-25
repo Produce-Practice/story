@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = {"/user/idea"}, method = RequestMethod.POST)
+@RequestMapping(value = {"/idea"}, method = RequestMethod.POST)
 public class IdeaController {
 
     private static Logger logger = Logger.getLogger(IdeaController.class);

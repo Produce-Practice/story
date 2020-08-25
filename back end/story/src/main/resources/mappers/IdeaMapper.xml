@@ -40,4 +40,8 @@
         delete from idea where ideaId = #{ideaId};
     </delete>
 
+    <select id="getTypeByTypeName" resultType="com.story.domain.Type">
+        select * from type where typeName = #{typeName};
+    </select>
+
 </mapper>
