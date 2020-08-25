@@ -82,10 +82,7 @@ public class IdeaServiceImpl implements IdeaService {
         String userAccount = message.getString("userAccount");
         User user = userDao.getUserByUserAccount(userAccount);
         message.put("userId",user.getUserId());
-        Integer currentPage = message.getInteger("currentPage");
-        Integer pageSize = message.getInteger("pageSize");
-        Integer currentBegin = (currentPage - 1) * pageSize;
-        message.put("currentBegin", currentBegin);
+
         List<JSONObject> ideas = ideaDao.listIdeasByUserId(message);
         // 插入markdown格式字符
         for (JSONObject idea : ideas) {
@@ -113,10 +110,7 @@ public class IdeaServiceImpl implements IdeaService {
             Type type = ideaDao.getTypeByTypeName(message);
             message.put("typeId",type.getTypeId());
         }
-        Integer currentPage = message.getInteger("currentPage");
-        Integer pageSize = message.getInteger("pageSize");
-        Integer currentBegin = (currentPage - 1) * pageSize;
-        message.put("currentBegin", currentBegin);
+
         List<JSONObject> ideas = ideaDao.listIdeasByTypeId(message);
         // 插入markdown格式字符
         for (JSONObject idea : ideas) {
@@ -138,11 +132,8 @@ public class IdeaServiceImpl implements IdeaService {
      */
     @Override
     public JSONObject listIdeasByTitle(JSONObject message) {
-        Integer currentPage = message.getInteger("currentPage");
-        Integer pageSize = message.getInteger("pageSize");
-        Integer currentBegin = (currentPage - 1) * pageSize;
+
         String title = "%" + message.getString("title") + "%";
-        message.put("currentBegin", currentBegin);
         message.put("title", title);
         List<JSONObject> ideas = ideaDao.listIdeasByTitle(message);
         // 插入markdown格式字符
