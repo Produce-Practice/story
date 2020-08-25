@@ -9,8 +9,10 @@ public interface IdeaService {
     JSONObject saveIdea(JSONObject message);
     JSONObject updateIdea(JSONObject message);
     JSONObject deleteIdea(JSONObject message);
-    JSONObject listIdeasByUserId(JSONObject message);  // 根据用户查找
+    JSONObject listIdeasByUserAccount(JSONObject message);  // 根据用户查找
     JSONObject listIdeasByTypeId(JSONObject message);  // 根据类型查找
     JSONObject listIdeasByTitle(JSONObject message);      // 根据标题查找
-    JSONObject listIdeasByHeat(JSONObject message);
+    JSONObject listIdeasByHeat(JSONObject message);     //根据热度
+    JSONObject listAllIdeasVisible(JSONObject message); //可见的
+    JSONObject listAllIdeasInvisible(JSONObject message);//不可见的
 }
