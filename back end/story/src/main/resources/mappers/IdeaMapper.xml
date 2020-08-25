@@ -23,7 +23,7 @@
     </select>
 
     <select id="listOneIdea" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits, typeId, visibility from idea where ideaId = #{ideaId};
+        select * from idea where ideaId = #{ideaId};
     </select>
 
     <insert id="saveIdea">
@@ -34,6 +34,10 @@
     <update id="updateIdea">
         update idea set title = #{title}, content = #{content}, likes = #{likes}, visits = #{visits}, typeId = #{typeId}, visibility = #{visibility}
         where ideaId = #{ideaId};
+    </update>
+
+    <update id="updateIdeaVisibility">
+        update idea set visibility = #{visibility} where ideaId = #{ideaId};
     </update>
 
     <delete id="deleteIdea">

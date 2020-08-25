@@ -28,6 +28,8 @@ public interface IdeaDao {
 
     JSONObject listOneIdea(JSONObject jsonObject);
 
+    Integer updateIdeaVisibility(JSONObject jsonObject);
+
     Type getTypeByTypeName(JSONObject jsonObject);
 
     List<JSONObject> listAllIdeasByVisible(JSONObject message);

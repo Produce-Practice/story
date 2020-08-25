@@ -15,4 +15,6 @@ public interface IdeaService {
     JSONObject listIdeasByHeat(JSONObject message);     //根据热度
     JSONObject listAllIdeasVisible(JSONObject message); //可见的
     JSONObject listAllIdeasInvisible(JSONObject message);//不可见的
+    JSONObject listOneIdea(JSONObject message);         //查一个idea
+    JSONObject updateIdeaVisibility(JSONObject message);   //更新可见性
 }

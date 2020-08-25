@@ -7,7 +7,7 @@
 <mapper namespace="com.story.dao.UserDao">
 
     <update id="updateUser">
-        update user set sign = #{sign}, email = #{email}, gender = #{gender}, avatar = #{avatar}
+        update user set userName = #{userName}, sign = #{sign}, email = #{email}, gender = #{gender}, avatar = #{avatar}
         where userAccount = #{userAccount};
     </update>
 
