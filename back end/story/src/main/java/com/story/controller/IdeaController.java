@@ -68,6 +68,20 @@ public class IdeaController {
 
     }
 
+    @RequestMapping(value = {"/listOneIdea"}, method = RequestMethod.POST)
+    public JSONObject listOneIdea(@RequestBody JSONObject message) {
+
+        return ideaService.listOneIdea(message);
+
+    }
+
+    @RequestMapping(value = {"/ideaPost"}, method = RequestMethod.POST)
+    public JSONObject ideaPost(@RequestBody JSONObject message) {
+
+        return ideaService.updateIdeaVisibility(message);
+
+    }
+
     @RequestMapping(value = {"/listAllIdeasVisible"}, method = RequestMethod.POST)
     public JSONObject listAllIdeasVisible(@RequestBody JSONObject message) {
 

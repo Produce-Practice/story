@@ -177,6 +177,29 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
+    public JSONObject listOneIdea(JSONObject message) {
+        JSONObject idea = ideaDao.listOneIdea(message);
+        if (idea != null) {
+            return JSONUtil.successJSON(idea);
+        } else {
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+        }
+    }
+
+    @Override
+    public JSONObject updateIdeaVisibility(JSONObject message) {
+        if (message.getString("status").equals("post")) {
+            message.put("visibility", 1);
+        }
+        Integer affectrows = ideaDao.updateIdeaVisibility(message);
+        if (affectrows > 0) {
+            return JSONUtil.successJSON(Constants.UPDATE_SUCCESS);
+        } else {
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+        }
+    }
+
+    @Override
     public JSONObject listAllIdeasVisible(JSONObject message) {
         //获取userId
         String userAccount = message.getString("userAccount");
