@@ -38,29 +38,6 @@ export default {
       currentPage: 1,
 
       draftList: [
-        // {
-        //   ideaId:"1",
-        //   title: "读《偷影子的人》有感",
-        //   content: "《偷影子的人》是一本感人至深的书",
-        //   updateTime: "2020.08.29 14:00:03",
-        //   typeName: "书评",
-        // },
-
-        // {
-        //   ideaId:"2",
-        //   title: "读《偷影子的人》有感2",
-        //   content: "《偷影子的人》是一本感人至深的书",
-        //   updateTime: "2020.08.29 14:00:03",
-        //   typeName: "书评",
-        // },
-
-        // {
-        //   ideaId:"3",
-        //   title: "读《偷影子的人》有感3",
-        //   content: "《偷影子的人》是一本感人至深的书",
-        //   updateTime: "2020.08.29 14:00:03",
-        //   typeName: "书评",
-        // },
       ]
 
     };
@@ -71,7 +48,7 @@ export default {
     var _this = this;
 
     // 请求draftList
-    if (storage.get("draftList") == null) {
+    // if (storage.get('draftList') == null) {
 
       http({
 
@@ -107,9 +84,11 @@ export default {
 
             _this.$store.commit('setDraftList', storage.get('draftList'));
 
-            _this.draftList = JSON.parse(this.$store.getters.getDraftList);
+            _this.draftList = JSON.parse(_this.$store.getters.getDraftList);
 
             console.log(JSON.parse(storage.get("draftList")));
+
+            // _this.$message.error("Draft.vue: setDraftist successful!");
             
           } else {
               
@@ -119,20 +98,11 @@ export default {
 
       }).catch(function (err) {
 
-          _this.$message.error("系统错误！");
+          _this.$message.error("Draft.vue: 系统错误！");
   
-  });
+      });
 
-  }
-
-  this.draftList = JSON.parse(storage.get("draftList"));
-
-  console.log("---------------")
-
-  // console.log();
-
-  console.log("---------------")
-
+  // }
 
   },
 

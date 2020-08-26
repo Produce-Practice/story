@@ -45,48 +45,48 @@ export default {
 
     http({
 
-    // 假设后台需要的是表单数据这里你就可以更改
-    headers: {
+      // 假设后台需要的是表单数据这里你就可以更改
+      headers: {
 
-    "Content-Type": "application/json;charset=UTF-8"
-    
-    },
+      "Content-Type": "application/json;charset=UTF-8"
+      
+      },
 
-    method: 'post',
-    url: 'http://localhost:8080/idea/deleteIdeaByIdeaId',
+      method: 'post',
+      url: 'http://localhost:8080/idea/deleteIdeaByIdeaId',
 
-    data: {
+      data: {
 
-      ideaId: _this.draft.ideaId
+        ideaId: _this.draft.ideaId
 
-    },
+      },
 
-    responseType: 'json'
+      responseType: 'json'
 
-    }).then(function (res) {
+      }).then(function (res) {
 
-        console.log(res);
+          console.log(res);
 
-        var code = res.code;
-        var info = res.info;
+          var code = res.code;
+          var info = res.info;
 
-        if (res.code == 200) {
-        
-            _this.$message.success("删除成功!");
-            storage.remove("draftList");
-            _this.reload();
-        
-        } else {
-            
-            _this.$message.error(info);
+          if (res.code == 200) {
+          
+              _this.$message.success("删除成功!");
+              storage.remove("draftList");
+              _this.reload();
+          
+          } else {
+              
+              _this.$message.error(info);
 
-        }
+          }
 
-    }).catch(function (err) {
+        }).catch(function (err) {
 
-        _this.$message.error("系统错误！");
+              _this.$message.error("系统错误！");
 
-    });
+        });
 
     },
 
@@ -106,8 +106,27 @@ export default {
 
     edit() {
       
-      alert(this.draft.ideaId);
-      this.$router.push('/ideaInfo')
+      var _this = this;
+      
+      // this.$router.push({
+      //   path: "'/ideaInfo",
+      //   query: {
+
+      //     title: _this.draft.title,
+      //     content: _this.draft.content,
+      //     likes: _this.draft.likes,
+      //     visits: _this.draft.visists
+
+      //   }
+      // })
+
+      this.$router.push({
+        path: '/user/createIdea',
+        query: {
+          ideaId: _this.draft.ideaId,
+          action: "post"
+        }
+      })
 
     }
   },

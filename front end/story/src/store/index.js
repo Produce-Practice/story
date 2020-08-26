@@ -22,6 +22,7 @@ export default new Vuex.Store({
         toWho: "请输入内容",
 
         article: {
+
             ideaId: null,
             title: null,
             content: null,
@@ -29,6 +30,7 @@ export default new Vuex.Store({
             likes: null,
             visits: null,
             typeId: null
+
 
         },
 

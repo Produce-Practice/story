@@ -1,5 +1,6 @@
 package com.story.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.story.constants.Constants;
 import com.story.dao.UserDao;
@@ -286,6 +287,23 @@ public class UserServiceImpl implements UserService {
         } else {
             return JSONUtil.errorJSON(Constants.QUERY_FAILED);
         }
+    }
+
+    @Override
+    public JSONObject listTypes(JSONObject jsonObject) {
+
+        String message = jsonObject.getString("message");
+
+        if (message.equals("typeList")) {
+
+            return JSONUtil.successJSON(userDao.listTypes());
+
+        } else {
+
+            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+
+        }
+
     }
 
 }

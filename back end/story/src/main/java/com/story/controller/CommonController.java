@@ -56,4 +56,11 @@ public class CommonController {
 
     }
 
+    @RequestMapping(value = {"/listTypes"}, method = RequestMethod.POST)
+    public JSONObject listTypes(@RequestBody JSONObject message) {
+
+        return userService.listTypes(message);
+
+    }
+
 }

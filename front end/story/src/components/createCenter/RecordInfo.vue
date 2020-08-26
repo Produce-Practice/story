@@ -23,7 +23,9 @@
 import http from "@/utils/http";
 import storage from '@/utils/storage';
 export default {
+
   name: "recordtInfo",
+
   props: ["record"],
   inject:['reload'],
 
@@ -35,13 +37,17 @@ export default {
 
     // console.table(this.record)
 
-    // console.log("---------11--------")
+    // console.log("--------- 00 --------")
+
+    // console.log(this.record.typeName)
+
+    // console.log("--------- 11 --------")
     
     // console.log(JSON.parse(storage.get("publishedList")))
 
     // storage.remove("publishedList")
 
-    // console.log("---------22--------")
+    // console.log("--------- 22 --------")
     // console.log(JSON.parse(storage.get("publishedList")))
   },
 
@@ -110,7 +116,7 @@ export default {
             ideaId: _this.record.ideaId,
             action: "update"
           }
-        })
+      })
 
       // http({
 
@@ -160,17 +166,41 @@ export default {
     },
 
     edit() {
-      alert(this.record.ideaId);
+
+      var _this = this;
+
+      // this.$router.push({
+      //   path: "'/ideaInfo",
+      //   query: {
+
+      //     title: _this.record.title,
+      //     content: _this.record.content,
+      //     likes: _this.record.likes,
+      //     visits: _this.record.visists
+
+      //   }
+      // })
+
+      this.$router.push({
+          path: '/ideaInfo',
+          query: {
+            ideaId: _this.record.ideaId,
+          }
+      })
+
     }
+
   },
 
   computed: {
     article: function() {
-        if (this.record.content.length > 15) {
+      
+      if (this.record.content.length > 15) {
           return this.record.content.substring(0, 15) + "...";
       } else {
           return this.record.content;
-        }
+      }
+
     }
   }
 };

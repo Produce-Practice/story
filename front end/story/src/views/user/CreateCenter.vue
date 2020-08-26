@@ -12,9 +12,9 @@
           >&nbsp;&nbsp;创作</el-button>
         </div>
         <el-menu default-active="2" class="el-menu-vertical-demo">
-          <el-menu-item index="1">
+          <el-menu-item index="1" @click="toPerson">
             <i class="el-icon-s-custom"></i>
-            <span slot="title">个人中心</span>
+            <span slot="title" >个人中心</span>
           </el-menu-item>
 
           <el-submenu index="2">
@@ -44,7 +44,7 @@
     <div class="router_class">
       <router-view></router-view>
     </div>
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
   <!-- </el-aside>     -->
 </template>
@@ -71,24 +71,39 @@ export default {
   },
 
   methods: {
+
+    toPerson() {
+
+      this.$router.push("/user/createCenter/personCenter");
+
+    },
+
     createIdea() {
+
       this.$router.push("/user/createIdea");
+
     },
 
     toReply() {
+
       this.$router.push("/user/createCenter/messageInfo");
+
     },
     
     toFavour() {
+
       this.$router.push("/user/createCenter/favourInfo");
+
     },
 
     toDraft() {
+
       this.$router.push({
         path:'/user/createCenter/draft',
         query:{
         }
       });
+
     },
 
     toRecord() {

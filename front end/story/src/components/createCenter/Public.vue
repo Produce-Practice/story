@@ -13,9 +13,9 @@
             <el-option label="随笔" value="note"></el-option> -->
             <el-option 
               v-for="(item, index) in typeList" 
-              :key="index"
+              :key="parseInt(index)"
               :label="item.typeName"
-              :value="item.typeId"
+              :value="parseInt(item.typeId)"
             >
             </el-option>
           </el-select>
@@ -65,6 +65,7 @@ export default {
       },
       typeList: [],
       selectedType: [],
+      status: null
 
     };
   },
@@ -98,7 +99,20 @@ export default {
       var user = JSON.parse(_this.$store.getters.getUser);
       var article = JSON.parse(_this.$store.getters.getArticle);
 
-      console.log(article);
+      console.log("article:" + article);
+
+      console.table(article);
+
+      if (article.visibility == 1) {  // 修改
+
+        this.status = "update";
+
+      } else {
+
+        
+        this.status = "post";
+
+      }
 
       http({
 
@@ -113,14 +127,16 @@ export default {
             url: 'http://localhost:8080/idea/ideaPost',
 
             data: {
-              
-                userAccount: user.userAccount,
+
+                ideaId: article.ideaId,
+                typeId: article.typeId,
                 title: article.title,
                 content: article.content,
                 typeId: article.typeId,
                 visibility: article.visibility,
                 likes: article.likes,
-                visits: article.visits
+                visits: article.visits,
+                status: _this.status
 
             },
 

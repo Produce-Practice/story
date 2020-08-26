@@ -6,7 +6,7 @@
         <h1>{{ideaInfo.title}}</h1>
         <hr>
         <div class="head_function">
-          <el-page-header @back="goBack" content="热评页" style="font-size:10px;"></el-page-header>
+          <el-page-header @back="goBack" content="" style="font-size:10px;"></el-page-header>
         </div>
       </header>
       <div class="entry-content">

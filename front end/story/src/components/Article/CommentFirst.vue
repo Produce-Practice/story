@@ -64,7 +64,6 @@ export default {
   props: ["FirstComment"],
   data() {
     return {
-      num: 12,
       secondFlag: false
     };
   },
@@ -75,7 +74,7 @@ export default {
 
     reply() {
 
-      this.$store.state.toWho = 123;
+      this.$store.state.toWho = this.FirstComment.author;
 
     }
   },

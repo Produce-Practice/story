@@ -13,7 +13,7 @@
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
           <div class="col-sm-4" v-for="(note,index) in notes" :key="index">
-            <div class="single-blog">
+            <div class="single-blog"  @click="note.views++">
               <!-- 用户头像 -->
               <router-link :to="{path: '/ideaInfo', query: {item: note}}">
               <img v-bind:src="note.userImg" alt />
@@ -31,7 +31,7 @@
               </div>
               
               <ul class="post-meta">
-                <li>
+                <li @click="note.commentCount++">
                   <!-- 点击评论跳转到idea详情页 将整个note对象传到about-->
                   <router-link :to="{path: '/ideaInfo', query: {item: note}}">
                     <i class="glyphicon glyphicon-comment"></i>
@@ -53,14 +53,13 @@
             </div>
           </div>
         </div>
+        <p class="blog-heading"></p>
       </div>
     </section>
     <Footer></Footer>
   </div>
 </template>
 <script>
-import storage from '@/utils/storage';
-import http from '@/utils/http';
 // 列表的样式
 import "@/assets/css/common.css";
 import axios from "axios";

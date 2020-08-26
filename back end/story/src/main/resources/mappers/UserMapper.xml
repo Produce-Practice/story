@@ -35,4 +35,13 @@
     <select id="listOneUser" resultType="com.alibaba.fastjson.JSONObject">
         select u.userId, u.userAccount, u.userName, u.sign, r.roleName, u.salt, u.avatar, u.gender, u.email from user u inner join role r on u.roleId = r.roleId where userAccount = #{userAccount};
     </select>
+
+    <select id="listTypes" resultType="com.alibaba.fastjson.JSONObject">
+        select typeId, typeName from type;
+    </select>
+
+    <select id="getUserAccountByUserId" parameterType="Integer" resultType="String">
+        select userName from user where userId = #{userId};
+    </select>
+
 </mapper>

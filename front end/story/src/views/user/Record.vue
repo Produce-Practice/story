@@ -29,39 +29,22 @@ export default {
   inject:['reload'],
 
   components: { myRecordinfo, myComment },
+
   data() {
+    
     return {
+      
       show3: false,
       pageCount: 7,
       currentPage: 1,
 
       recordList: [
-        // {
-        //   ideaId: "1",
-        //   title: "读《偷影子的人》有感",
-        //   content: "《偷影子的人》是一本感人至深的书",
-        //   updateTime: "2020.08.29 14:00:03",
-        //   typeName: "书评"
-        // },
-
-        // {
-        //   ideaId: "2",
-        //   title: "读《偷影子的人》有感2",
-        //   content: "《偷影子的人》是一本感人至深的书",
-        //   updateTime: "2020.08.29 14:00:03",
-        //   typeName: "书评"
-        // },
-
-        // {
-        //   ideaId: "3",
-        //   title: "读《偷影子的人》有感3",
-        //   content: "《偷影子的人》是一本感人至深的书",
-        //   updateTime: "2020.08.29 14:00:03",
-        //   typeName: "书评"
-        // }
       ]
+    
     };
+  
   },
+  
   methods: {
     
     currentchange: function(currentPage) {
@@ -78,68 +61,63 @@ export default {
 
     var _this = this;
 
-    if (storage.get("publishedList") == null) {
+    // if (storage.get("publishedList") == null) {
 
       http({
 
-      // 假设后台需要的是表单数据这里你就可以更改
-      headers: {
+        // 假设后台需要的是表单数据这里你就可以更改
+        headers: {
 
-      "Content-Type": "application/json;charset=UTF-8"
-      
-      },
+        "Content-Type": "application/json;charset=UTF-8"
+        
+        },
 
-      method: 'post',
-      url: 'http://localhost:8080/idea/listAllIdeasVisible',
+        method: 'post',
+        url: 'http://localhost:8080/idea/listAllIdeasVisible',
 
-      data: {
+        data: {
 
-        userAccount: JSON.parse(_this.$store.getters.getUser).userAccount,
-        visibility: 1
+          userAccount: JSON.parse(_this.$store.getters.getUser).userAccount,
+          visibility: 1
 
-      },
+        },
 
-      responseType: 'json'
+        responseType: 'json'
 
-      }).then(function (res) {
+        }).then(function (res) {
 
-          console.log(res);
+            console.log(res);
 
-          var code = res.code;
-          var info = res.info;
+            var code = res.code;
+            var info = res.info;
 
-          if (res.code == 200) {
-            
-            storage.set("publishedList", JSON.stringify(info));
+            if (res.code == 200) {
 
-            _this.$store.commit('setpublishedList', storage.get('publishedList'));
+              storage.set("publishedList", JSON.stringify(info));
 
-            _this.recordList = JSON.parse(this.$store.getters.getPublishedList);
+              _this.$store.commit('setpublishedList', storage.get('publishedList'));
 
-            console.log(JSON.parse(storage.get("publishedList")));
-            
-          } else {
+              _this.recordList = JSON.parse(_this.$store.getters.getPublishedList);
+
+              // _this.$message.success("Record.vue: setPublishedList")
               
-              _this.$message.error(info);
+            } else {
+                
+                _this.$message.error(info);
 
-          }
+            }
 
-      }).catch(function (err) {
+        }).catch(function (err) {
 
-          _this.$message.error("系统错误！");
-  
-  });
-
-  }
-
-  this.recordList = JSON.parse(storage.get("publishedList"));
-
-  console.log("------")
-  console.log("record list: " + this.recordList);
+            _this.$message.error("Record.vue: 系统错误！");
+    
+        });
 
   },
 
-  beforeMount() {}
+  beforeMount() {
+    
+  }
 };
 </script>
 

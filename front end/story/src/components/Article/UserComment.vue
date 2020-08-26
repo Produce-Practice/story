@@ -3,10 +3,11 @@
     <!-- 整合 一级评论  二级评论  发送对话框  -->
     <div class="box_header">
       <span>Comments |</span>
-      {{num}} 条评论
+      <!-- 评论条数 从 VUEX 中获取来 -->
+      {{this.$store.state.commentCount}} 条评论
     </div>
 
-    <myCommentFirst v-for="(item, index) in commentFirst" :key="index" :FirstComment="item"></myCommentFirst>
+    <myCommentFirst v-for="(item, index) in comments" :key="index" :FirstComment="item"></myCommentFirst>
 
     <myCommentArea class="mycomment-area"></myCommentArea>
   </div>
@@ -19,60 +20,11 @@ import myCommentFirst from "@/components/article/CommentFirst";
 import http from '@/utils/http';
 export default {
   name: "myUserComment",
-  // props:['FirstComment'],
+  props:['comments'],
 
   data() {
     return {
-      num: 12,
-      avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
       secondFlag: false,
-      Page: {
-        role: "飞飞"
-      },
-      commentFirst: [
-      
-        {
-          author: "不知名男作者1",
-          comment:
-            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
-          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
-          secondComment: [{
-            author: "不知名男作者1二级作者",
-            comment:
-              "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
-            avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
-            father: "不知名作者1"
-          },
-          {
-            author: "不知名男作者2二级作者",
-            comment:
-              "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
-            avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
-            father: "不知名作者1"
-          }]
-
-
-
-        },
-        {
-          author: "不知名男作者2",
-          comment:
-            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
-          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
-          father:"不知名作者1"
-        },
-
-
-
-
-
-        {
-          author: "不知名男作者3",
-          comment:
-            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
-          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg"
-        }
-      ]
     };
   },
   components: { myCommentArea, myCommentFirst }

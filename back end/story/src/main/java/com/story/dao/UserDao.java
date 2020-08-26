@@ -24,4 +24,9 @@ public interface UserDao {
     Integer updateUser(JSONObject jsonObject);
 
     JSONObject listOneUser(JSONObject jsonObject);
+
+    List<JSONObject> listTypes();
+
+    String getUserAccountByUserId(Integer userId);
+
 }

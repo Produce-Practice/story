@@ -15,28 +15,28 @@
         </div>
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
-          <div class="col-sm-4" v-for="(book,index) in books" :key="index">
-            <div class="single-blog" v-if="index<6">
+          <div class="col-sm-4" v-for="(book, index) in books" :key="index">
+            <div class="single-blog" v-if="index<6" @click="book.views++">
               <!-- 用户头像 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: book}}">
+              <router-link :to="{path: '/ideaInfo', query: {ideaId: book.ideaId}}">
                 <img v-bind:src="book.userImg" alt />
               </router-link>
               <!-- idea标题 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: book}}">
+              <router-link :to="{path: '/ideaInfo', query: {ideaId: book.ideaId}}">
                 <h2>{{book.title}}</h2>
               </router-link>
 
               <div class="blog-content">
                 <!-- idea内容 -->
-                <router-link :to="{path: '/ideaInfo', query: {item: book}}">
+                <router-link :to="{path: '/ideaInfo', query: {ideaId: book.ideaId}}">
                   <p>{{book.content}}</p>
                 </router-link>
               </div>
 
               <ul class="post-meta">
-                <li>
+                <li @click="book.commentCount++">
                   <!-- 点击评论跳转到idea详情页 将整个book对象传到about-->
-                  <router-link :to="{path: '/ideaInfo', query: {item: book}}">
+                  <router-link :to="{path: '/ideaInfo', query: {ideaId: book.ideaId}}">
                     <i class="glyphicon glyphicon-comment"></i>
                     {{book.commentCount}}
                   </router-link>
@@ -79,27 +79,27 @@
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
           <div class="col-sm-4" v-for="(music,index) in musics" :key="index">
-            <div class="single-blog" v-if="index<6">
+            <div class="single-blog" v-if="index<6" @click="music.views++">
               <!-- 用户头像 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: music}}">
+              <router-link :to="{path: '/ideaInfo', query: {ideaId: music.ideaId}}">
               <img v-bind:src="music.userImg" alt />
               </router-link>
               <!-- idea标题 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: music}}">
+              <router-link :to="{path: '/ideaInfo', query: {ideaId: music.ideaId}}">
               <h2>{{music.title}}</h2>
               </router-link>
               
               <div class="blog-content">
                 <!-- idea内容 -->
-                <router-link :to="{path: '/ideaInfo', query: {item: music}}">
+                <router-link :to="{path: '/ideaInfo', query: {ideaId: music.ideaId}}">
                 <p>{{music.content}}</p>
                 </router-link>
               </div>
               
               <ul class="post-meta">
-                <li>
+                <li @click="music.commentCount++">
                   <!-- 点击评论跳转到idea详情页 将整个music对象传到about-->
-                  <router-link :to="{path: '/ideaInfo', query: {item: music}}">
+                  <router-link :to="{path: '/ideaInfo', query: {ideaId: music.ideaId}}">
                     <i class="glyphicon glyphicon-comment"></i>
                     {{music.commentCount}}
                   </router-link>
@@ -143,27 +143,27 @@
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
           <div class="col-sm-4" v-for="(video,index) in videos" :key="index">
-            <div class="single-blog" v-if="index<6">
+            <div class="single-blog" v-if="index < 6" @click="video.views++">
               <!-- 用户头像 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: video}}">
+              <router-link :to="{path: '/ideaInfo', query: {ideaId: video.ideaId}}">
               <img v-bind:src="video.userImg" alt />
               </router-link>
               <!-- idea标题 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: video}}">
+              <router-link :to="{path: '/ideaInfo', query: {ideaId: video.ideaId}}">
               <h2>{{video.title}}</h2>
               </router-link>
               
               <div class="blog-content">
                 <!-- idea内容 -->
-                <router-link :to="{path: '/ideaInfo', query: {item: video}}">
+                <router-link :to="{path: '/ideaInfo', query: {ideaId: video.ideaId}}">
                 <p>{{video.content}}</p>
                 </router-link>
               </div>
               
               <ul class="post-meta">
-                <li>
+                <li @click="video.commentCount++">
                   <!-- 点击评论跳转到idea详情页 将整个music对象传到about-->
-                  <router-link :to="{path: '/ideaInfo', query: {item: video}}">
+                  <router-link :to="{path: '/ideaInfo', query: {ideaId: video.ideaId}}">
                     <i class="glyphicon glyphicon-comment"></i>
                     {{video.commentCount}}
                   </router-link>
@@ -207,27 +207,27 @@
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
           <div class="col-sm-4" v-for="(note,index) in notes" :key="index">
-            <div class="single-blog" v-if="index<6">
+            <div class="single-blog" v-if="index<6" @click="note.views++">
               <!-- 用户头像 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: note}}">
+              <router-link :to="{path: '/ideaInfo', query: {item: note.ideaId}}">
               <img v-bind:src="note.userImg" alt />
               </router-link>
               <!-- idea标题 -->
-              <router-link :to="{path: '/ideaInfo', query: {item: note}}">
+              <router-link :to="{path: '/ideaInfo', query: {item: note.ideaId}}">
               <h2>{{note.title}}</h2>
               </router-link>
               
               <div class="blog-content">
                 <!-- idea内容 -->
-                <router-link :to="{path: '/ideaInfo', query: {item: note}}">
+                <router-link :to="{path: '/ideaInfo', query: {item: note.ideaId}}">
                 <p>{{note.content}}</p>
                 </router-link>
               </div>
               
               <ul class="post-meta">
-                <li>
+                <li @click="note.commentCount++">
                   <!-- 点击评论跳转到idea详情页 将整个note对象传到about-->
-                  <router-link :to="{path: '/ideaInfo', query: {item: note}}">
+                  <router-link :to="{path: '/ideaInfo', query: {item: note.ideaId}}">
                     <i class="glyphicon glyphicon-comment"></i>
                     {{note.commentCount}}
                   </router-link>
@@ -264,22 +264,25 @@
   <!-- </el-main> -->
 </template>
 <script>
-import storage from '@/utils/storage';
-import http from '@/utils/http';
 // 列表的样式
 import "../../assets/css/common.css";
 import axios from "axios";
 import Footer from "@/components/Footer.vue";
 export default {
   data() {
+
     return {
+
       books: [],
       musics: [],
       videos: [],
       notes: [],
       instance: null
+
     };
+
   },
+
   components: {
     Footer
   },

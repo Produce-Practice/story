@@ -35,4 +35,7 @@ public interface IdeaDao {
     List<JSONObject> listAllIdeasByVisible(JSONObject message);
 
     List<JSONObject> listAllIdeasByInvisible(JSONObject message);
+
+    String getTypeNameByTypeId(String typeId);
+
 }

@@ -1,56 +1,55 @@
-[
-    {
-        "id":1,
-        "userImg":"demo.jpg",
-        "likes":200,
-        "views":200,
-        "commentCount":233,
-        "title":"《说好不哭》",
-        "content":"你陪了我多少年花开花败，一路上起起落落"
+[{
+        "id": 1,
+        "userImg": "./img/demo3.jpg",
+        "likes": 10,
+        "views": 20,
+        "commentCount": 3,
+        "title": "《说好不哭》",
+        "content": "说不哭,眼泪却止不住毕竟曾拥有过你一段路,决定祝福我会算数,就像当初说要爱你,给了全部。"
     },
     {
-        "id":2,
-        "userImg":"logo.png",
-        "likes":200,
-        "views":200,
-        "commentCount":233,
-        "title":"《相思病》",
-        "content":"这种重逢，算是命运吗？"
+        "id": 2,
+        "userImg": "./img/demo8.jpg",
+        "likes": 7,
+        "views": 20,
+        "commentCount": 1,
+        "title": "《相思病》",
+        "content": " 望着天空我想起花瓣试着掉落为你翘课的那一天花落的那一天教室的那一间我怎么看不见消失的下雨天我好想再淋一遍没想到 "
     },
     {
-        "id":3,
-        "userImg":"demo.jpg",
-        "likes":200,
-        "views":200,
-        "commentCount":233,
-        "title":"《红莲华》",
-        "content":"人与人之间的关系往往不是因为某些具体的原因而断。"
+        "id": 3,
+        "userImg": "./img/demo9.jpg",
+        "likes": 2,
+        "views": 20,
+        "commentCount": 3,
+        "title": "《红莲华》",
+        "content": "苏油骨，拿来卤，你有我洗蛋不苦我，组了袋，速素面多了带来凯弄，锁买多我灭有"
     },
     {
-        "id":4,
-        "userImg":"logo.png",
-        "likes":200,
-        "views":200,
-        "commentCount":233,
-        "title":"《最美的期待》",
-        "content":"被真相伤害总比被谎言欺骗的好,得到了再失去，总是比从来就没有得到更伤人。"
+        "id": 4,
+        "userImg": "./img/demo10.jpg",
+        "likes": 13,
+        "views": 30,
+        "commentCount": 3,
+        "title": "《最美的期待》",
+        "content": "我有一个梦像雨后彩虹，用所有泪水换来笑容，还有一种爱穿越了人海，拾起那颗迷失的尘埃。"
     },
     {
-        "id":5,
-        "userImg":"demo.jpg",
-        "likes":200,
-        "views":200,
-        "commentCount":233,
-        "title":"《晴天》",
-        "content":"如果我存在也是因为你需要我"
+        "id": 5,
+        "userImg": "./img/demo11.jpg",
+        "likes": 3,
+        "views": 12,
+        "commentCount": 4,
+        "title": "《晴天》",
+        "content": "故事的小黄花从出生那年就飘着童年的荡秋千随记忆一直晃到现在"
     },
     {
-        "id":6,
-        "userImg":"demo.jpg",
-        "likes":200,
-        "views":200,
-        "commentCount":233,
-        "title":"《明天你好》",
-        "content":"如果我存在也是因为你需要我"
+        "id": 6,
+        "userImg": "./img/demo2.jpg",
+        "likes": 12,
+        "views": 27,
+        "commentCount": 3,
+        "title": "《明天你好》",
+        "content": "如果我存在也是因为你需要我"
     }
 ]

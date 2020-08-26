@@ -29,9 +29,6 @@ export default {
   props:['SecondComment'],
   data() {
     return {
-      num: 12,
-      avatar:"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-
     };
   }
 };

@@ -48,12 +48,20 @@
         select * from type where typeName = #{typeName};
     </select>
 
-    <select id="listAllIdeasByVisible" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits, typeId, visibility from idea where userId = #{userId} and visibility = 1;
+    <select id="getTypeNameByTypeId" resultType="String" parameterType="String">
+        select typeName from type where typeId = #{typeId};
     </select>
 
+    <select id="listAllIdeasByVisible" resultType="com.alibaba.fastjson.JSONObject">
+        select distinct ideaId, title, content, likes, visits, typeId, visibility
+        from idea where userId = #{userId} and visibility = 1;
+    </select>
+<!--   select distinct i.ideaId, i.title, i.content, i.likes, i.visits, t.typeName, i.visibility
+        from idea i inner join type t where i.userId = #{userId} and i.visibility = 1;     -->
+
     <select id="listAllIdeasByInvisible" resultType="com.alibaba.fastjson.JSONObject">
-        select ideaId, title, content, likes, visits, typeId, visibility from idea where userId = #{userId} and visibility = 0;
+        select distinct ideaId, title, content, likes, visits, typeId, visibility
+        from idea where userId = #{userId} and visibility = 0;
     </select>
 
 </mapper>

@@ -48,7 +48,7 @@ export default {
     data () {
 
         return {
-
+            ideaId: '',
             title: '',
             content: '', // 输入的markdown
             html: '',    // 及时转的html
@@ -75,7 +75,8 @@ export default {
             for (var i = 0; i < draftList.length; i++) {
                 
                 if (draftList[i].ideaId == ideaId) {
-                    
+
+                    _this.ideaId = draftList[i].ideaId;
                     _this.title = draftList[i].title;
                     _this.content = draftList[i].content;
 
@@ -93,6 +94,7 @@ export default {
                 
                 if (publishedList[i].ideaId == ideaId) {
                     
+                    _this.ideaId = publishedList[i].ideaId;
                     _this.title = publishedList[i].title;
                     _this.content = publishedList[i].content;
 
@@ -153,6 +155,7 @@ export default {
             } else {    // 提交
 
                 var obj = new Object();
+                obj.ideaId = _this.ideaId;
                 obj.title = _this.title;
                 obj.content = _this.content;
                 obj.html = _this.html;
@@ -170,10 +173,13 @@ export default {
         },
 
         save() {    // 保存
+
+            var _this = this;
             
             this.visibility = 0;
 
             var obj = new Object();
+            obj.ideaId = _this.ideaId;
             obj.title = _this.title;
             obj.content = _this.content;
             obj.html = _this.html;
@@ -201,7 +207,7 @@ export default {
 
             data: {
               
-                userAccount: user.userAccount,
+                ideaId: _this.ideaId,
                 title: _this.title,
                 content: _this.content,
                 typeId: 4,

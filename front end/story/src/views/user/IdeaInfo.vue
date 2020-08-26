@@ -53,18 +53,81 @@ import myUserComment from "@/components/article/UserComment";
 
 export default {
   components: { myArticle, myUserComment },
+  
+  created() {
+
+    // this.ideaInfo.title = this.$route.query.title;
+    // this.ideaInfo.content = this.$route.query.content;
+
+    var ideaId = this.$route.query.ideaId;
+
+    var _this = this;
+
+    http({
+
+      // 假设后台需要的是表单数据这里你就可以更改
+      headers: {
+
+      "Content-Type": "application/json;charset=UTF-8"
+      
+      },
+
+      method: 'post',
+      url: 'http://localhost:8080/idea/listOneIdea',
+
+      data: {
+        
+        ideaId: ideaId
+
+      },
+
+      responseType: 'json'
+
+      }).then(function (res) {
+
+          console.log(res);
+
+          var code = res.code;
+          var info = res.info;
+
+          if (res.code == 200) {
+              
+              _this.ideaInfo.title = info.title;
+              _this.ideaInfo.article = info.content;
+              _this.ideaInfo.author = info.userAccount;
+              _this.ideaInfo.star = info.likes;
+              _this.ideaInfo.eye = info.visits;
+          
+          } else {
+              
+              _this.$message.error(info);
+
+          }
+
+      }).catch(function (err) {
+
+        _this.$message.error("系统错误！");
+  
+  });
+
+
+
+
+  },
+
   data() {
     return {
       flag: false,
 
       //  文章详情内容
       ideaInfo: {
-        article:
-          "本人今年34么用处的一种人吧！种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父",
-        author: "张三",
-        title: "慢一步，差一步",
-        star: 1234,
-        eye: 123
+
+        article: "",
+        author: "",
+        title: "",
+        star: "",
+        eye: ""
+      
       },
 
       //评论总数存入Vuex吧

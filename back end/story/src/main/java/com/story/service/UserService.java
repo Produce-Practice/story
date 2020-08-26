@@ -17,4 +17,6 @@ public interface UserService {
     JSONObject updateUser(JSONObject jsonObject);
 
     JSONObject listOneUser(JSONObject jsonObject);
+
+    JSONObject listTypes(JSONObject jsonObject);
 }

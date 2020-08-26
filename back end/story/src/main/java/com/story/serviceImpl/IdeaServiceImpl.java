@@ -1,6 +1,5 @@
 package com.story.serviceImpl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.story.constants.Constants;
 import com.story.dao.CommentDao;
@@ -24,53 +23,73 @@ public class IdeaServiceImpl implements IdeaService {
 
     @Resource
     private IdeaDao ideaDao;
+
     @Resource
     private CommentDao commentDao;
+
     @Resource
     private UserDao userDao;
 
     @Override
     public JSONObject saveIdea(JSONObject message) {
+
         //获取userId
         String userAccount = message.getString("userAccount");
         User user = userDao.getUserByUserAccount(userAccount);
         message.put("userId",user.getUserId());
+
         if (!message.containsKey("typeId")) {
+
             //获取typeId
             Type type = ideaDao.getTypeByTypeName(message);
             message.put("typeId",type.getTypeId());
+
         }
+
         Integer result = ideaDao.saveIdea(message);
+
         if (result != 1) {
             return JSONUtil.errorJSON(Constants.INSERT_FAILED);
         } else {
             return JSONUtil.successJSON(Constants.INSERT_SUCCESS);
         }
+
     }
 
     @Override
     public JSONObject updateIdea(JSONObject message) {
+
         if (!message.containsKey("typeId")) {
             //获取typeId
             Type type = ideaDao.getTypeByTypeName(message);
-            message.put("typeId",type.getTypeId());
+            message.put("typeId", type.getTypeId());
         }
+
         Integer result = ideaDao.updateIdea(message);
+
         if (result != 1) {
             return JSONUtil.errorJSON(Constants.UPDATE_FAILED);
         } else {
             return JSONUtil.successJSON(Constants.UPDATE_SUCCESS);
         }
+
     }
 
     @Override
     public JSONObject deleteIdea(JSONObject message) {
+
         Integer result = ideaDao.deleteIdea(message);
+
         if (result != 1) {
+
             return JSONUtil.errorJSON(Constants.DELETE_FAILED);
+
         } else {
+
             return JSONUtil.successJSON(Constants.DELETE_SUCCESS);
+
         }
+
     }
 
     /**
@@ -86,8 +105,11 @@ public class IdeaServiceImpl implements IdeaService {
         List<JSONObject> ideas = ideaDao.listIdeasByUserId(message);
         // 插入markdown格式字符
         for (JSONObject idea : ideas) {
+
             idea.put("markdownString",markdownStyle(idea));
+
         }
+
         if (ideas.size() > 0) {
 
             return JSONUtil.successJSON(ideas);
@@ -105,16 +127,20 @@ public class IdeaServiceImpl implements IdeaService {
      */
     @Override
     public JSONObject listIdeasByTypeId(JSONObject message) {
+
         if (!message.containsKey("typeId")) {
+
             //获取typeId
             Type type = ideaDao.getTypeByTypeName(message);
             message.put("typeId",type.getTypeId());
+
         }
 
         List<JSONObject> ideas = ideaDao.listIdeasByTypeId(message);
+
         // 插入markdown格式字符
         for (JSONObject idea : ideas) {
-            idea.put("markdownString",markdownStyle(idea));
+            idea.put("markdownString", markdownStyle(idea));
         }
         if (ideas.size() > 0) {
 
@@ -156,12 +182,17 @@ public class IdeaServiceImpl implements IdeaService {
      */
     @Override
     public JSONObject listIdeasByHeat(JSONObject message) {
+
         List<Idea> ideaList = ideaDao.listAllIdeas();
+
         for (Idea idea : ideaList) {
+
             Integer commentNum = commentDao.countComments(idea.getIdeaId());
             idea.setCommentCount(commentNum);
             idea.setMarkdownString(markdownStyle(idea));
+
         }
+
         //然后通过比较器来实现排序
         //降序排序
         ideaList.sort((idea1, idea2) -> {
@@ -169,43 +200,79 @@ public class IdeaServiceImpl implements IdeaService {
             Integer idea2Heat = idea2.getCommentCount() + idea2.getLikes() + idea2.getVisits();
             return idea2Heat.compareTo(idea1Heat);
         });
+
         if (ideaList.size() > 0) {
+
             return JSONUtil.successJSON(ideaList);
+
         } else {
+
             return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+
         }
+
     }
+
 
     @Override
     public JSONObject listOneIdea(JSONObject message) {
+
         JSONObject idea = ideaDao.listOneIdea(message);
-        if (idea != null) {
-            return JSONUtil.successJSON(idea);
-        } else {
-            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
-        }
+
+        Integer userId = Integer.parseInt(idea.getString("userId"));
+
+        String userAccount = userDao.getUserAccountByUserId(userId);
+
+        idea.remove("userId");
+
+        idea.put("userAccount", userAccount);
+
+        idea.put("markdownString", markdownStyle(idea));
+
+        return JSONUtil.successJSON(idea);
+
     }
+
 
     @Override
     public JSONObject updateIdeaVisibility(JSONObject message) {
+
         if (message.getString("status").equals("post")) {
             message.put("visibility", 1);
-        }
-        Integer affectrows = ideaDao.updateIdeaVisibility(message);
-        if (affectrows > 0) {
+            Integer affectRows = ideaDao.updateIdeaVisibility(message);
             return JSONUtil.successJSON(Constants.UPDATE_SUCCESS);
+
         } else {
-            return JSONUtil.errorJSON(Constants.QUERY_FAILED);
+
+            ideaDao.updateIdea(message);
+
+            return JSONUtil.successJSON(Constants.UPDATE_SUCCESS);
+
         }
+
     }
 
     @Override
     public JSONObject listAllIdeasVisible(JSONObject message) {
+
         //获取userId
         String userAccount = message.getString("userAccount");
         User user = userDao.getUserByUserAccount(userAccount);
         message.put("userId",user.getUserId());
         List<JSONObject> ideas = ideaDao.listAllIdeasByVisible(message);
+
+        for (JSONObject idea: ideas) {
+
+            String typeId = idea.getString("typeId");
+
+            String typeName = ideaDao.getTypeNameByTypeId(typeId);
+
+            idea.put("typeName", typeName);
+
+            idea.remove("typeId");
+
+        }
+
         if (ideas.size() > 0) {
 
             return JSONUtil.successJSON(ideas);
@@ -219,11 +286,25 @@ public class IdeaServiceImpl implements IdeaService {
 
     @Override
     public JSONObject listAllIdeasInvisible(JSONObject message) {
+
         //获取userId
         String userAccount = message.getString("userAccount");
         User user = userDao.getUserByUserAccount(userAccount);
         message.put("userId",user.getUserId());
         List<JSONObject> ideas = ideaDao.listAllIdeasByInvisible(message);
+
+        for (JSONObject idea: ideas) {
+
+            String typeId = idea.getString("typeId");
+
+            String typeName = ideaDao.getTypeNameByTypeId(typeId);
+
+            idea.put("typeName", typeName);
+
+            idea.remove("typeId");
+
+        }
+
         if (ideas.size() > 0) {
 
             return JSONUtil.successJSON(ideas);

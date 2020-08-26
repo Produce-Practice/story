@@ -76,7 +76,7 @@ export default {
   data() {
     return {    
       message: "修 改",
-      userName:"275518",
+      userName:"云飞er",
       gender: "男",
       email:"913283849@qq.com",
       sign: "追求自由!",
@@ -111,12 +111,12 @@ export default {
             url: 'http://localhost:8080/user/updateUser',
 
             data: {
-                userName: this.userName,
+                userName: _this.userName,
                 avatar: "",
                 userAccount: JSON.parse(_this.$store.getters.getUser).userAccount,
-                gender:this.gender,
-                email:this.email,
-                sign:this.sign
+                gender: _this.gender,
+                email: _this.email,
+                sign: _this.sign
             },
       
             responseType: 'json'

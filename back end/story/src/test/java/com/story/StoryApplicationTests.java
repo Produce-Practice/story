@@ -1,5 +1,6 @@
 package com.story;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.story.dao.CommentDao;
 import com.story.dao.IdeaDao;
@@ -23,6 +24,7 @@ class StoryApplicationTests {
     private UserDao userDao;
     @Autowired
     private CommentDao commentDao;
+
     @Test
     void contextLoads() {
     }
@@ -88,6 +90,67 @@ class StoryApplicationTests {
             List<Comment> commentList = commentDao.findByIdeaIdAndParentId(ideaId, commentId);
             System.out.println(commentList);
         }
+    }
+
+    @Test
+    void test1() {
+
+        String userAccount = "275518";
+        User user = userDao.getUserByUserAccount(userAccount);
+        JSONObject message = new JSONObject();
+
+        message.put("userId",user.getUserId());
+        List<JSONObject> ideas = ideaDao.listAllIdeasByInvisible(message);
+
+        System.out.println(ideas);
+
+    }
+
+    @Test
+    void test4() {
+
+        JSONObject user = new JSONObject();
+
+        user.put("userId", 1);
+
+        List<JSONObject> ideaList = ideaDao.listAllIdeasByVisible(user);
+
+        for (JSONObject idea: ideaList) {
+
+            System.out.println(idea);
+
+        }
+
+//        System.out.println(ideaList);
+
+        System.out.println(ideaList.size());
+
+    }
+
+    @Test
+    void hello() {
+
+        JSONObject idea = new JSONObject();
+
+        idea.put("title", "《说好不哭》");
+
+        idea.put("content", "说不哭,眼泪却止不住毕竟曾拥有过你一段路,决定祝福我会算数,就像当初说要爱你,给了全部。");
+
+        idea.put("typeId", 2);
+
+        idea.put("likes", 2);
+
+        idea.put("visits", 20);
+
+        idea.put("userId", 4);
+
+        ideaDao.saveIdea(idea);
+
+    }
+
+    @Test
+    void test() {
+
     }
 
 

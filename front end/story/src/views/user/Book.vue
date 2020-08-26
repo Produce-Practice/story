@@ -12,8 +12,8 @@
         </div>
         <div class="row">
           <!-- 渲染列表，包括用户头像，标题名，内容  只获取热度前六个-->
-          <div class="col-sm-4" v-for="(book, index) in books" :key="index">
-            <div class="single-blog">
+          <div class="col-sm-4" v-for="(book,index) in books" :key="index">
+            <div class="single-blog" @click="book.views++">
               <!-- 用户头像 -->
               <router-link :to="{path: '/ideaInfo', query: {item: book}}">
                 <img v-bind:src="book.userImg" alt />
@@ -31,13 +31,12 @@
               </div>
 
               <ul class="post-meta">
-                <li>
+                <li @click="book.commentCount++">
                   <!-- 点击评论跳转到idea详情页 将整个book对象传到about-->
                   <router-link :to="{path: '/ideaInfo', query: {item: book}}">
                     <i class="glyphicon glyphicon-comment"></i>
-                     {{book.commentCount}}
+                    {{book.commentCount}}
                   </router-link>
-                 
                 </li>
                 <!-- 点赞 +1-->
                 <li @click="book.likes++">
@@ -53,6 +52,7 @@
             </div>
           </div>
         </div>
+        <p class="blog-heading"></p>
       </div>
     </section>
     <Footer></Footer>
@@ -60,9 +60,6 @@
 </template>
 
 <script>
-
-import http from '@/utils/http';
-import storage from '@/utils/storage';
 // 列表的样式
 import "../../assets/css/common.css";
 import axios from "axios";

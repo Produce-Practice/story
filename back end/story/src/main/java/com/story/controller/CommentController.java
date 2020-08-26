@@ -3,6 +3,7 @@ package com.story.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.story.service.CommentService;
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class CommentController {
 
     // 保存评论
     @RequestMapping(value = {"/saveComment"}, method = RequestMethod.POST)
+    @RequiresRoles("user")
     public JSONObject saveComment(@RequestBody JSONObject message) {
 
         return commentService.saveComment(message);
