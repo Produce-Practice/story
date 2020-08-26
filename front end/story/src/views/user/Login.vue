@@ -129,7 +129,7 @@ export default {
           storage.set('user', JSON.stringify(user));
           _this.$store.commit('createUser', storage.get('user'));
 
-          // console.log(JSON.parse(_this.$store.getters.getUser).userAccount);
+        //   console.log(JSON.parse(_this.$store.getters.getUser).userAccount);
 
           _this.$router.replace('/');
 

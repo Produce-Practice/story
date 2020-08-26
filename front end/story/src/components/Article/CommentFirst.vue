@@ -58,6 +58,7 @@
 <script>
 import myCommentSecond from "@/components/article/CommentSecond";
 import storage from '@/utils/storage';
+import http from '@/utils/http';
 export default {
   name: "myCommentFirst",
   props: ["FirstComment"],

@@ -3,9 +3,7 @@
     <div class="message-content-head">
       <span>草稿箱</span>
     </div>
-    <myDraftinfo :Cinfo="messagedata" @child-event="toSend"></myDraftinfo>
-    <myDraftinfo :Cinfo="messagedata" @child-event="toSend"></myDraftinfo>
-    <myDraftinfo :Cinfo="messagedata" @child-event="toSend"></myDraftinfo>
+    <myDraftinfo v-for="(item, index) in draftList" :key="index" :draft="item"></myDraftinfo>
 
     <div class="pagination">
       <el-pagination
@@ -25,19 +23,119 @@ import storage from '@/utils/storage';
 import http from '@/utils/http';
 import myDraftinfo from "@/components/createCenter/DraftInfo";
 import myComment from "@/components/article/CommentArea";
+
 export default {
+  
   name: "message",
+
+  inject:['reload'],
+
   components: { myDraftinfo, myComment },
   data() {
     return {
       show3: false,
       pageCount: 7,
       currentPage: 1,
-      messagedata: {
-        title: "好标题"
-      }
+
+      draftList: [
+        // {
+        //   ideaId:"1",
+        //   title: "读《偷影子的人》有感",
+        //   content: "《偷影子的人》是一本感人至深的书",
+        //   updateTime: "2020.08.29 14:00:03",
+        //   typeName: "书评",
+        // },
+
+        // {
+        //   ideaId:"2",
+        //   title: "读《偷影子的人》有感2",
+        //   content: "《偷影子的人》是一本感人至深的书",
+        //   updateTime: "2020.08.29 14:00:03",
+        //   typeName: "书评",
+        // },
+
+        // {
+        //   ideaId:"3",
+        //   title: "读《偷影子的人》有感3",
+        //   content: "《偷影子的人》是一本感人至深的书",
+        //   updateTime: "2020.08.29 14:00:03",
+        //   typeName: "书评",
+        // },
+      ]
+
     };
   },
+
+  created() {
+
+    var _this = this;
+
+    // 请求draftList
+    if (storage.get("draftList") == null) {
+
+      http({
+
+      // 假设后台需要的是表单数据这里你就可以更改
+      headers: {
+
+      "Content-Type": "application/json;charset=UTF-8"
+      
+      },
+
+      method: 'post',
+      url: 'http://localhost:8080/idea/listAllIdeasInvisible',
+
+      data: {
+
+        userAccount: JSON.parse(_this.$store.getters.getUser).userAccount,
+        visibility: 0
+
+      },
+
+      responseType: 'json'
+
+      }).then(function (res) {
+
+          console.log(res);
+
+          var code = res.code;
+          var info = res.info;
+
+          if (res.code == 200) {
+            
+            storage.set("draftList", JSON.stringify(info));
+
+            _this.$store.commit('setDraftList', storage.get('draftList'));
+
+            _this.draftList = JSON.parse(this.$store.getters.getDraftList);
+
+            console.log(JSON.parse(storage.get("draftList")));
+            
+          } else {
+              
+              _this.$message.error(info);
+
+          }
+
+      }).catch(function (err) {
+
+          _this.$message.error("系统错误！");
+  
+  });
+
+  }
+
+  this.draftList = JSON.parse(storage.get("draftList"));
+
+  console.log("---------------")
+
+  // console.log();
+
+  console.log("---------------")
+
+
+  },
+
   methods: {
     toSend() {
       alert("去创造中心发送");

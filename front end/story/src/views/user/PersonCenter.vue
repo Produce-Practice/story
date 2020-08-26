@@ -20,7 +20,7 @@
               <span>昵称：</span>
               <input
                 type="text"
-                v-model="nickname"
+                v-model="userName"
                 :readonly="edit_state"
                 :style="{border:borderState+'px solid'}"
               />
@@ -31,7 +31,7 @@
                   type="radio"
                   name="radios"
                   value="男"
-                  v-model="sex"
+                  v-model="gender"
                   :disabled="choseState"
                 />
                 女：
@@ -39,7 +39,7 @@
                   type="radio"
                   name="radios"
                   value="女"
-                  v-model="sex"
+                  v-model="gender"
                   :disabled="choseState"
                 />
               </div>
@@ -54,7 +54,7 @@
               </div>
               <div class="personalSignature">
                 <span>个性签名：</span>
-                <textarea v-model="signature" cols="50" rows="8" :readonly="edit_state"></textarea>
+                <textarea v-model="sign" cols="50" rows="8" :readonly="edit_state"></textarea>
               </div>
               <button class="btn btn-lg btn-login" @click="edit_state?edit():save()">{{message}}</button>
             </div>
@@ -66,21 +66,20 @@
 </template>
 
 <script>
-import storage from '@/utils/storage';
-import http from '@/utils/http';
 import Footer from "@/components/Footer.vue";
+import http from '@/utils/http';
 export default {
   name: "PersonalInfo",
   components: {
     Footer
   },
   data() {
-    return {
+    return {    
       message: "修 改",
-      nickname: "Mystory",
-      sex: "男",
-      email: "1062653191@qq.com",
-      signature: "Welcome to mystory!",
+      userName:"275518",
+      gender: "男",
+      email:"913283849@qq.com",
+      sign: "追求自由!",
       edit_state: true,
       choseState: true,
       borderState: "0",
@@ -98,6 +97,52 @@ export default {
       this.choseState = this.edit_state = true;
       this.borderState = "0";
       this.message = "修 改";
+      var _this = this;
+       http({
+
+            // 假设后台需要的是表单数据这里你就可以更改
+            headers: {
+
+            "Content-Type": "application/json;charset=UTF-8"
+            
+            },
+
+            method: 'post',
+            url: 'http://localhost:8080/user/updateUser',
+
+            data: {
+                userName: this.userName,
+                avatar: "",
+                userAccount: JSON.parse(_this.$store.getters.getUser).userAccount,
+                gender:this.gender,
+                email:this.email,
+                sign:this.sign
+            },
+      
+            responseType: 'json'
+
+            }).then(function (res) {
+                console.log(res);
+
+                var code = res.code;
+                var info = res.info;
+
+                if (res.code == 200) {
+                
+                    _this.$message.success("修改成功！");
+                    _this.$router.push("/user/createCenter/personCenter");
+                
+                } else {
+                     _this.$message.success("修改失败！");
+                    _this.$message.error(info);
+
+                }
+
+            }).catch(function (err) {
+
+                console.log(err);
+            
+        });
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
@@ -145,7 +190,7 @@ export default {
 }
 .form-signin span {
   font-size: 20px;
-  margin-left: 160px;
+  margin-left: 50px;
 }
 .form-signin input[type="text"] {
   margin-left: 20px;
@@ -160,7 +205,6 @@ export default {
 .form-signin .checkbox {
   text-align: left;
   font-weight: normal;
-  color: #b6b6b6;
   font-weight: 300;
   font-size: 20px;
   margin-bottom: 14px;
@@ -171,13 +215,12 @@ export default {
 .mail {
   text-align: left;
   font-weight: normal;
-  color: #b6b6b6;
   font-weight: 300;
   font-size: 20px;
   margin-bottom: 14px;
 }
 .personalSignature textarea {
-  margin-left: 160px;
+  margin-left: 60px;
   margin-top: 20px;
   background: #fff;
   border-radius: 3px;
@@ -185,7 +228,7 @@ export default {
   -webkit-border-radius: 3px;
 }
 .form-signin .btn-login {
-  margin-left: 260px;
+  margin-left: 190px;
   margin-top: 50px;
   width: 25%;
   background: #48cfad;

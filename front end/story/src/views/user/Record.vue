@@ -1,11 +1,9 @@
 <template>
   <div>
     <div class="message-content-head">
-      <span>已发送</span>
+      <span>已投递</span>
     </div>
-    <myRecordinfo :Cinfo="messagedata" @child-event="toSend"></myRecordinfo>
-    <myRecordinfo :Cinfo="messagedata" @child-event="toSend"></myRecordinfo>
-    <myRecordinfo :Cinfo="messagedata" @child-event="toSend"></myRecordinfo>
+    <myRecordinfo v-for="(item, index) in recordList" :key="index" :record="item"></myRecordinfo>
 
     <div class="pagination">
       <el-pagination
@@ -21,31 +19,51 @@
 </template>
 
 <script>
-import storage from '@/utils/storage';
-import http from '@/utils/http';
+import storage from "@/utils/storage";
+import http from "@/utils/http";
 import myRecordinfo from "@/components/createCenter/RecordInfo";
 import myComment from "@/components/article/CommentArea";
 export default {
   name: "message",
+
+  inject:['reload'],
+
   components: { myRecordinfo, myComment },
   data() {
     return {
-
       show3: false,
       pageCount: 7,
       currentPage: 1,
-      messagedata: {
-        title: "好标题"
-      }
+
+      recordList: [
+        // {
+        //   ideaId: "1",
+        //   title: "读《偷影子的人》有感",
+        //   content: "《偷影子的人》是一本感人至深的书",
+        //   updateTime: "2020.08.29 14:00:03",
+        //   typeName: "书评"
+        // },
+
+        // {
+        //   ideaId: "2",
+        //   title: "读《偷影子的人》有感2",
+        //   content: "《偷影子的人》是一本感人至深的书",
+        //   updateTime: "2020.08.29 14:00:03",
+        //   typeName: "书评"
+        // },
+
+        // {
+        //   ideaId: "3",
+        //   title: "读《偷影子的人》有感3",
+        //   content: "《偷影子的人》是一本感人至深的书",
+        //   updateTime: "2020.08.29 14:00:03",
+        //   typeName: "书评"
+        // }
+      ]
     };
   },
   methods: {
     
-    toSend() {
-
-      alert("去创造中心发送");
-    
-    },
     currentchange: function(currentPage) {
 
       this.currentPage = currentPage;
@@ -55,9 +73,73 @@ export default {
     }
   
   },
-  beforeMount() {
-      //
+
+    created() {
+
+    var _this = this;
+
+    if (storage.get("publishedList") == null) {
+
+      http({
+
+      // 假设后台需要的是表单数据这里你就可以更改
+      headers: {
+
+      "Content-Type": "application/json;charset=UTF-8"
+      
+      },
+
+      method: 'post',
+      url: 'http://localhost:8080/idea/listAllIdeasVisible',
+
+      data: {
+
+        userAccount: JSON.parse(_this.$store.getters.getUser).userAccount,
+        visibility: 1
+
+      },
+
+      responseType: 'json'
+
+      }).then(function (res) {
+
+          console.log(res);
+
+          var code = res.code;
+          var info = res.info;
+
+          if (res.code == 200) {
+            
+            storage.set("publishedList", JSON.stringify(info));
+
+            _this.$store.commit('setpublishedList', storage.get('publishedList'));
+
+            _this.recordList = JSON.parse(this.$store.getters.getPublishedList);
+
+            console.log(JSON.parse(storage.get("publishedList")));
+            
+          } else {
+              
+              _this.$message.error(info);
+
+          }
+
+      }).catch(function (err) {
+
+          _this.$message.error("系统错误！");
+  
+  });
+
   }
+
+  this.recordList = JSON.parse(storage.get("publishedList"));
+
+  console.log("------")
+  console.log("record list: " + this.recordList);
+
+  },
+
+  beforeMount() {}
 };
 </script>
 

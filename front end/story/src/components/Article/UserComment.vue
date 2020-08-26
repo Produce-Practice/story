@@ -16,6 +16,7 @@
 import storage from '@/utils/storage';
 import myCommentArea from "@/components/article/CommentArea";
 import myCommentFirst from "@/components/article/CommentFirst";
+import http from '@/utils/http';
 export default {
   name: "myUserComment",
   // props:['FirstComment'],
@@ -29,8 +30,7 @@ export default {
         role: "飞飞"
       },
       commentFirst: [
-        
-        
+      
         {
           author: "不知名男作者1",
           comment:

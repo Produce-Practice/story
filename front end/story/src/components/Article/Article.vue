@@ -3,17 +3,17 @@
     <!-- 文章内容组件 -->
     <article class="main_box">
       <header>
-        <h1>{{PageInfo.title}}</h1>
+        <h1>{{ideaInfo.title}}</h1>
         <hr>
         <div class="head_function">
           <el-page-header @back="goBack" content="热评页" style="font-size:10px;"></el-page-header>
         </div>
       </header>
       <div class="entry-content">
-        <p>{{PageInfo.article}}</p>
+        <p>{{ideaInfo.article}}</p>
       </div>
       <div class="entry-footer">
-        <p>———— {{PageInfo.author}}</p>
+        <p>———— {{ideaInfo.author}}</p>
       </div>
       <div class="icon_content">
         <i class="eye">
@@ -39,7 +39,7 @@
             ></path>
           </svg>
         </i>
-        <span>{{PageInfo.eye}}</span>
+        <span>{{ideaInfo.eye}}</span>
         <i class="icon">
           <svg
             t="1597996768855"
@@ -59,7 +59,7 @@
             ></path>
           </svg>
         </i>
-        <span>{{PageInfo.star}}</span>
+        <span>{{ideaInfo.star}}</span>
       </div>
     </article>
   </div>
@@ -68,19 +68,19 @@
 <script>
 
 import storage from '@/utils/storage';
-
+import http from '@/utils/http';
 export default {
   name: "myArticle",
+  props:['ideaInfo'],
   data() {
     return {
-      PageInfo: {
-        article:
-          "本人今年34么用处的一种人吧！种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父",
-        author: "张三",
-        title: "慢一步，差一步-网易云热评墙",
-        star: 1234,
-        eye: 123,
-      },
+      // PageInfo: {
+      //   article: "本人今年34么用处的一种人吧！种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父",
+      //   author: "张三",
+      //   title: "慢一步，差一步-网易云热评墙",
+      //   star: 1234,
+      //   eye: 123,
+      // },
 
       flag: false
     };

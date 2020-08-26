@@ -22,7 +22,7 @@ export default new Vuex.Store({
         toWho: "请输入内容",
 
         article: {
-
+            ideaId: null,
             title: null,
             content: null,
             visibility: null,
@@ -31,6 +31,10 @@ export default new Vuex.Store({
             typeId: null
 
         },
+
+        publishedList: [],
+        draftList: [],
+        userInfo: [],
 
     },
 
@@ -58,17 +62,27 @@ export default new Vuex.Store({
 
         setTypeList(state, typeList) {
 
-            // typeList.forEach(item => {
-            //     Vue.set(state.typeList, item.tpyeId, item);
-            // })
-
-            // for (var i = 0; i < typeList.length; i++) {
-
-            //     state.typeList.push(typeList[i]);
-
-            // }
-
             state.typeList = typeList;
+
+        },
+
+
+        setDraftList(state, draftList) {
+
+            state.draftList = draftList;
+
+        },
+
+        setpublishedList(state, publishedList) {
+
+            state.publishedList = publishedList;
+
+        },
+
+
+        setUserInfo(state, userInfo) {
+
+            state.userInfo = userInfo;
 
         },
 
@@ -132,6 +146,26 @@ export default new Vuex.Store({
             return state.article;
 
         },
+
+        getUserInfo(state) {
+            state.userInfo = storage.get("userInfo");
+            return state.userInfo;
+        },
+
+        getPublishedList(state) {
+
+            state.publishedList = storage.get("publishedList");
+            return state.publishedList;
+
+        },
+
+        getDraftList(state) {
+
+            state.draftList = storage.get("draftList");
+            return state.draftList;
+
+        }
+
 
     },
 

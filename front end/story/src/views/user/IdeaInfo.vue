@@ -1,6 +1,6 @@
 <template>
   <div class="main_box">
-    <myArticle></myArticle>
+    <myArticle :ideaInfo="ideaInfo"></myArticle>
 
     <div class="CommentBotton" v-if="!flag" @click="getComment">
       <i>
@@ -40,14 +40,14 @@
     </div>
 
     <transition name="plus-icon">
-      <myUserComment v-if="flag" :commentInfo="comments"></myUserComment>
+      <myUserComment v-if="flag" :comments="comments"></myUserComment>
     </transition>
   </div>
 </template>
 
 <script>
-import storage from '@/utils/storage';
-import http from '@/utils/http';
+import storage from "@/utils/storage";
+import http from "@/utils/http";
 import myArticle from "@/components/article/Article";
 import myUserComment from "@/components/article/UserComment";
 
@@ -56,12 +56,69 @@ export default {
   data() {
     return {
       flag: false,
-      comments: null
+
+      //  文章详情内容
+      ideaInfo: {
+        article:
+          "本人今年34么用处的一种人吧！种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什么用处的一种人吧！本人今年34岁，结婚6年，育有一女，4岁，父母健全，在建筑局上班，为人低调，做事一般，可以说没什么前途也没什本人今年34岁，结婚6年，育有一女，4岁，父",
+        author: "张三",
+        title: "慢一步，差一步",
+        star: 1234,
+        eye: 123
+      },
+
+      //评论总数存入Vuex吧
+      commentCount: "",
+
+      // 评论相关内容
+      comments: [
+        {
+          author: "不知名男作者1",
+          comment:
+            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+          // 二级评论
+          secondComment: [
+            {
+              author: "不知名男作者1二级作者",
+              comment:
+                "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+              avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+              father: "不知名作者1"
+            },
+            {
+              author: "不知名男作者2二级作者",
+              comment:
+                "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+              avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+              father: "不知名作者1"
+            }
+          ]
+        },
+        {
+          author: "不知名男作者2",
+          comment:
+            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg",
+          father: "不知名作者1"
+        },
+
+        {
+          author: "不知名男作者3",
+          comment:
+            "这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错这篇文章写的真不错",
+          avatar: "https://i.niupic.com/images/2020/08/22/8yLU.jpg"
+        }
+      ]
     };
   },
+
+
+  
   methods: {
     getComment() {
       this.flag = true;
+
       this.$axios({
         methods: "get",
         url: "/parameter/demoList"

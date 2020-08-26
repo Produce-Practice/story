@@ -86,10 +86,6 @@ export default {
 
     select(item) {
 
-      // console.log("000000000000000");
-      // console.table(item);
-      // console.log(item);
-
       storage.set("typeId", item);
       this.$store.commit('keepArticleType', storage.get('typeId'));
 
@@ -102,7 +98,7 @@ export default {
       var user = JSON.parse(_this.$store.getters.getUser);
       var article = JSON.parse(_this.$store.getters.getArticle);
 
-      console.log(article)
+      console.log(article);
 
       http({
 
@@ -114,15 +110,14 @@ export default {
             },
 
             method: 'post',
-            url: 'http://localhost:8080/idea/saveIdea',
+            url: 'http://localhost:8080/idea/ideaPost',
 
             data: {
               
-                userId: 3,
                 userAccount: user.userAccount,
                 title: article.title,
                 content: article.content,
-                typeId: storage.get("typeId"),
+                typeId: article.typeId,
                 visibility: article.visibility,
                 likes: article.likes,
                 visits: article.visits
